@@ -1,0 +1,27 @@
+
+site_title: Nikl.me
+email: hello@nikl.me
+description: >- # this means to ignore newlines until "baseurl:"
+  Personal homepage with a Blog, Pictures from traveling and
+  a Portfolio with Java, C++ and Python projects
+baseurl: ""
+url: "https://jekyll.nikl.me"
+github_username:  NiklasEi
+
+markdown: kramdown
+kramdown:
+ input: GFM
+ auto_ids: true
+ hard_wrap: false
+syntax_highlighter: rouge
+
+collections:
+  posts:
+    permalink: blog/:title/
+
+exclude:
+  - .idea/
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+# these are the files and directories that jekyll will exclude from the build
