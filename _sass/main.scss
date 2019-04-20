@@ -2,9 +2,35 @@
   color: darkolivegreen;
 }
 
-.footer {
-  display: block;
+// push the footer down
+html {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+}
+
+footer {
+  background-color: #222;
   font-size: 80%;
   line-height: 1.42857143;
-  color: #777
+  color: #9d9d9d;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 2rem 2rem 1rem;
+  width: 100%;
+}
+
+.navbar {
+  margin-right: 0;
 }

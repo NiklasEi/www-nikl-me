@@ -6,3 +6,11 @@ _site
 # IDE - IntelliJ
 .idea
 **.iml
+
+# IDE - eclipse
+.settings/
+.project
+.classpath
+
+# Ruby
+Gemfile.lock

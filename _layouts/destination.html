@@ -1,0 +1,46 @@
+---
+layout: default
+---
+
+{{content}}
+
+{% if page.images %}
+    <h1>Images</h1>
+    {% for image in page.images %}
+        {% assign year = page.date | date: "%Y" %}
+        {% assign name = page.name %}
+        {% assign file = image.image %}
+        {% assign image-path = "/assets/images/destinations/" | append: year | append: "/" | append: name | append: "/" | append: file %}
+
+        <div class="image">
+            <a href="{{ image-path }}" class="imageAnchor"><img src="{{ image-path }}" alt="{{ page.name }} - {{ image.image }}" {% if image.label %}title="{{ image.label }} &#013; &#013; Click for the full image."{% else %}title="Click for the full image."{% endif %} width="100%" style="max-width:640px" hight="auto" ></a>
+        </div>
+        <p class=meta>
+            {% exiftag exif?, nil, image-path %}
+            {% if image.label %}
+                {{ image.label }}
+            {% endif %}
+            {% capture date_time %}{% exiftag date_time, nil, image-path %}{% endcapture %}
+            {% assign time = date_time | date: "%b %-d, %Y" %}
+            {% capture gps_lat %}{% exiftag gps.latitude, nil, image-path %}{% endcapture %}
+            {% capture gps_long %}{% exiftag gps.longitude, nil, image-path %}{% endcapture %}
+            {{ time | string }}
+<p>{% exiftag model, nil, image-path %}</p>
+            {{ gps_lat }}
+            {% if time!=nil or gps_lat!=nil %}
+                (taken
+                {% if gps_lat!=nil and gps_long!=nil %}
+                    <a href="https://www.openstreetmap.org/?mlat={{ gps_lat }}&mlon={{ gps_long }}&zoom=8&layers=M" target="_blank">here</a>
+                {% endif %}
+                {% if time %}
+                    on {{ time }})
+                {% else %}
+                    )
+                {% endif %}
+            {% endif %}
+        </p>
+        <br>
+        <br>
+
+    {% endfor %}
+{% endif %}

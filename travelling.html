@@ -1,0 +1,91 @@
+---
+layout: default
+title: Travelling
+permalink: /travelling/
+hide_sidebar: true
+---
+<h1>Travelling</h1>
+
+<div class="destinations">
+    {% for destination in site.destinations %}
+    <div class="destination" id="{{ destination.name }}">
+
+        {% assign year = destination.date | date: "%Y" %}
+        {% assign front = destination.front %}
+        {% assign name = destination.name %}
+        {% assign image = "/assets/images/destinations/" | append: year | append: "/" | append: name | append: "/" | append: front %}
+
+        <div class="visible-md visible-lg">
+            <div class="row vertical-align">
+                <div class="col-md-6">
+                    <h2>
+                        <p>
+
+                            <a href="{{ destination.url }}" class="imageAnchor"><img src="{{ image }}" alt="{{ destination.name }} front ({{destination.front}})" width="320" align="middle"></a>
+
+                        </p>
+                    </h2>
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <p>
+                            <a href="{{ destination.url }}">{{ destination.name }}</a>
+                            <em>({{ destination.date | date: "%Y" }})</em>
+                        </p>
+                    </h2>
+                    {{ destination.short_description }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="visible-sm">
+            <div class="row vertical-align">
+                <div class="col-sm-6">
+                    <h2>
+                        <p>
+                            <a href="{{ destination.url }}" class="imageAnchor"><img src="{{ image }}" alt="{{ destination.name }} front ({{destination.front}})" width="320" align="middle"></a>
+
+                        </p>
+                    </h2>
+                </div>
+                <div class="col-sm-6">
+                    <h2>
+                        <p>
+                            <a href="{{ destination.url }}">{{ destination.name }}</a>
+                            <em>({{ destination.date.year }})</em>
+                        </p>
+                    </h2>
+                </div>
+
+                <br>
+
+            </div>
+            <div>
+                {{ destination.short_description }}
+            </div>
+            <br><br><br>
+        </div>
+
+        <div class="visible-xs">
+            <div class="row vertical-align">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>
+                        <p>
+                            <a href="{{ destination.url }}">{{ destination.name }}</a>
+                            <em>({{ destination.date.year }})</em>
+                            <br><br>
+                            <a href="{{ destination.url }}" class="imageAnchor"><img src="{{ image }}" alt="{{ destination.name }} front ({{destination.front}})" width="100%" align="middle"></a>
+                        </p>
+                    </h2>
+                    <br>
+                    {{ destination.short_description }}
+                    <br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+    {% endfor %}
+</div>

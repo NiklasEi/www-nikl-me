@@ -17,7 +17,29 @@ syntax_highlighter: rouge
 
 collections:
   posts:
-    permalink: blog/:title/
+    permalink: blog/:year/:title/
+  destinations:
+    output: true
+    hide_sidebar: true
+    permalink: travelling/:year/:title/
+
+exiftag:
+  sources:
+    - assets/images/destinations/2018/poland
+
+plugins:
+  - jekyll-paginate-v2
+  - jekyll-exiftag
+
+# Pagination Settings
+pagination:
+  enabled: true
+  per_page: 10
+  permalink: '/page/:num/'
+  title: 'Blog'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
 
 exclude:
   - .idea/
