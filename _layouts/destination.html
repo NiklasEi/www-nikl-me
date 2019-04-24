@@ -10,7 +10,9 @@ layout: default
         {% assign year = page.date | date: "%Y" %}
         {% assign name = page.name %}
         {% assign file = image.image %}
-        {% assign image-path = "/assets/images/destinations/" | append: year | append: "/" | append: name | append: "/" | append: file %}
+        {% assign image_path_clean = "assets/images/destinations/" | append: year | append: "/" | append: name %}
+        {% assign image-path = "/" | append: image_path_clean | append: "/" | append: file %}
+        {% assign image-path-no-leading-slash = image_path_clean | append: "/" | append: file %}
 
         <div class="image">
             <a href="{{ image-path }}" class="imageAnchor"><img src="{{ image-path }}" alt="{{ page.name }} - {{ image.image }}" {% if image.label %}title="{{ image.label }} &#013; &#013; Click for the full image."{% else %}title="Click for the full image."{% endif %} width="100%" style="max-width:640px" hight="auto" ></a>
@@ -20,11 +22,11 @@ layout: default
             {% if image.label %}
                 {{ image.label }}
             {% endif %}
-            {% capture date_time %}{% exiftag date_time, nil, image-path %}{% endcapture %}
+            {% capture date_time %}{% exiftag DateTime, image_path_clean, image-path-no-leading-slash %}{% endcapture %}
             {% assign time = date_time | date: "%b %-d, %Y" %}
-            {% capture gps_lat %}{% exiftag gps.latitude, nil, image-path %}{% endcapture %}
-            {% capture gps_long %}{% exiftag gps.longitude, nil, image-path %}{% endcapture %}
-            {{ time | string }}
+            {% capture gps_lat %}{% exiftag image_description, image_path_clean, image-path-no-leading-slash %}{% endcapture %}
+            {% capture gps_long %}{% exiftag GPSLongitude, image_path_clean, image-path-no-leading-slash %}{% endcapture %}
+            {{ gps_lat | inspect }}
 <p>{% exiftag model, nil, image-path %}</p>
             {{ gps_lat }}
             {% if time!=nil or gps_lat!=nil %}
