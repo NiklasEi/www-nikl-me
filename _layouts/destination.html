@@ -18,26 +18,23 @@ layout: default
             <a href="{{ image-path }}" class="imageAnchor"><img src="{{ image-path | resize: '600x600' }}" alt="{{ name }} - {{ image.image }}" {% if image.label %}title="{{ image.label }} &#013; &#013; Click for the full image."{% else %}title="Click for the full image."{% endif %} width="100%" style="max-width:640px" hight="auto" ></a>
         </div>
         <p class=meta>
-            {% exiftag exif?, nil, image-path %}
+            {% capture has_exif %}{{ image-path-no-leading-slash | exif: "exif?" }}{% endcapture %}
+            {% capture has_gps %}{{ image-path-no-leading-slash | exif: "gps?" }}{% endcapture %}
+            {% capture time %}{{ image-path-no-leading-slash | exif: "date_time" | date: "%Y" }}{% endcapture %}
             {% if image.label %}
                 {{ image.label }}
             {% endif %}
-            {% capture date_time %}{% exiftag DateTime, image_path_clean, image-path-no-leading-slash %}{% endcapture %}
-            {% assign time = date_time | date: "%b %-d, %Y" %}
-            {% capture gps_lat %}{% exiftag image_description, image_path_clean, image-path-no-leading-slash %}{% endcapture %}
-            {% capture gps_long %}{% exiftag GPSLongitude, image_path_clean, image-path-no-leading-slash %}{% endcapture %}
-            {{ gps_lat | inspect }}
-<p>{% exiftag model, nil, image-path %}</p>
-            {{ gps_lat }}
-            {% if time!=nil or gps_lat!=nil %}
-                (taken
-                {% if gps_lat!=nil and gps_long!=nil %}
-                    <a href="https://www.openstreetmap.org/?mlat={{ gps_lat }}&mlon={{ gps_long }}&zoom=8&layers=M" target="_blank">here</a>
-                {% endif %}
-                {% if time %}
-                    on {{ time }})
-                {% else %}
-                    )
+            {% if has_exif %}
+                {% if time != "" or has_gps==true %}
+                    (taken
+                    {% if has_gps=="true" %}
+                        <a href="https://www.openstreetmap.org/?mlat={{ image-path-no-leading-slash | exif: 'gps.latitude' }}&mlon={{ image-path-no-leading-slash | exif: 'gps.longitude' }}&zoom=8&layers=M" target="_blank">here</a>
+                    {% endif %}
+                    {% if time != "" %}
+                        in {{ time }})
+                    {% else %}
+                        )
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </p>

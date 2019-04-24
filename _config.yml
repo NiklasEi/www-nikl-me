@@ -23,14 +23,6 @@ collections:
     hide_sidebar: true
     permalink: travelling/:year/:title/
 
-exiftag:
-  sources:
-    - assets/images/destinations/2018/Poland
-
-plugins:
-  - jekyll-paginate-v2
-  - jekyll-exiftag
-
 # Pagination Settings
 pagination:
   enabled: true
