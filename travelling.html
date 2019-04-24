@@ -21,7 +21,7 @@ hide_sidebar: true
                     <h2>
                         <p>
 
-                            <a href="{{ destination.url }}" class="imageAnchor"><img src="{{ image }}" alt="{{ destination.name }} front ({{destination.front}})" width="320" align="middle"></a>
+                            <a href="{{ destination.url }}" class="imageAnchor"><img src="{{ image | resize: '600x600' }}" alt="{{ destination.name }} front ({{destination.front}})" width="320" align="middle"></a>
 
                         </p>
                     </h2>
