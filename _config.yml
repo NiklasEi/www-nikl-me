@@ -25,7 +25,7 @@ collections:
 
 exiftag:
   sources:
-    - assets/images/destinations/2018/poland
+    - assets/images/destinations/2018/Poland
 
 plugins:
   - jekyll-paginate-v2

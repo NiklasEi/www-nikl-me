@@ -16,11 +16,15 @@ images:
   - image: GOPR9256.JPG
     label: Graveyard during All Saints' Day. On this christian festival families visit graves of ancestors and lay down flowers.
   - image: GOPR9395.JPG
+    label: Czarny Staw Gąsienicowy on the way to the mountain Koscielec
   - image: GOPR9412.JPG
+    label: At this point it got too dangerous to continue without ice axes and we went down on the other side of the pass, without taking the summit of Koscielec.
   - image: GOPR9421.JPG
+    label: In the valley behind Koscielec
   - image: GOPR9484.JPG
+    label: On our way out of the valley back to Zakopane. The Koscielec is the peak in the left of the picture.
   - image: GOPR9545.JPG
-    label:
+    label: The sun is disappearing behind the mountains on our way back to the city.
 ---
 I stayed in poland for five months from October 2017 to February 2018. Since I didn't have any classes on Fridays, I had plenty of 3-day weekends to travel around the country.
 
