@@ -22,13 +22,9 @@ hide_sidebar: true
         <div class="visible-md visible-lg">
             <div class="row vertical-align">
                 <div class="col-lg-6">
-                    <h2>
-                        <p>
-
-                             <img src="{{ image | resize: '600x600' }}" alt="{{ name }} front ({{destination.front}})" width="320" align="middle">
-
-                        </p>
-                    </h2>
+                    <p>
+                        <img src="{{ image | resize: '600x600' }}" alt="{{ name }} front ({{destination.front}})" width="320" align="middle">
+                    </p>
                 </div>
                 <div class="col-lg-6">
                     <h2>
@@ -68,7 +64,6 @@ hide_sidebar: true
             <div>
                 {{ destination.short_description }}
             </div>
-            <br><br><br>
         </div>
 
         <div class="visible-xs">
@@ -84,12 +79,11 @@ hide_sidebar: true
                     </h2>
                     <br>
                     {{ destination.short_description }}
-                    <br><br><br>
                 </div>
             </div>
         </div>
     </div>
 
-    <p></p>
+    <br><br>
     {% endfor %}
 </div>
