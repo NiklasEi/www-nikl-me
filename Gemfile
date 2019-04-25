@@ -9,6 +9,6 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
   gem "jekyll-paginate-v2", "2.0.0"
   gem 'jekyll-resize', '~> 0.0.3'
-  gem 'jekyll-exif-data', '0.0.1'
+  gem 'jekyll-exif-data', '~> 0.0'
 end
 
