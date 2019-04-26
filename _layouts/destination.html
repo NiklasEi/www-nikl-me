@@ -15,14 +15,14 @@ layout: default
         {% assign image-path-no-leading-slash = image_path_clean | append: "/" | append: file %}
 
         <div class="image">
-            <a href="{{ image-path }}" class="imageAnchor"><img src="{{ image-path | resize: '600x600' }}" alt="{{ name }} - {{ image.image }}" {% if image.label %}title="{{ image.label }} &#013; &#013; Click for the full image."{% else %}title="Click for the full image."{% endif %} width="100%" style="max-width:640px" hight="auto" ></a>
+            <a href="{{ image-path }}" class="imageAnchor"><img src="{{ image-path | resize: '600x600' }}" alt="{{ name }} - {{ image.image }}" {% if image.label %}title="{{ image.label | strip_html }} &#013; &#013; Click for the full image."{% else %}title="Click for the full image."{% endif %} width="100%" style="max-width:640px" hight="auto" ></a>
         </div>
         <p class=meta>
             {% capture has_exif %}{{ image-path-no-leading-slash | exif: "exif?" }}{% endcapture %}
             {% capture has_gps %}{{ image-path-no-leading-slash | exif: "gps?" }}{% endcapture %}
-            {% capture time %}{{ image-path-no-leading-slash | exif: "date_time" | date: "%Y" }}{% endcapture %}
+            {% capture time %}{{ image-path-no-leading-slash | exif: "date_time" | date_to_long_string: "ordinal" }}{% endcapture %}
             {% if image.label %}
-                {{ image.label }}
+                {{ image.label | markdownify }}
             {% endif %}
             {% if has_exif %}
                 {% if time != "" or has_gps==true %}
@@ -30,8 +30,8 @@ layout: default
                     {% if has_gps=="true" %}
                         <a href="https://www.openstreetmap.org/?mlat={{ image-path-no-leading-slash | exif: 'gps.latitude' }}&mlon={{ image-path-no-leading-slash | exif: 'gps.longitude' }}&zoom=8&layers=M" target="_blank">here</a>
                     {% endif %}
-                    {% if time != "" %}
-                        in {{ time }})
+                    {% if time %}
+                        on {{ time }})
                     {% else %}
                         )
                     {% endif %}
