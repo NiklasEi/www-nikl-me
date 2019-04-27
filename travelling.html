@@ -45,7 +45,7 @@ hide_sidebar: true
                 <div class="col-sm-6">
                     <h2>
                         <p>
-                            <img src="{{ image }}" alt="{{ name }} front ({{destination.front}})" width="320" align="middle">
+                            <img src="{{ image | resize: '600x600' }}" alt="{{ name }} front ({{destination.front}})" width="320" align="middle">
 
                         </p>
                     </h2>
@@ -75,7 +75,7 @@ hide_sidebar: true
                             {{ name }}
                             <em>({{ destination.date | date: "%Y" }})</em>
                             <br><br>
-                            <img src="{{ image }}" alt="{{ name }} front ({{destination.front}})" width="100%" align="middle">
+                            <img src="{{ image | resize: '600x600' }}" alt="{{ name }} front ({{destination.front}})" width="100%" align="middle">
                         </p>
                     </h2>
                     <br>
