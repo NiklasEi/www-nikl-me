@@ -3,7 +3,7 @@ site_title: Nikl.me
 email: hello@nikl.me
 description: >- # this means to ignore newlines until "baseurl:"
   Personal homepage with a Blog, Pictures from traveling and
-  a Portfolio with Java, C++ and Python projects
+  a Portfolio with Java, HTML5, C++, and Python projects
 baseurl: ""
 url: "https://jekyll.nikl.me"
 github_username:  NiklasEi
@@ -22,6 +22,12 @@ collections:
     output: true
     hide_sidebar: true
     permalink: travelling/:year/:title/
+  projects:
+    output: true
+    hide_sidebar: true
+    custom_permalink_placeholders: ["type"]
+    permalink: projects/:type/:title/
+
 
 # Pagination Settings
 pagination:

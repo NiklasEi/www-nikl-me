@@ -10,5 +10,6 @@ group :jekyll_plugins do
   gem "jekyll-paginate-v2", "2.0.0"
   gem 'jekyll-resize', '~> 0.0.3'
   gem 'jekyll-exif-data', '~> 0.0'
+  gem 'jekyll_custom_permalink', '~> 0.0'
 end
 

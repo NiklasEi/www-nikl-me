@@ -16,9 +16,9 @@ topnav_dropdowns:
   folders:
     - title: Projects
       folderitems:
-        - title: HyGames
-          external_url: https://www.hygames.co
+        - title: Hytale
+          url: /projects/hytale
         - title: Minecraft plugins
-          url: /mc-plugins
+          url: /projects/minecraft
         - title: Other projects
-          url: /projects
+          url: /projects/other
