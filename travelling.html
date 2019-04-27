@@ -7,7 +7,7 @@ hide_sidebar: true
 <h1>Travelling</h1>
 
 <div class="destinations">
-    {% assign sortedDestinations = site.destinations | sort: 'title' | reverse %}
+    {% assign sortedDestinations = site.destinations | sort: 'date' | reverse %}
     {% for destination in sortedDestinations %}
     {% if destination.skip_listing %}
         {% continue %}
