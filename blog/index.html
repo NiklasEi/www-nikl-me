@@ -1,6 +1,19 @@
 ---
-layout: blog
+layout: page
 title: Blog
-pagination:
-  enabled: true
+hide_sidebar: true
 ---
+<div class="home">
+  <div class="post-list">
+    <div class="row">
+      {% for post in site.posts %}
+        <div class="col-md-6">
+          <h2><a class="post-link" href="{{ post.url }}">{{ post.title }}</a></h2>
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+          <p>{% if page.summary %} {{ page.summary | strip_html | strip_newlines | truncate: 160 }} {% else %} {{ post.content | truncatewords: 50 | strip_html }} {% endif %}</p>
+          <br>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
