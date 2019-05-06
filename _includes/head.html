@@ -10,7 +10,7 @@
 <meta property="og:title" content="{%- if page.og_title -%}{{- page.og_title -}}{%- else -%}{{ page.title }}{%- endif -%}">
 <meta property="og:type" content="{%- if page.og_type -%}{{- page.og_type -}}{%- else -%}website{%- endif -%}">
 <meta property="og:image" content="{%- if page.front -%}{{- page.date | date: '%Y' | append: '/' | append: page.slug | append: '/' | append: page.front | prepend: '/assets/images/destinations/' | absolute_url -}}{%- elsif page.og_image -%}{{- page.og_image | absolute_url -}}{%- else -%}{{- '/assets/images/ruffyAvatar.jpg' | absolute_url -}}{%- endif -%}">
-<meta property="og:description" content="{%- if page.og_description -%}{{- page.og_description -}}{% elsif page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 297 }}{% else %}{{ site.description }}{% endif %}">
+<meta property="og:description" content="{%- if page.short_description -%}{{- page.short_description | markdownify | strip_html -}}{%- elsif page.og_description -%}{{- page.og_description -}}{% elsif page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 297 }}{% else %}{{ site.description }}{% endif %}">
 <title>{{ page.title }} | {{ site.site_title }}</title>
 <link rel="stylesheet" href="/assets/css/styles.css">
 <link rel="stylesheet" href="/assets/css/syntax.css">
