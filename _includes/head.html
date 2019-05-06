@@ -5,11 +5,11 @@
 <meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 <meta name="keywords" content="{% if page.tags %}{{page.tags}}, {% elsif page.keywords %}{{page.keywords}}{% else %}{{ site.keywords }}{% endif %}">
 <meta name="language" content="en">
-<meta property="og:url" content="{{- page.url -}}">
+<meta property="og:url" content="{{- page.url | absolute_url -}}">
 <meta property="og:site_name" content="Nikl.me">
 <meta property="og:title" content="{%- if page.og_title -%}{{- page.og_title -}}{%- else -%}{{ page.title }}{%- endif -%}">
 <meta property="og:type" content="{%- if page.og_type -%}{{- page.og_type -}}{%- else -%}website{%- endif -%}">
-<meta property="og:image" content="{%- if page.front -%}{{ page.date | date: '%Y' | append: '/' | append: page.slug | append: '/' | append: page.front | prepend: '/assets/images/destinations/' }}{%- elsif page.og_image -%}{{- page.og_image -}}{%- else -%}{{- '/assets/images/ruffyAvatar.jpg' -}}{%- endif -%}">
+<meta property="og:image" content="{%- if page.front -%}{{- page.date | date: '%Y' | append: '/' | append: page.slug | append: '/' | append: page.front | prepend: '/assets/images/destinations/' | absolute_url -}}{%- elsif page.og_image -%}{{- page.og_image | absolute_url -}}{%- else -%}{{- '/assets/images/ruffyAvatar.jpg' | absolute_url -}}{%- endif -%}">
 <meta property="og:description" content="{%- if page.og_description -%}{{- page.og_description -}}{% elsif page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 297 }}{% else %}{{ site.description }}{% endif %}">
 <title>{{ page.title }} | {{ site.site_title }}</title>
 <link rel="stylesheet" href="/assets/css/styles.css">
