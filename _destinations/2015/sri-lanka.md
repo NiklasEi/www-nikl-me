@@ -3,7 +3,6 @@ layout: destination
 slug: sri-lanka
 date: 2015-11-01
 front: DSCF2924.JPG
-og_image: /assets/images/destinations/2015/sri-lanka/DSCF2924.JPG
 hide_sidebar: true
 title: Sri Lanka
 short_description:
