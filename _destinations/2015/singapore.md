@@ -3,6 +3,7 @@ layout: destination
 slug: singapore
 date: 2015-10-28
 front: DSCF2132.JPG
+og_image: /assets/images/destinations/2015/singapore/DSCF2132.JPG
 hide_sidebar: true
 title: Singapore
 short_description:

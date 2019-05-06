@@ -3,11 +3,11 @@ layout: default
 ---
 
 {{content}}
-
+{% assign year = page.date | date: "%Y" %}
+{%- assign page.og_image = '/assets/images/destinations/' | append: year | append: "/" | append: page.slug | append: "/" | append: page.front -%}
 {% if page.images %}
     <h1>Images</h1>
     {% for image in page.images %}
-        {% assign year = page.date | date: "%Y" %}
         {% assign name = page.slug %}
         {% assign file = image.image %}
         {% assign image_path_clean = "assets/images/destinations/" | append: year | append: "/" | append: name %}

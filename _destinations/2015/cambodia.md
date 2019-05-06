@@ -3,6 +3,7 @@ layout: destination
 slug: cambodia
 date: 2015-10-01
 front: P1060093.JPG
+og_image: /assets/images/destinations/2015/cambodia/P1060093.JPG
 hide_sidebar: true
 title: Cambodia
 short_description:

@@ -3,6 +3,7 @@ layout: destination
 slug: vietnam
 date: 2015-10-20
 front: GOPR0797.JPG
+og_image: /assets/images/destinations/2015/vietnam/GOPR0797.JPG
 hide_sidebar: true
 title: Vietnam
 short_description:

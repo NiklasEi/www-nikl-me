@@ -1,0 +1,7 @@
+types:
+  hytale:
+    description: Hytale is an upcoming open world RPG
+  minecraft:
+    decription: Minecraft is an open world block game. Activities in the game include exploration, resource gathering, crafting and combat.
+  others:
+    descriptiuon: 'Projects:'

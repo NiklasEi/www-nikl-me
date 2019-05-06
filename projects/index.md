@@ -2,4 +2,7 @@
 layout: page
 title: Projects
 ---
-Test Hytale
+Project categories:
+* [Hytale](hytale)
+* [Minecraft](minecraft)
+* [Others](others)
