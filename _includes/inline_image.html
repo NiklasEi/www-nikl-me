@@ -1,0 +1,8 @@
+{%- capture path -%}
+    {%- if include.resize -%}
+        {{ '/assets/images/' | append: include.file | resize: include.resize | relative_url }}
+    {%- else -%}
+        {{ 'assets/images/' | append: include.file | relative_url }}
+    {%- endif -%}
+{%- endcapture -%}
+<img class="inline" src="{{ path }}" alt="{{include.alt}}" style='float: left;position: relative;{%- if include.max-width -%}max-width: {{include.max-width}}; {% endif %}' />

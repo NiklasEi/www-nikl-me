@@ -7,6 +7,7 @@ layout: default
         <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
         <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time></p>
     </header>
+    <br>
 
     <div class="post-content" itemprop="articleBody">
         {% if page.summary %}
@@ -14,5 +15,11 @@ layout: default
         {% endif %}
         {{ content }}
     </div>
+    <br><br>
+
+    {% unless page.no_backlink %}
+        <br><br>
+        <a href='{{"/blog" | relative_url }}#{{ page.title }}'><span class="fa fa-arrow-left" aria-hidden="true"></span> Back to Blog</a>
+    {% endunless %}
 
 </article>

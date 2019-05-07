@@ -4,9 +4,7 @@ title: "Big Family meeting in Harz"
 date: 2017-10-25
 categories: germany
 ---
-<div class="col-md-4 col-sm-6 col-xs-12">
-    <img class="image-blog" src="/blog/17_10_25_Family_trip_Harz/IMG-20171025-WA0008.jpg" alt="hiking in Hartz" />
-</div>
+{% include inline_image.html resize="600x600" file="blog\2017\2017-10-25-family-meeting-harz\IMG-20171025-WA0008.jpg" alt="hiking in Hartz" max-width="400px" %}
 
 My grandmother had birthday a few days ago and my whole family from my mothers side met in the Harz (east germany) for a week. We were almost 30 at the beginning and had a house to ourselves. It was a lot of fun meeting all my cousins and aunts/uncles, especially since I hadn't seen many of them in a long time. There was a billiard table and a lot of board games. Apart from that we had trips planed for almost every day of the week.
 
