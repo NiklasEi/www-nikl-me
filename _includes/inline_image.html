@@ -5,4 +5,6 @@
         {{ 'assets/images/' | append: include.file | relative_url }}
     {%- endif -%}
 {%- endcapture -%}
-<img class="inline" src="{{ path }}" alt="{{include.alt}}" style='float: left;position: relative;{%- if include.max-width -%}max-width: {{include.max-width}}; {% endif %}' />
+<a href="{{ 'assets/images/' | append: include.file | relative_url }}">
+    <img class="inline" src="{{ path }}" alt="{{include.alt}}" style='float: left;position: relative;{%- if include.max-width -%}max-width: {{include.max-width}}; {% endif %}' />
+</a>

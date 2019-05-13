@@ -1,7 +1,8 @@
 ---
 layout: default
 ---
-
+<h1 class="no-anchor">{{ page.title }}</h1>
+<br>
 {{content}}
 {% assign year = page.date | date: "%Y" %}
 {%- assign page.og_image = '/assets/images/destinations/' | append: year | append: "/" | append: page.slug | append: "/" | append: page.front -%}

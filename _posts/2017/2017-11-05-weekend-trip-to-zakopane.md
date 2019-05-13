@@ -4,7 +4,7 @@ title: "Weekend trip to Zakopane - Mountains and a lot of snow"
 date: 2017-11-05
 categories: poland
 ---
-{% include inline_image.html resize="600x600" file="destinations\2017\poland-tatra\GOPR9421.JPG" alt="up on the mountain" max-width="400px" %}
+{% include inline_image.html resize="600x600" file="destinations/2017/poland-tatra/GOPR9421.JPG" alt="up on the mountain" max-width="400px" %}
 
 Together with two friends I made a trip to Zakopane, south of Krakow over the long weekend. It was my first time in the mountains with that much snow. On the first day we had bad luck with the weather, it was almost constantly raining or snowing. We made it up to a summit, but learned the hard way that some equipment like snowshoes and crampons are nice to have.
 
