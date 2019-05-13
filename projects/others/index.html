@@ -1,0 +1,12 @@
+---
+title: Projects
+layout: page
+---
+
+{% assign projects = site.projects | where:"type","others" %}
+{% for project in projects %}
+<div>
+    <h1><a href="{{ project.url }}">{{ project.title }}</a></h1>
+    <p>{{ project.description }}</p>
+</div>
+{%- endfor -%}

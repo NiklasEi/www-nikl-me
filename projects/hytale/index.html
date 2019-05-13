@@ -1,0 +1,15 @@
+---
+title: Hytale projects
+layout: page
+---
+
+{% assign projects = site.projects | where:"type","hytale" %}
+{% for project in projects %}
+{%- if project.title == "Hygames" -%}
+    {%- continue -%}
+{%- endif -%}
+<div>
+    <h1><a href="{{ project.url }}">{{ project.title }}</a></h1>
+    <p>{{ project.description }}</p>
+</div>
+{%- endfor -%}

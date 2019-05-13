@@ -2,7 +2,4 @@
 layout: page
 title: Projects
 ---
-Project categories:
-* [Hytale](hytale)
-* [Minecraft](minecraft)
-* [Others](others)
+The projects showcased on this website are divided into three categories: [Hytale](hytale), [Minecraft](minecraft) and [Others](others)
