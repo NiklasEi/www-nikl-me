@@ -19,11 +19,9 @@ collections:
     permalink: blog/:year/:title/
   destinations:
     output: true
-    hide_sidebar: true
     permalink: travelling/:year/:title/
   projects:
     output: true
-    hide_sidebar: true
     custom_permalink_placeholders: ["type"]
     permalink: projects/:type/:title/
 
@@ -34,12 +32,20 @@ defaults:
       type: "destinations"
     values:
       og_type: "article"
+      hide_sidebar: true
   -
     scope:
       path: ""
       type: "posts"
     values:
       og_type: "blog"
+  -
+    scope:
+      path: ""
+      type: "projects"
+    values:
+      og_type: "article"
+      hide_sidebar: true
 
 # these are the files and directories that jekyll will exclude from the build
 exclude:
