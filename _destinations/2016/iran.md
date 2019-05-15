@@ -6,7 +6,7 @@ front: GOPR0746.JPG
 hide_sidebar: true
 title: Iran
 short_description:
-  During my internship in <a href="/traveling/Oman">Oman</a> I went to Iran for my christmas holidays.
+  During my internship in <a href="/travelling/2017/Oman">Oman</a> I went to Iran for my christmas holidays.
   <br><br>
   Iran is a very interesting country with many places to visit. Sadly there was only time for the south.
   <br><br>

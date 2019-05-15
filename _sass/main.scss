@@ -44,6 +44,10 @@ footer .contacts a:hover {
   color: deepskyblue;
 }
 
+footer .container {
+  clear: both;
+}
+
 .navbar {
   margin-right: 0;
 }
@@ -53,17 +57,17 @@ footer .contacts a:hover {
   align-items: center;
 }
 
-.travel-destination {
+.travel-destination, .blog-post {
   position: relative;
   padding: 6px 6px 6px 6px;
 }
 
-.travel-destination:hover {
+.travel-destination:hover, .blog-post:hover {
   border: solid #436aff 2px;
   padding: 4px 4px 4px 4px;
 }
 
-.travel-destination-link {
+.travel-destination-link, .post-link {
   position:absolute;
   width:100%;
   height:100%;
@@ -85,4 +89,12 @@ footer .contacts a:hover {
 .post-content img.inline {
   margin: 0px 10px 6px 0px;
   width: 100%;
+}
+
+.align-left {
+  float: left;
+}
+
+.align-right {
+  float: right;
 }
