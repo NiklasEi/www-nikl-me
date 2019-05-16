@@ -9,13 +9,10 @@ hide_sidebar: true
   {% for post in site.posts %}
     <div class="row blog-post">
         <a class="post-link" href="{{ post.url }}"></a>
-        <h2 id="{{ post.title }}">{{ post.title }}</h2>
+        <h2 id="{{ post.title | normalize_whitespace | uri_escape }}">{{ post.title }}</h2>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
         <br><br>
         <p>{% if page.summary %} {{ page.summary | strip_html | strip_newlines | truncate: 160 }} {% else %} {{ post.content | truncatewords: 50 | strip_html }} {% endif %}</p>
-        {%- if forloop.last == false -%}
-          <!--<hr>-->
-        {%- endif -%}
         <br>
     </div>
   {% endfor %}
