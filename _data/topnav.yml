@@ -16,9 +16,13 @@ topnav_dropdowns:
   folders:
     - title: Projects
       folderitems:
+        - title: Overview
+          url: /projects
         - title: Hytale
           url: /projects/hytale
         - title: Minecraft plugins
           url: /projects/minecraft
+        - title: Ruby
+          url: /projects/ruby
         - title: Other projects
           url: /projects/others
