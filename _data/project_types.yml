@@ -1,7 +1,13 @@
-types:
-  hytale:
+categories:
+  - category: Hytale
     description: Hytale is an upcoming open world RPG
-  minecraft:
-    decription: Minecraft is an open world block game. Activities in the game include exploration, resource gathering, crafting and combat.
-  others:
-    descriptiuon: 'Projects:'
+    link: hytale
+  - category: Minecraft
+    description: Minecraft is an open world block game. Activities in the game include exploration, resource gathering, crafting and combat.
+    link: minecraft
+  - category: Ruby
+    description: While making websites using Jekyll I created some Jekyll plugins
+    link: ruby
+  - category: Others
+    description: Projects not belonging in any of the other categories like for example a Telegram bot or websites
+    link: others
