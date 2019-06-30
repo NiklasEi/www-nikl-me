@@ -1,0 +1,14 @@
+---
+layout: page
+title: Projects
+---
+<p>The projects showcased on this website are divided into different categories.</p>
+<div class="projects-list">
+  {% for category in site.data.project_types.categories %}
+    <div class="category">
+      <a href="{{ category.link | prepend: '/projects/' | relative_url }}" class="div-link"></a>
+      <h2>{{- category.category -}}</h2>
+      <p>{{- category.description -}}</p>
+    </div>
+  {% endfor %}
+</div>
