@@ -16,7 +16,7 @@ layout: default
         {% assign image-path-no-leading-slash = image_path_clean | append: "/" | append: file %}
 
         <div class="image">
-            <a href="{{ image-path }}" class="imageAnchor"><img src="{{ image-path | resize: '600x600' }}" alt="{{ name }} - {{ image.image }}" {% if image.label %}title="{{ image.label | strip_html }} &#013; &#013; Click for the full image."{% else %}title="Click for the full image."{% endif %} width="100%" style="max-width:640px" hight="auto" ></a>
+            <a href="{{ image-path }}" class="imageAnchor"><img src="{{ image-path | resize: '600x600' }}" alt="{{ name }} - {{ image.image }}" {% if image.label %}title="{{ image.label | strip_html }} &#013; &#013; Click for the full image."{% else %}title="Click for the full image."{% endif %} width="100%" style="max-width:640px;cursor: zoom-in;" hight="auto" ></a>
         </div>
         <p class=meta>
             {% capture has_exif %}{{ image-path-no-leading-slash | exif: "exif?" }}{% endcapture %}
