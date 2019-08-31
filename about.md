@@ -2,7 +2,6 @@
 layout: page
 title: About
 permalink: /about/
-hide_sidebar: true
 ---
 
 This website is a project of mine. I wanted to learn a bit of html and wanted to know how to build a website in general. It is a static website.

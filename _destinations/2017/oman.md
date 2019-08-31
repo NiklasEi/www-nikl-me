@@ -3,7 +3,6 @@ layout: destination
 slug: oman
 date: 2017-01-19
 front: GOPR0169.JPG
-hide_sidebar: true
 title: Oman
 short_description:
   Oman has a very diverse environment. The country is famous for it's wadis, has huge mountain rages, desert and surprisingly green areas in between all of that.

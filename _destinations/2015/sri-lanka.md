@@ -3,7 +3,6 @@ layout: destination
 slug: sri-lanka
 date: 2015-11-01
 front: DSCF2924.JPG
-hide_sidebar: true
 title: Sri Lanka
 short_description:
   Sri Lanka was the last stop on my south asia tour after my bachelors.

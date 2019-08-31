@@ -3,7 +3,6 @@ layout: destination
 slug: vietnam
 date: 2015-10-20
 front: GOPR0797.JPG
-hide_sidebar: true
 title: Vietnam
 short_description:
   Starting in Hanoi we made two trips visiting Sa Pa and Hạ Long Bay. Then took the night train to the south. The train ride passed by the ocean and several empty beautiful beaches.

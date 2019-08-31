@@ -3,7 +3,6 @@ layout: destination
 slug: poland-tatra
 skip_listing: true
 date: 2017-02-28
-hide_sidebar: true
 no_backlink: true
 title: Poland - Tatra
 images:

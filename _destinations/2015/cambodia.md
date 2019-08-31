@@ -3,7 +3,6 @@ layout: destination
 slug: cambodia
 date: 2015-10-01
 front: P1060093.JPG
-hide_sidebar: true
 title: Cambodia
 short_description:
   Cambodia is a south asian country neighboring Thailand, Laos and Vietnam. It is best known for the ancient city Ankor which probably was the biggest city in the world in around 1200 [<a href="https://en.wikipedia.org/wiki/Khmer_Empire" target="_blank">Wikipedia</a>].

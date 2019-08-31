@@ -3,7 +3,6 @@ layout: destination
 slug: france
 date: 2018-01-05
 front: GOPR9868.JPG
-hide_sidebar: true
 title: France
 short_description:
   In the middle of my Erasmus semester in Poland, I went back to Germany for Christmas. For ten days around new Year I made a road trip through France with a friend.

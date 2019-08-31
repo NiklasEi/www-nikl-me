@@ -2,7 +2,6 @@
 layout: destination
 slug: kyrgyzstan
 date: 2016-09-10
-hide_sidebar: true
 front: CIMG1629.JPG
 title: Kyrgyzstan
 short_description:

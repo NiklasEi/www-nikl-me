@@ -3,7 +3,6 @@ layout: destination
 slug: myanmar
 date: 2017-03-17
 front: GOPR1437.JPG
-hide_sidebar: true
 title: Myanmar
 short_description:
   For around 25 days I traveled through Myanmar together with a friend and his sister. From Yangon we made a round trip anticlockwise, but did not go further north then Mandalay.

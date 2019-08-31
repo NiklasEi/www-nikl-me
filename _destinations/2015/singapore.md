@@ -3,7 +3,6 @@ layout: destination
 slug: singapore
 date: 2015-10-28
 front: DSCF2132.JPG
-hide_sidebar: true
 title: Singapore
 short_description:
   My father was living in Singapore for around three years and I visited him a few times. It was perfect to have a "station" in south asia and I used it as a starting point for traveling.

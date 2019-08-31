@@ -3,7 +3,6 @@ layout: destination
 slug: iran
 date: 2016-12-24
 front: GOPR0746.JPG
-hide_sidebar: true
 title: Iran
 short_description:
   During my internship in <a href="/travelling/2017/Oman">Oman</a> I went to Iran for my christmas holidays.

@@ -3,7 +3,6 @@ layout: destination
 slug: poland
 date: 2018-02-28
 front: GOPR9545.JPG
-hide_sidebar: true
 title: Poland
 short_description:
   I did an erasmus semester in Krakow at the Jagiellonian University doing theoretical physics (as an experimentalist ^^). At that time Krakow was the biggest city I ever lived in and there was a lot to see and do.
