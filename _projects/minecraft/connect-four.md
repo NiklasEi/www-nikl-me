@@ -1,11 +1,11 @@
 ---
-layout: page
+layout: page-center
 type: minecraft
 title: Connect Four
 gamebox: true
 spigot: 40134
 source: https://github.com/NiklasEi/GameBox_ConnectFour
-description: Two player inventory game. Create rows of four while keeping your opponent from doing the same.
+summary: Two player inventory game. Create rows of four while keeping your opponent from doing the same.
 ---
 
 Two players compete in building a row of four. Rows can be vertical, horizontal or diagonal.

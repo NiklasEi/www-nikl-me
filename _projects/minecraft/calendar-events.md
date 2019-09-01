@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: page-center
 type: minecraft
 title: Calendar Events
 spigot: 35536
 source: https://github.com/NiklasEi/CalendarEvents
-description: Configure dates and times at which a custom event is called.
+summary: Configure dates and times at which a custom event is called.
 ---
 
 In the configuration file you can name and specify events, for example:

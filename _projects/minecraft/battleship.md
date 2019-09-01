@@ -1,11 +1,11 @@
 ---
-layout: page
+layout: page-center
 type: minecraft
 title: Battleship
 gamebox: true
 spigot: 26627
 source: https://github.com/NiklasEi/battleship-for-gamebox
-description: Two player GameBox game. Sink your opponent's ships before he sinks yours.
+summary: Two player GameBox game. Sink your opponent's ships before he sinks yours.
 ---
 
 Each player has two different grids:

@@ -32,7 +32,6 @@ defaults:
       type: "destinations"
     values:
       og_type: "article"
-#      hide_sidebar: true
   -
     scope:
       path: ""
@@ -45,7 +44,6 @@ defaults:
       type: "projects"
     values:
       og_type: "article"
-#      hide_sidebar: true
 
 # these are the files and directories that jekyll will exclude from the build
 exclude:

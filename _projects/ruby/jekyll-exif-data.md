@@ -1,9 +1,9 @@
 ---
-layout: page
+layout: page-center
 type: ruby
 title: Jekyll Exif data
 source: https://github.com/NiklasEi/jekyll-exif-data
-description: Jekyll plugin to access image exif data via liquid filters.
+summary: Jekyll plugin to access image exif data via liquid filters.
 ---
 
 [Source code on GitHub]({{ page.source }}){: target="_blank"}

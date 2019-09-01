@@ -1,8 +1,8 @@
 ---
-layout: page
+layout: page-center
 type: hytale
 title: GameBox
-description: GameBox is a collection of minigames
+summary: GameBox is a collection of minigames
 ---
 The development on GameBox is currently on hold, since there has yet not been any relevant information published about the Hytale API.
 

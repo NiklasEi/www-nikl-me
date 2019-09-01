@@ -1,11 +1,11 @@
 ---
-layout: page
+layout: page-center
 type: minecraft
 title: GemCrush
 gamebox: true
 spigot: 30138
 source: https://github.com/NiklasEi/gemcrush-for-gamebox
-description: Inventory game inspired by Candy Crush.
+summary: Inventory game inspired by Candy Crush.
 ---
 
 Connect rows of the same gem (at least 3 of the same kind).

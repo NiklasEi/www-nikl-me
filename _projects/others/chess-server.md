@@ -1,9 +1,9 @@
 ---
-layout: page
+layout: page-center
 type: others
 title: Chess server
 source: https://github.com/NiklasEi/node-chess
-description: A small chess server that can be used via my telegram bot to play chess against your friends in telegram.
+summary: A small chess server that can be used via my telegram bot to play chess against your friends in telegram.
 ---
 
 1. [Add my telegram bot](https://telegram.me/NiklsAwesomeBot){: target="_blank"}

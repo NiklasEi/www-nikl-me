@@ -1,9 +1,9 @@
 ---
-layout: page
+layout: page-center
 type: ruby
 title: Jekyll custom permalink
 source: https://github.com/NiklasEi/jekyll_custom_permalink
-description: Jekyll plugin allowing usage of custom Front Matter in the `permalink` setting of collections.
+summary: Jekyll plugin allowing usage of custom Front Matter in the `permalink` setting of collections.
 ---
 [Source code on GitHub]({{ page.source }}){: target="_blank"}
 

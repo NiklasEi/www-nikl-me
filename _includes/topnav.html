@@ -19,13 +19,23 @@
 
                 {% for entry in topnav.topnav %}
                     {% for item in entry.items %}
+                        <li 
+                            {% if page.url contains item.url %} 
+                                class="active"
+                            {% endif %}
+                        >
                         {% if item.external_url %}
-                            <li><a href="{{item.external_url}}" target="_blank">{{item.title}}</a></li>
-                        {% elsif page.url contains item.url %}
-                            <li class="active"><a href="{{item.url }}">{{item.title}}</a></li>
+                            <a href="{{item.external_url}}" target="_blank">{{item.title}}</a>
                         {% else %}
-                            <li><a href="{{item.url }}">{{item.title}}</a></li>
+                            <a 
+                            {% if item.icon %}
+                                class="{{item.icon}}"
+                            {% endif %}
+                            href="{{item.url }}">
+                            {{item.title}}
+                            </a>
                         {% endif %}
+                    </li>
                     {% endfor %}
                 {% endfor %}
                 <!-- entries with drop-downs appear here -->
@@ -33,15 +43,17 @@
                 {% for entry in topnav_dropdowns %}
                     {% for folder in entry.folders %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ folder.title }}<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle{% if folder.icon %} {{folder.icon}}{% endif %}" data-toggle="dropdown">{{ folder.title }}<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 {% for folderitem in folder.folderitems %}
                                     {% if folderitem.external_url %}
                                         <li><a href="{{folderitem.external_url}}" target="_blank">{{folderitem.title}}</a></li>
                                     {% elsif page.url contains folderitem.url %}
                                         <li class="dropdownActive"><a href="{{folderitem.url }}">{{folderitem.title}}</a></li>
-                                    {% else %}
+                                    {% elsif folderitem.url %}
                                         <li><a href="{{folderitem.url }}">{{folderitem.title}}</a></li>
+                                    {% else %}
+                                        <li><hr></li>
                                     {% endif %}
                                 {% endfor %}
                             </ul>

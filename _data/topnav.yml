@@ -7,17 +7,21 @@ topnav:
     #  external_url: https://github.com/NiklasEi
     - title: Blog
       url: /blog
+      icon: "fa fa-rss"
     - title: Travelling
       url: /travelling
+      icon: "fa fa-globe"
 
 #Topnav dropdowns
 topnav_dropdowns:
 - title: Topnav dropdowns
   folders:
     - title: Projects
+      icon: "fa fa-folder-open"
       folderitems:
         - title: Overview
           url: /projects
+        -
         - title: Hytale
           url: /projects/hytale
         - title: Minecraft plugins

@@ -1,11 +1,11 @@
 ---
-layout: page
+layout: page-center
 type: minecraft
 title: Cookie Clicker
 gamebox: true
 spigot: 43801
 source: https://github.com/NiklasEi/GameBox_CookieClicker
-description: Bake cookies and rule the world.
+summary: Bake cookies and rule the world.
 ---
 Screenshot from the game with some additional info
 <br>

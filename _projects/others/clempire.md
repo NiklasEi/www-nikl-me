@@ -1,9 +1,9 @@
 ---
-layout: page
+layout: page-center
 type: others
 title: Clempire
 source: https://github.com/NiklasEi/clempire
-description: Idle game written in javascript
+summary: Idle game written in javascript
 ---
 
 [Source code on GitHub]({{ page.source }}){: target="_blank"}
