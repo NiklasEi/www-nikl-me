@@ -1,5 +1,5 @@
 ---
-layout: page-center
+layout: project
 type: others
 title: games.nikl.me
 source: https://github.com/NiklasEi/games-nikl-me

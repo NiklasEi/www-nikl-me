@@ -1,5 +1,5 @@
 ---
-layout: page-center
+layout: project
 type: minecraft
 title: Cookie Clicker
 gamebox: true

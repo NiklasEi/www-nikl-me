@@ -7,7 +7,7 @@ topnav:
     #  external_url: https://github.com/NiklasEi
     - title: Blog
       url: /blog
-      icon: "fa fa-rss"
+      icon: "fas fa-book-open"
     - title: Travelling
       url: /travelling
       icon: "fa fa-globe"

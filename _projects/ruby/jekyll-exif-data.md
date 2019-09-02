@@ -1,15 +1,11 @@
 ---
-layout: page-center
+layout: project
 type: ruby
 title: Jekyll Exif data
 source: https://github.com/NiklasEi/jekyll-exif-data
 summary: Jekyll plugin to access image exif data via liquid filters.
 ---
-
-[Source code on GitHub]({{ page.source }}){: target="_blank"}
-
 {% raw %}
-
 [![Gem Version](https://badge.fury.io/rb/jekyll-exif-data.svg)](https://badge.fury.io/rb/jekyll-exif-data)
 
 This Jekyll plugin adds the Liquid filter `exif`, supplying exif data to Jekyll websites. To read the data [exifr](https://github.com/remvee/exifr) is used as a dependency.

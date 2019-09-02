@@ -1,5 +1,5 @@
 ---
-layout: page-center
+layout: project
 type: minecraft
 title: GemCrush
 gamebox: true

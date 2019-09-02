@@ -1,5 +1,5 @@
 ---
-layout: page-center
+layout: project
 type: others
 title: Chess server
 source: https://github.com/NiklasEi/node-chess

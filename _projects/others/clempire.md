@@ -1,5 +1,5 @@
 ---
-layout: page-center
+layout: project
 type: others
 title: Clempire
 source: https://github.com/NiklasEi/clempire
