@@ -1,28 +1,61 @@
-<meta charset="utf-8">
-<!-- Edge mode tells Internet Explorer to display content in the highest mode available -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-<meta name="keywords" content="{% if page.tags %}{{page.tags}}, {% elsif page.keywords %}{{page.keywords}}{% else %}{{ site.keywords }}{% endif %}">
-<meta name="language" content="en">
-<meta property="og:url" content="{{- page.url | absolute_url -}}">
-<meta property="og:site_name" content="Nikl.me">
-<meta property="og:title" content="{%- if page.og_title -%}{{- page.og_title -}}{%- else -%}{{ page.title }}{%- endif -%}">
-<meta property="og:type" content="{%- if page.og_type -%}{{- page.og_type -}}{%- else -%}website{%- endif -%}">
-<meta property="og:image" content="{%- if page.front -%}{{- page.date | date: '%Y' | append: '/' | append: page.slug | append: '/' | append: page.front | prepend: '/assets/images/destinations/' | absolute_url -}}{%- elsif page.og_image -%}{{- page.og_image | absolute_url -}}{%- else -%}{{- '/assets/images/ruffyAvatar.jpg' | absolute_url -}}{%- endif -%}">
-<meta property="og:description" content="{%- if page.short_description -%}{{- page.short_description | markdownify | strip_html -}}{%- elsif page.og_description -%}{{- page.og_description -}}{% elsif page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 297 }}{% else %}{{ site.description }}{% endif %}">
-<title>{{ page.title }} | {{ site.site_title }}</title>
-<link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/syntax.css">
+<head>
+  <meta charset="utf-8" />
+  <!-- Edge mode tells Internet Explorer to display content in the highest mode available -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 160}}{% else %}{{ site.description }}{% endif %}"
+  />
+  <meta
+    name="keywords"
+    content="{% if page.tags %}{{ page.tags }}, {% elsif page.keywords %}{{ page.keywords }}{% else %}{{ site.keywords }}{% endif %}"
+  />
+  <meta name="language" content="en" />
+  <meta property="og:url" content="{{- page.url | absolute_url -}}" />
+  <meta property="og:site_name" content="Nikl.me" />
+  <meta
+    property="og:title"
+    content="{%- if page.og_title -%}{{- page.og_title -}}{%- else -%}{{ page.title }}{%- endif -%}"
+  />
+  <meta
+    property="og:type"
+    content="{%- if page.og_type -%}{{- page.og_type -}}{%- else -%}website{%- endif -%}"
+  />
+  <meta
+    property="og:image"
+    content="{%- if page.front -%}{{- page.date | date: '%Y' | append: '/' | append: page.slug | append: '/' | append: page.front | prepend: '/assets/images/destinations/' | absolute_url -}}{%- elsif page.og_image -%}{{- page.og_image | absolute_url -}}{%- else -%}{{- '/assets/images/ruffyAvatar.jpg' | absolute_url -}}{%- endif -%}"
+  />
+  <meta
+    property="og:description"
+    content="{%- if page.short_description -%}{{- page.short_description | markdownify | strip_html -}}{%- elsif page.og_description -%}{{- page.og_description -}}{% elsif page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 297 }}{% else %}{{ site.description }}{% endif %}"
+  />
+  <title>{{ page.title }} | {{ site.site_title }}</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/syntax.css" />
 
-<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://use.fontawesome.com/releases/v5.10.2/css/all.css"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous"
+  />
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<!-- Anchor.js
+  <!-- Latest compiled and minified JavaScript -->
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"
+  ></script>
+  <!-- Anchor.js
 <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>-->
 
-<link rel="shortcut icon" href="{{ '/assets/images/ruffyAvatar.jpg' }}">
+  <link rel="shortcut icon" href="{{ '/assets/images/ruffyAvatar.jpg' }}" />
+</head>
