@@ -1,12 +1,13 @@
 {
   "name": "www-nikl-me",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "https://www.nikl.me",
+  "private": true,
+  "main": "n/a",
   "scripts": {
     "format": "prettier --write \"src/**/*.{ts,tsx,md}\" && eslint --fix 'src/**/*.{ts,tsx}'",
     "lint": "eslint \"src/**/*.{ts,tsx,md}\"",
-    "dev": "gatsby clean && gatsby develop",
+    "dev": "gatsby develop",
     "build": "gatsby build",
     "clean": "gatsby clean",
     "test": "npm run type-check && npm run lint",
@@ -23,14 +24,18 @@
   },
   "homepage": "https://github.com/NiklasEi/www-nikl-me#readme",
   "dependencies": {
-    "gatsby": "^2.24.85",
-    "react": "^17.0.1"
+    "gatsby": "2.24.85",
+    "gatsby-plugin-typescript": "^2.4.24",
+    "react": "16.14.0",
+    "react-dom": "^17.0.1",
+    "ts-node": "^9.0.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.53",
-    "eslint": "^7.12.0",
-    "eslint-config-prettier": "^6.14.0",
-    "prettier": "^2.1.2",
-    "typescript": "^4.0.3"
+    "@types/react": "16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "eslint": "7.12.0",
+    "eslint-config-prettier": "6.14.0",
+    "prettier": "2.1.2",
+    "typescript": "4.0.3"
   }
 }
