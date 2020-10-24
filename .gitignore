@@ -1,19 +1,4 @@
-# Jekyll
-_site
-.sass-cache
-.jekyll-metadata
-
-# IDE - IntelliJ
 .idea
-**.iml
-
-# IDE - eclipse
-.settings/
-.project
-.classpath
-
-# Ruby
-Gemfile.lock
-
-# resized images
-cache/resize/
+old
+new
+node_modules

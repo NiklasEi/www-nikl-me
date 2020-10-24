@@ -1,0 +1,36 @@
+{
+  "name": "www-nikl-me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write \"src/**/*.{ts,tsx,md}\" && eslint --fix 'src/**/*.{ts,tsx}'",
+    "lint": "eslint \"src/**/*.{ts,tsx,md}\"",
+    "dev": "gatsby clean && gatsby develop",
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "test": "npm run type-check && npm run lint",
+    "type-check": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiklasEi/www-nikl-me.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NiklasEi/www-nikl-me/issues"
+  },
+  "homepage": "https://github.com/NiklasEi/www-nikl-me#readme",
+  "dependencies": {
+    "gatsby": "^2.24.85",
+    "react": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.53",
+    "eslint": "^7.12.0",
+    "eslint-config-prettier": "^6.14.0",
+    "prettier": "^2.1.2",
+    "typescript": "^4.0.3"
+  }
+}
