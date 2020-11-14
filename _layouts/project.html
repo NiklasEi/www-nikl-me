@@ -14,7 +14,13 @@ layout: default
     {% endif %}
     <ul class="project-links">
         {% if page.source %}
-            <li><a href="{{page.source}}" target="_blank"></a><i class="fab fa-github fa-2x" aria-hidden="true"></i></li>
+        <li><a href="{{page.source}}" target="_blank"></a><i class="fab fa-github fa-2x" aria-hidden="true"></i></li>
+        {% endif %}
+        {% if page.android %}
+        <li><a href="{{page.android}}" target="_blank"></a><i class="fab fa-android fa-2x" aria-hidden="true"></i></li>
+        {% endif %}
+        {% if page.apple %}
+        <li><a href="{{page.apple}}" target="_blank"></a><i class="fab fa-apple fa-2x" aria-hidden="true"></i></li>
         {% endif %}
         {% if page.spigot %}
             <li><a href="https://www.spigotmc.org/resources/{{page.spigot}}" target="_blank"></a><i class="fa fa-home fa-2x" aria-hidden="true"></i></li>
@@ -24,6 +30,9 @@ layout: default
         {% endif %}
         {% if page.discord %}
             <li><a href="{{page.discord}}" target="_blank"></a><i class="fab fa-discord fa-2x" aria-hidden="true"></i></li>
+        {% endif %}
+        {% if page.privacy %}
+        <li><a href="{{page.privacy}}" target="_blank"></a><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i></li>
         {% endif %}
     </ul>
 
