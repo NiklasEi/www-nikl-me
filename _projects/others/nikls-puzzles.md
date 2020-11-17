@@ -2,7 +2,7 @@
 layout: project
 type: others
 title: Nikl's Puzzles
-apple: https://nikl.me
+apple: https://apps.apple.com/us/app/nikls-puzzles/id1529182561
 android: https://play.google.com/store/apps/details?id=dev.nikl.puzzles
 privacy: privacy
 summary: Android and iOS app with logic puzzles. Written in Dart using Flutter and featuring self generated puzzles.
@@ -10,7 +10,7 @@ summary: Android and iOS app with logic puzzles. Written in Dart using Flutter a
 
 The app currently features 100 levels of Sudoku and 100 Three in a row puzzles. I generated all puzzles myself assuring they have only one solution and can be solved without guessing.
 
-The app can be downloaded from the App store and Play store for free. If you have any comments, questions or ideas feel free to contact me.
+The app can be downloaded from the [App store](https://apps.apple.com/us/app/nikls-puzzles/id1529182561) and [Play store](https://play.google.com/store/apps/details?id=dev.nikl.puzzles) for free. If you have any comments, questions or ideas feel free to contact me.
 
 <div class="row">
         {% include inline_image.html resize="600x600" file="projects/others/nikls-puzzles/home_view.png" alt="home view of Nikl's puzzles" max-width="320px" %}
