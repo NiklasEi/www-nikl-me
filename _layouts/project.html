@@ -25,6 +25,9 @@ layout: default
         {% if page.spigot %}
             <li><a href="https://www.spigotmc.org/resources/{{page.spigot}}" target="_blank"></a><i class="fa fa-home fa-2x" aria-hidden="true"></i></li>
         {% endif %}
+        {% if page.itch %}
+        <li><a href="{{page.itch}}" target="_blank"></a><img src="/assets/images/itchio-logo-textless-black.svg" alt="itch.io"/></li>
+        {% endif %}
         {% if page.www %}
             <li><a href="{{page.www}}" target="_blank"></a><i class="fa fa-link fa-2x" aria-hidden="true"></i></li>
         {% endif %}
