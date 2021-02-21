@@ -1,0 +1,28 @@
+{% extends "DeepThought/templates/base.html" %}
+
+{% block custom_css %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.6.1/galleria.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1/dist/chart.xkcd.min.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.6.1/themes/folio/galleria.folio.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/elasticlunr/0.9.6/elasticlunr.min.js"></script>
+<script src='{{ get_url(path='search_index.en.js') }}'></script>
+<script src='{{ get_url(path='js/site.js') }}'></script>
+{% endblock %}
+
+{% block footbar %}
+<footer class="py-4 has-background-light">    <p class="has-text-centered">
+    Powered By
+    <span class="icon is-small">
+        <i class="fas fa-power-off fa-xs"></i>
+      </span>
+    Zola
+</p>
+</footer>
+{% endblock %}
+
+{% block imports %}
+{% endblock %}
