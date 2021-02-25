@@ -1,4 +1,4 @@
-.idea
-old
-new
-node_modules
+.idea/
+node_modules/
+public/
+.cache/

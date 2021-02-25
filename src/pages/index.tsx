@@ -1,5 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
+import DefaultLayout from '../layouts/default';
 
 const IndexPage: React.FC = () => {
-    return <p>Hi there</p>
-}
+  return <DefaultLayout>Hi there</DefaultLayout>;
+};
+
+export default IndexPage;

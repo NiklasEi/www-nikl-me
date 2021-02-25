@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "https://www.nikl.me",
   "private": true,
-  "main": "n/a",
   "scripts": {
-    "format": "prettier --write \"src/**/*.{ts,tsx,md}\" && eslint --fix 'src/**/*.{ts,tsx}'",
-    "lint": "eslint \"src/**/*.{ts,tsx,md}\"",
-    "dev": "gatsby develop",
+    "format": "prettier --write \"src/**/*.{ts,tsx,md}\" --ignore-path \".gitignore\" && eslint --fix 'src/**/*.{ts,tsx}'",
+    "lint": "prettier --check \"src/**/*.{ts,tsx,md}\" --ignore-path \".gitignore\" && eslint \"src/**/*.{ts,tsx,md}\"",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "clean": "gatsby clean",
     "test": "npm run type-check && npm run lint",
@@ -17,25 +16,31 @@
     "type": "git",
     "url": "git+https://github.com/NiklasEi/www-nikl-me.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Niklas Eicker <hello@nikl.me>",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/NiklasEi/www-nikl-me/issues"
   },
   "homepage": "https://github.com/NiklasEi/www-nikl-me#readme",
   "dependencies": {
-    "gatsby": "2.24.85",
-    "gatsby-plugin-typescript": "^2.4.24",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
+    "gatsby": "2.32.8",
+    "gatsby-plugin-typescript": "2.12.1",
     "react": "16.14.0",
-    "react-dom": "^17.0.1",
-    "ts-node": "^9.0.0"
+    "react-dom": "17.0.1",
+    "ts-node": "9.1.1"
   },
   "devDependencies": {
     "@types/react": "16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "eslint": "7.12.0",
-    "eslint-config-prettier": "6.14.0",
-    "prettier": "2.1.2",
-    "typescript": "4.0.3"
+    "@types/react-dom": "16.9.11",
+    "eslint": "7.20.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jest-dom": "3.6.5",
+    "eslint-plugin-jsdoc": "30.5.1",
+    "eslint-plugin-prefer-arrow": "1.2.2",
+    "eslint-plugin-testing-library": "3.10.1",
+    "prettier": "2.2.1",
+    "typescript": "4.2.2"
   }
 }

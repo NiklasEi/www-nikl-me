@@ -10,6 +10,4 @@ export const siteMetadata = {
   }
 };
 
-export const plugins = [
-  'gatsby-plugin-typescript'
-];
+export const plugins = ['gatsby-plugin-typescript'];
