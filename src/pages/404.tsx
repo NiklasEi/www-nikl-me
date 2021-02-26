@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyledPageNotFound, StyledPageNotFoundImg } from './404.styles';
 import withDefaultLayout from '../layouts/default';
+import styled from '@emotion/styled';
 
 const PageNotFound: React.FC = () => {
   return (
@@ -15,3 +15,13 @@ const PageNotFound: React.FC = () => {
 };
 
 export default withDefaultLayout(PageNotFound);
+
+const StyledPageNotFound = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledPageNotFoundImg = styled.img`
+  max-width: 300px;
+`;
