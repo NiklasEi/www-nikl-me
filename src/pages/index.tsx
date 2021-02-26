@@ -1,8 +1,12 @@
 import * as React from 'react';
-import DefaultLayout from '../layouts/default';
+import withDefaultLayout from '../layouts/default';
 
 const IndexPage: React.FC = () => {
-  return <DefaultLayout>Hi there</DefaultLayout>;
+  return (
+    <div>
+      <p>Hi there</p>
+    </div>
+  );
 };
 
-export default IndexPage;
+export default withDefaultLayout(IndexPage);

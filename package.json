@@ -23,17 +23,21 @@
   },
   "homepage": "https://github.com/NiklasEi/www-nikl-me#readme",
   "dependencies": {
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.1.5",
+    "@emotion/react": "11.1.5",
+    "@emotion/styled": "11.1.5",
+    "emotion-reset": "3.0.0",
     "gatsby": "2.32.8",
+    "gatsby-plugin-react-helmet": "3.10.0",
     "gatsby-plugin-typescript": "2.12.1",
     "react": "16.14.0",
     "react-dom": "17.0.1",
+    "react-helmet": "6.1.0",
     "ts-node": "9.1.1"
   },
   "devDependencies": {
     "@types/react": "16.9.53",
     "@types/react-dom": "16.9.11",
+    "@types/react-helmet": "6.1.0",
     "eslint": "7.20.0",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-jest-dom": "3.6.5",

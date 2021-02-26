@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import emotionReset from 'emotion-reset';
 
 export const StyledDefaultLayout = styled.div`
   display: flex;
@@ -9,6 +10,8 @@ export const StyledDefaultLayout = styled.div`
 `;
 
 export const globalStyles = css`
+  ${emotionReset}
+
   html,
   body,
   #___gatsby,

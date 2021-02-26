@@ -5,9 +5,8 @@ export const siteMetadata = {
   siteUrl: 'https://www.nikl.me',
   author: {
     name: 'Niklas Eicker',
-    url: 'https://www.nikl.me',
     email: 'hello@nikl.me'
   }
 };
 
-export const plugins = ['gatsby-plugin-typescript'];
+export const plugins = ['gatsby-plugin-typescript', 'gatsby-plugin-react-helmet'];
