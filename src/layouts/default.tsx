@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer/Footer';
 import { Global } from '@emotion/react';
 import { globalStyles, StyledDefaultLayout } from './default.styled';
 import Helmet from 'react-helmet';
