@@ -14,4 +14,8 @@ export const StyledFooter = styled.div`
 export const ContactLink = styled.a`
   color: ${colors.secondary};
   margin: 0 5px;
+
+  &:hover {
+    color: ${colors.white};
+  }
 `;

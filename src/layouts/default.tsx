@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import { Global } from '@emotion/react';
 import { globalStyles, StyledDefaultLayout } from './default.styled';
 import Helmet from 'react-helmet';
-import { StaticQuery, graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 interface StaticQueryProps {
   site: {
@@ -17,9 +17,9 @@ interface StaticQueryProps {
 }
 
 const withDefaultLayout = <P extends PropsWithChildren<{}>>(Component: React.FC<P>): React.FC<P> => {
-  return (props: P) => (
-    <StaticQuery
-      query={graphql`
+  return (props: P) => {
+    const data: StaticQueryProps = useStaticQuery(
+      graphql`
         query DefaultLayoutQuery {
           site {
             siteMetadata {
@@ -29,24 +29,24 @@ const withDefaultLayout = <P extends PropsWithChildren<{}>>(Component: React.FC<
             }
           }
         }
-      `}
-      render={(data: StaticQueryProps) => (
-        <StyledDefaultLayout>
-          <Helmet
-            title={data.site.siteMetadata.title}
-            meta={[
-              { name: 'description', content: data.site.siteMetadata.description },
-              { name: 'keywords', content: data.site.siteMetadata.keywords }
-            ]}
-          />
-          <Global styles={globalStyles} />
-          <NavBar />
-          <Component {...props} />
-          <Footer />
-        </StyledDefaultLayout>
-      )}
-    />
-  );
+      `
+    );
+    return (
+      <StyledDefaultLayout>
+        <Helmet
+          title={data.site.siteMetadata.title}
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { name: 'keywords', content: data.site.siteMetadata.keywords }
+          ]}
+        />
+        <Global styles={globalStyles} />
+        <NavBar />
+        <Component {...props} />
+        <Footer />
+      </StyledDefaultLayout>
+    );
+  };
 };
 
 export default withDefaultLayout;
