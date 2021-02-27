@@ -16,4 +16,16 @@ export const siteMetadata = {
   }
 };
 
-export const plugins = ['gatsby-plugin-typescript', 'gatsby-plugin-react-helmet', 'gatsby-plugin-fontawesome-css'];
+export const plugins = [
+  'gatsby-plugin-typescript',
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `blog`,
+      path: `${__dirname}/../../blog/`
+    }
+  },
+  `gatsby-transformer-remark`,
+  'gatsby-plugin-react-helmet',
+  'gatsby-plugin-fontawesome-css'
+];
