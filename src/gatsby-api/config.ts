@@ -25,7 +25,20 @@ export const plugins = [
       path: `${__dirname}/../../blog/`
     }
   },
-  `gatsby-transformer-remark`,
+  {
+    resolve: `gatsby-transformer-remark`,
+    options: {
+      plugins: [
+        {
+          resolve: `gatsby-remark-autolink-headers`,
+          options: {
+            offsetY: `100`,
+            removeAccents: true
+          }
+        }
+      ]
+    }
+  },
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-fontawesome-css'
 ];

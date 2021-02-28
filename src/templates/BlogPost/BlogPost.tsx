@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import withDefaultLayout from '../../layouts/default';
+import { BlogBody, BlogPostTitle, StyledBlogPost } from './BlogPost.styles';
 
 interface BlogEntryProps {
   data: BlogEntryData;
@@ -9,10 +10,10 @@ interface BlogEntryProps {
 const BlogPost: React.FC<PropsWithChildren<BlogEntryProps>> = ({ data }) => {
   const post = data.markdownRemark;
   return (
-    <div>
-      <h1>{post.frontmatter.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
-    </div>
+    <StyledBlogPost>
+      <BlogPostTitle>{post.frontmatter.title}</BlogPostTitle>
+      <BlogBody dangerouslySetInnerHTML={{ __html: post.html }} />
+    </StyledBlogPost>
   );
 };
 
