@@ -19,3 +19,9 @@ export const globalStyles = css`
     height: 100%;
   }
 `;
+
+export const ContentContainer = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+`;

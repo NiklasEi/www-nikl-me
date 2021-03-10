@@ -4,13 +4,16 @@ import { Link } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const StyledNavBar = styled.div`
+  background-color: ${colors.background};
+  color: ${colors.secondary};
+`;
+
+export const StyledInnerNavBar = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   padding: 5px 0;
-  background-color: ${colors.background};
-  color: ${colors.secondary};
 `;
 
 export const NavBarLink = styled(Link)`
