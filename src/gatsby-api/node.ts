@@ -6,13 +6,28 @@ export const onCreateNode = ({ node, getNode, actions }: CreateNodeArgs) => {
   const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {
     const fileNode = getNode(node.parent!);
-    const basePath = (fileNode.sourceInstanceName as string) ?? 'blog';
-    const slug = createFilePath({ node, getNode });
-    createNodeField({
-      node,
-      name: `slug`,
-      value: `/${basePath}${slug}`
-    });
+    switch (fileNode.sourceInstanceName) {
+      case 'blog': {
+        const basePath = 'blog';
+        const slug = createFilePath({ node, getNode });
+        createNodeField({
+          node,
+          name: `slug`,
+          value: `/${basePath}${slug}`
+        });
+        return;
+      }
+      case 'projects': {
+        const basePath = 'projects';
+        const slug = createFilePath({ node, getNode });
+        createNodeField({
+          node,
+          name: `slug`,
+          value: `/${basePath}${slug}`
+        });
+        return;
+      }
+    }
   }
 };
 
