@@ -3,7 +3,7 @@ tags:
 - hytale
 title: GameBox
 summary: GameBox is a collection of minigames
-source: https://github.com/hygames/gamebox
+github: https://github.com/hygames/gamebox
 ---
 The development on GameBox is currently on hold, since there has yet not been any relevant information published about the Hytale API.
 

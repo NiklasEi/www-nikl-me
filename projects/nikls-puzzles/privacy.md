@@ -1,5 +1,6 @@
 ---
 title: Nikl's Puzzles - App Privacy Policy
+hide: true
 ---
 
 Last updated March 10, 2021

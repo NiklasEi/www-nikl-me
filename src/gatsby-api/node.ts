@@ -15,7 +15,7 @@ export const onCreateNode = ({ node, getNode, actions }: CreateNodeArgs) => {
           name: `slug`,
           value: `/${basePath}${slug}`
         });
-        return;
+        break;
       }
       case 'projects': {
         const basePath = 'projects';
@@ -25,9 +25,14 @@ export const onCreateNode = ({ node, getNode, actions }: CreateNodeArgs) => {
           name: `slug`,
           value: `/${basePath}${slug}`
         });
-        return;
+        break;
       }
     }
+    createNodeField({
+      node,
+      name: `group`,
+      value: fileNode.sourceInstanceName ?? ''
+    });
   }
 };
 

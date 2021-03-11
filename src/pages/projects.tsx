@@ -1,16 +1,28 @@
 import { graphql, Link } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
+import { groupTags } from '../utilities/tags';
 
-interface BlogProps {
-  data: BlogData;
+interface ProjectsProps {
+  data: ProjectData;
 }
 
-const Blog: React.FC<PropsWithChildren<BlogProps>> = ({ data }) => {
+const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
+  const groupedTags = groupTags(
+    data.allMarkdownRemark.edges.map(({ node }) => ({
+      ...node.frontmatter
+    }))
+  );
   return (
     <div>
-      <h1>Nikl's thoughts</h1>
-      <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+      <h1>Nikl's projects</h1>
+      {groupedTags.map((groupedTag) => (
+        <div>
+          <span>
+            {groupedTag.tag}({groupedTag.count})
+          </span>
+        </div>
+      ))}
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <div key={node.id}>
           <Link to={node.fields.slug}>
@@ -25,9 +37,9 @@ const Blog: React.FC<PropsWithChildren<BlogProps>> = ({ data }) => {
   );
 };
 
-export default withDefaultLayout(Blog);
+export default withDefaultLayout(Projects);
 
-interface BlogData {
+interface ProjectData {
   allMarkdownRemark: {
     totalCount: number;
     edges: {
@@ -36,6 +48,11 @@ interface BlogData {
         frontmatter: {
           title: string;
           date: string;
+          tags: string[];
+          github?: string;
+          apple?: string;
+          android?: string;
+          privacy?: string;
         };
         fields: {
           slug: string;
@@ -50,7 +67,7 @@ export const query = graphql`
   query {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fields: { group: { eq: "blog" } }, frontmatter: { hide: { ne: true } } }
+      filter: { fields: { group: { eq: "projects" } }, frontmatter: { hide: { ne: true } } }
     ) {
       totalCount
       edges {
@@ -58,7 +75,12 @@ export const query = graphql`
           id
           frontmatter {
             title
-            date(formatString: "DD MMMM, YYYY")
+            date
+            tags
+            github
+            apple
+            android
+            privacy
           }
           fields {
             slug

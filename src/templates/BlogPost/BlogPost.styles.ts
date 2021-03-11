@@ -17,6 +17,7 @@ export const BlogPostTitle = styled.h1`
 
 export const BlogBody = styled.div`
   max-width: 800px;
+  padding-bottom: 20px;
   h1 {
     font-size: 2rem;
     font-weight: 700;
