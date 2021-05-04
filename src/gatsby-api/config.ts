@@ -44,7 +44,7 @@ export const plugins = [
           }
         },
         {
-          resolve: `gatsby-remark-prismjs`,
+          resolve: `gatsby-remark-prismjs`
         }
       ]
     }

@@ -1,6 +1,6 @@
 import { Project } from '../models/Project';
 
-interface TagGroup {
+export interface TagGroup {
   tag: string;
   count: number;
 }

@@ -2,6 +2,7 @@ import { graphql, Link } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
 import { groupTags } from '../utilities/tags';
+import { GroupedTags } from '../components/GroupedTags/GroupedTags';
 
 interface ProjectsProps {
   data: ProjectData;
@@ -16,13 +17,7 @@ const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
   return (
     <div>
       <h1>Nikl's projects</h1>
-      {groupedTags.map((groupedTag) => (
-        <div>
-          <span>
-            {groupedTag.tag}({groupedTag.count})
-          </span>
-        </div>
-      ))}
+      <GroupedTags groupedTags={groupedTags} />
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <div key={node.id}>
           <Link to={node.fields.slug}>
