@@ -42,6 +42,9 @@ export const plugins = [
             offsetY: `100`,
             removeAccents: true
           }
+        },
+        {
+          resolve: `gatsby-remark-prismjs`,
         }
       ]
     }
