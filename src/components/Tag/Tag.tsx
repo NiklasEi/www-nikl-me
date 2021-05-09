@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTag } from '@fortawesome/free-solid-svg-icons';
-import { TagName } from './Tag.styles';
+import {TagContainer, TagName } from './Tag.styles';
 
 export interface OuterProps {
   name: string;
@@ -9,9 +9,9 @@ export interface OuterProps {
 
 export const Tag: React.FC<OuterProps> = ({ name }) => {
   return (
-    <div>
+    <TagContainer>
       <FontAwesomeIcon icon={faTag} />
       <TagName>{name}</TagName>
-    </div>
+    </TagContainer>
   );
 };

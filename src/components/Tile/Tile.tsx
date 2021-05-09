@@ -20,9 +20,9 @@ export const Tile: React.FC<OuterProps> = ({ left, right, link }) => {
     return <StyledTile onClick={onClick}>{left}</StyledTile>;
   }
   return (
-    <TileContainer>
-      <StyledLeftTile onClick={onClick}>{left}</StyledLeftTile>
-      <StyledRightTile onClick={onClick}>{right}</StyledRightTile>
+    <TileContainer onClick={onClick}>
+      <StyledLeftTile>{left}</StyledLeftTile>
+      <StyledRightTile>{right}</StyledRightTile>
     </TileContainer>
   );
 };
