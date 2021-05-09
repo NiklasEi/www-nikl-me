@@ -3,3 +3,7 @@ export const colors = {
   secondary: '#9d9d9d',
   white: '#fff'
 };
+
+export const colorUsage = {
+  tileBorder: colors.secondary
+};
