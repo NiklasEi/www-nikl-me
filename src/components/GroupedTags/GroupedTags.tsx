@@ -12,7 +12,7 @@ export const GroupedTags: React.FC<OuterProps> = ({ groupedTags }) => {
   return (
     <TagsContainer>
       {groupedTags.map((groupedTag) => (
-        <Tile left={<Tag name={groupedTag.tag} />} right={<span>{groupedTag.count}</span>} link={"/"}/>
+        <Tile left={<Tag name={groupedTag.tag} />} right={<span>{groupedTag.count}</span>} link={`/tag/${groupedTag.tag}`} />
       ))}
     </TagsContainer>
   );
