@@ -1,61 +1,42 @@
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
-import { groupTags } from '../utilities/tags';
-import { GroupedTags } from '../components/GroupedTags/GroupedTags';
+import { ProjectList } from '../components/ProjectList/ProjectList';
 
 interface ProjectsProps {
-  data: ProjectData;
+  data: ProjectList;
 }
 
 const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
-  const groupedTags = groupTags(
-    data.allMarkdownRemark.edges.map(({ node }) => ({
-      ...node.frontmatter
-    }))
-  );
-  return (
-    <div>
-      <h1>Nikl's projects</h1>
-      <GroupedTags groupedTags={groupedTags} />
-      {data.allMarkdownRemark.edges.map(({ node }) => (
-        <div key={node.id}>
-          <Link to={node.fields.slug}>
-            <h3>
-              {node.frontmatter.title} <span>— {node.frontmatter.date}</span>
-            </h3>
-            <p>{node.excerpt}</p>
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
+  return <ProjectList posts={data.allMarkdownRemark.edges.map(({ node }) => node)} />;
 };
 
 export default withDefaultLayout(Projects);
 
-interface ProjectData {
+interface ProjectList {
   allMarkdownRemark: {
     totalCount: number;
     edges: {
-      node: {
-        id: string;
-        frontmatter: {
-          title: string;
-          date: string;
-          tags: string[];
-          github?: string;
-          apple?: string;
-          android?: string;
-          privacy?: string;
-        };
-        fields: {
-          slug: string;
-        };
-        excerpt: string;
-      };
+      node: ProjectData;
     }[];
   };
+}
+
+export interface ProjectData {
+  id: string;
+  frontmatter: {
+    title: string;
+    date: string;
+    tags: string[];
+    github?: string;
+    apple?: string;
+    android?: string;
+    privacy?: string;
+  };
+  fields: {
+    slug: string;
+  };
+  excerpt: string;
 }
 
 export const query = graphql`
