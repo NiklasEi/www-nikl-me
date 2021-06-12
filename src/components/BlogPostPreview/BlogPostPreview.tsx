@@ -2,7 +2,7 @@ import React from 'react';
 import { BlogPostData } from '../../pages/blog';
 import { Link } from 'gatsby';
 
-export const BlogPost: React.FC<BlogPostData> = (post) => {
+export const BlogPostPreview: React.FC<BlogPostData> = (post) => {
   return (
     <div>
       <Link to={post.fields.slug}>

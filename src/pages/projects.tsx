@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
 import { ProjectList } from '../components/ProjectList/ProjectList';
+import { ProjectLinksData } from '../components/ProjectLinks/ProjectLinks';
 
 interface ProjectsProps {
   data: ProjectList;
@@ -26,13 +27,9 @@ export interface ProjectData {
   id: string;
   frontmatter: {
     title: string;
-    date: string;
     tags: string[];
-    github?: string;
-    apple?: string;
-    android?: string;
-    privacy?: string;
-  };
+    imageUrl?: string;
+  } & ProjectLinksData;
   fields: {
     slug: string;
   };

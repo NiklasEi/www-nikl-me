@@ -1,7 +1,8 @@
 ---
 tags:
 - mobile app
-- Flutter
+- Flutter 
+imageUrl: projects/nikls-puzzles/icon.png
 title: Nikl's Puzzles
 apple: https://apps.apple.com/us/app/nikls-puzzles/id1529182561
 android: https://play.google.com/store/apps/details?id=dev.nikl.puzzles
