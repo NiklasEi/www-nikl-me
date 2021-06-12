@@ -1,49 +1,37 @@
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
+import { BlogPostList } from '../components/BlogPostList/BlogPostList';
 
 interface BlogProps {
-  data: BlogData;
+  data: BlogListData;
 }
 
-const Blog: React.FC<PropsWithChildren<BlogProps>> = ({ data }) => {
-  return (
-    <div>
-      <h1>Nikl's thoughts</h1>
-      <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
-      {data.allMarkdownRemark.edges.map(({ node }) => (
-        <div key={node.id}>
-          <Link to={node.fields.slug}>
-            <h3>
-              {node.frontmatter.title} <span>— {node.frontmatter.date}</span>
-            </h3>
-            <p>{node.excerpt}</p>
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
+const BlogPage: React.FC<PropsWithChildren<BlogProps>> = ({ data }) => {
+  return <BlogPostList posts={data.allMarkdownRemark.edges.map(({ node }) => node)} />;
 };
 
-export default withDefaultLayout(Blog);
+export default withDefaultLayout(BlogPage);
 
-interface BlogData {
+interface BlogListData {
   allMarkdownRemark: {
     totalCount: number;
     edges: {
-      node: {
-        id: string;
-        frontmatter: {
-          title: string;
-          date: string;
-        };
-        fields: {
-          slug: string;
-        };
-        excerpt: string;
-      };
+      node: BlogPostData;
     }[];
   };
+}
+
+export interface BlogPostData {
+  id: string;
+  frontmatter: {
+    title: string;
+    date: string;
+  };
+  fields: {
+    slug: string;
+  };
+  excerpt: string;
 }
 
 export const query = graphql`
