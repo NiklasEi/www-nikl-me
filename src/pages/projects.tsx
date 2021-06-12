@@ -25,15 +25,19 @@ interface ProjectList {
 
 export interface ProjectData {
   id: string;
-  frontmatter: {
-    title: string;
-    tags: string[];
-    imageUrl?: string;
-  } & ProjectLinksData;
+  frontmatter: ProjectFrontmatter;
   fields: {
     slug: string;
   };
   excerpt: string;
+}
+
+export type ProjectFrontmatter = ProjectFrontmatterData & ProjectLinksData;
+
+interface ProjectFrontmatterData {
+  title: string;
+  tags: string[];
+  imageUrl?: string;
 }
 
 export const query = graphql`

@@ -1,11 +1,11 @@
-import { Project } from '../models/Project';
+import { ProjectFrontmatter } from '../pages/projects';
 
 export interface TagGroup {
   tag: string;
   count: number;
 }
 
-export function groupTags(projects: Project[]): TagGroup[] {
+export function groupTags(projects: ProjectFrontmatter[]): TagGroup[] {
   let tags: TagGroup[] = [];
   for (const currentProject of projects) {
     for (const tag of currentProject.tags) {
