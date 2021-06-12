@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 
 export const BlogPost: React.FC<BlogPostData> = (post) => {
   return (
-    <div key={post.id}>
+    <div>
       <Link to={post.fields.slug}>
         <h3>
           {post.frontmatter.title} <span>— {post.frontmatter.date}</span>

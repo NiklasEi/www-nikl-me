@@ -4,6 +4,8 @@ date: 2021-06-12
 categories: code
 ---
 
+This is a longer sentence to test line breaks and general layout of the blog page. It should look nice on large screens and on mobile phones. I hope...
+
 Some rust:
 ```rust
 #[derive(Clone)]

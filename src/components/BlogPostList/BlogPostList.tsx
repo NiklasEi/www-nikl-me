@@ -11,7 +11,7 @@ export const BlogPostList: React.FC<BlogPostListProps> = ({ posts }) => {
     <div>
       <h1>Blog posts</h1>
       {posts.map((post) => (
-        <BlogPost {...post} />
+        <BlogPost {...post} key={post.id} />
       ))}
     </div>
   );
