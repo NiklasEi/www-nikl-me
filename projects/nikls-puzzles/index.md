@@ -6,7 +6,7 @@ imageUrl: projects/nikls-puzzles/icon.png
 title: Nikl's Puzzles
 apple: https://apps.apple.com/us/app/nikls-puzzles/id1529182561
 android: https://play.google.com/store/apps/details?id=dev.nikl.puzzles
-privacy: /privacy
+privacy: /projects/nikls-puzzles/privacy
 summary: Android and iOS app with logic puzzles. Written in Dart using Flutter and featuring self generated puzzles.
 ---
 

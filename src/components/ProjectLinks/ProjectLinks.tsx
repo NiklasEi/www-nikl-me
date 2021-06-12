@@ -59,7 +59,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
     }
 
     return (
-      <ProjectLink href={links.privacy} target="_blank" title={`${projectTitle} - Privacy`}>
+      <ProjectLink href={links.privacy} title={`${projectTitle} - Privacy`}>
         <FontAwesomeIcon icon={faUserSecret} size={'lg'} />
       </ProjectLink>
     );
