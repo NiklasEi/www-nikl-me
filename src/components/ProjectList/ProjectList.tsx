@@ -5,12 +5,12 @@ import { GroupedTags } from '../GroupedTags/GroupedTags';
 import { ProjectPreview } from '../ProjectPreview/ProjectPreview';
 
 interface ProjectListProps {
-  posts: ProjectData[];
+  projects: ProjectData[];
 }
 
-export const ProjectList: React.FC<ProjectListProps> = ({ posts }) => {
+export const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   const groupedTags = groupTags(
-    posts.map((post) => ({
+    projects.map((post) => ({
       ...post.frontmatter
     }))
   );
@@ -18,7 +18,7 @@ export const ProjectList: React.FC<ProjectListProps> = ({ posts }) => {
     <div>
       <h1>Nikl's projects</h1>
       <GroupedTags groupedTags={groupedTags} />
-      {posts.map((post) => (
+      {projects.map((post) => (
         <ProjectPreview key={post.id} {...post} />
       ))}
     </div>

@@ -9,7 +9,7 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
-  return <ProjectList posts={data.allMarkdownRemark.edges.map(({ node }) => node)} />;
+  return <ProjectList projects={data.allMarkdownRemark.edges.map(({ node }) => node)} />;
 };
 
 export default withDefaultLayout(Projects);
