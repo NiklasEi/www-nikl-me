@@ -44,19 +44,29 @@ interface AllMarkdown {
 
 interface MarkdownNode {
   node: {
+    parent: {
+      id: string;
+    };
     fields: {
       slug: string;
     };
   };
 }
 
-export const createPages = async ({ graphql, actions }: CreatePagesArgs) => {
+export const createPages = async (args: CreatePagesArgs) => {
+  await createBlogPostsAndProjects(args);
+};
+
+const createBlogPostsAndProjects = async ({ graphql, actions, getNode }: CreatePagesArgs) => {
   const { createPage } = actions;
   const result = await graphql<AllMarkdown>(`
     query {
       allMarkdownRemark {
         edges {
           node {
+            parent {
+              id
+            }
             fields {
               slug
             }
@@ -70,14 +80,29 @@ export const createPages = async ({ graphql, actions }: CreatePagesArgs) => {
     return;
   }
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: node.fields.slug,
-      component: path.resolve(`./src/templates/BlogPost/BlogPost.tsx`),
-      context: {
-        // Data passed to context is available
-        // in page queries as GraphQL variables.
-        slug: node.fields.slug
+    const fileNode = getNode(node.parent.id!);
+    switch (fileNode.sourceInstanceName) {
+      case 'blog':
+        {
+          createPage({
+            path: node.fields.slug,
+            component: path.resolve(`./src/templates/BlogPost/BlogPost.tsx`),
+            context: {
+              slug: node.fields.slug
+            }
+          });
+        }
+        break;
+      case 'projects': {
+        createPage({
+          path: node.fields.slug,
+          component: path.resolve(`./src/templates/Project/Project.tsx`),
+          context: {
+            slug: node.fields.slug
+          }
+        });
+        break;
       }
-    });
+    }
   });
 };
