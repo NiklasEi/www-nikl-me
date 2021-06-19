@@ -1,6 +1,6 @@
 import React from 'react';
-import { BlogPostData } from '../../pages/blog';
 import { Link } from 'gatsby';
+import { BlogPostData } from '../../modules/blog';
 
 export const BlogPostPreview: React.FC<BlogPostData> = (post) => {
   return (

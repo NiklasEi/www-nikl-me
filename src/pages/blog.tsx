@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
 import { BlogPostList } from '../components/BlogPostList/BlogPostList';
+import { BlogListData } from '../modules/blog';
 
 interface BlogProps {
   data: BlogListData;
@@ -12,27 +13,6 @@ const BlogPage: React.FC<PropsWithChildren<BlogProps>> = ({ data }) => {
 };
 
 export default withDefaultLayout(BlogPage);
-
-interface BlogListData {
-  allMarkdownRemark: {
-    totalCount: number;
-    edges: {
-      node: BlogPostData;
-    }[];
-  };
-}
-
-export interface BlogPostData {
-  id: string;
-  frontmatter: {
-    title: string;
-    date: string;
-  };
-  fields: {
-    slug: string;
-  };
-  excerpt: string;
-}
 
 export const query = graphql`
   query {

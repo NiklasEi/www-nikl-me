@@ -1,6 +1,6 @@
 import React from 'react';
-import { BlogPostData } from '../../pages/blog';
 import { BlogPostPreview } from '../BlogPostPreview/BlogPostPreview';
+import { BlogPostData } from '../../modules/blog';
 
 interface BlogPostListProps {
   posts: BlogPostData[];
