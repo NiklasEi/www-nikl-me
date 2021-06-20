@@ -9,6 +9,7 @@ export const StyledProject = styled.div`
 `;
 
 export const ProjectContainer = styled.div`
+  width: 300px;
   position: relative;
 `;
 

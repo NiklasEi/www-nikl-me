@@ -3,18 +3,33 @@ import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
 import { ProjectList } from '../components/ProjectList/ProjectList';
 import { ProjectLinksData } from '../components/ProjectLinks/ProjectLinks';
+import { ContentContainer } from '../layouts/default.styled';
+import { groupTags } from '../utilities/tags';
+import { GroupedTags } from '../components/GroupedTags/GroupedTags';
 
 interface ProjectsProps {
-  data: ProjectList;
+  data: ProjectListData;
 }
 
 const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
-  return <ProjectList projects={data.allMarkdownRemark.edges.map(({ node }) => node)} />;
+  const projectData = data.allMarkdownRemark.edges.map(({ node }) => node);
+  const groupedTags = groupTags(
+    projectData.map((post) => ({
+      ...post.frontmatter
+    }))
+  );
+  return (
+    <ContentContainer>
+      <h1>Nikl's projects</h1>
+      <GroupedTags groupedTags={groupedTags} />
+      <ProjectList projects={projectData} />
+    </ContentContainer>
+  );
 };
 
 export default withDefaultLayout(Projects);
 
-interface ProjectList {
+interface ProjectListData {
   allMarkdownRemark: {
     totalCount: number;
     edges: {
@@ -37,7 +52,7 @@ export type ProjectFrontmatter = ProjectFrontmatterData & ProjectLinksData;
 interface ProjectFrontmatterData {
   title: string;
   tags: string[];
-  imageUrl?: string;
+  cover: string | null;
 }
 
 export const query = graphql`
@@ -58,6 +73,7 @@ export const query = graphql`
             apple
             android
             privacy
+            cover
           }
           fields {
             slug

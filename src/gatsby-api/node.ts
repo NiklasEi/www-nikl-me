@@ -152,6 +152,7 @@ const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArg
                 apple
                 android
                 privacy
+                cover
               }
               fields {
                 slug
