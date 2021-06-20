@@ -1,6 +1,6 @@
 ---
 title: "Code test"
-date: 2021-06-12
+date: 2021-05-04
 category: code
 tags:
 - rust

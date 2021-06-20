@@ -1,6 +1,6 @@
 import React from 'react';
 import withDefaultLayout from '../../layouts/default';
-import { StyledLandingPage } from './LandingPage.styles';
+import { LandingPageTitle, StyledLandingPage } from './LandingPage.styles';
 import { graphql, StaticQuery } from 'gatsby';
 import { BlogListData } from '../../modules/blog';
 import { BlogPostPreview } from '../BlogPostPreview/BlogPostPreview';
@@ -36,10 +36,10 @@ const LandingPage: React.FC = () => {
       render={(data: BlogListData) => (
         <ContentContainer>
           <StyledLandingPage>
-            <span>This page is currently being rewritten. I am changing the static site generator from Jekyll to Gatsby.</span>
+            <LandingPageTitle>Hi, I'm Niklas</LandingPageTitle>
+            <p>And this is my spot on the internet</p>
             <br />
             <br />
-
             <span>Latest post:</span>
             <BlogPostPreview {...data.allMarkdownRemark.edges.map(({ node }) => node)[0]} />
           </StyledLandingPage>
