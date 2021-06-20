@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faGitlab, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { ContactLink, StyledFooter } from './Footer.styles';
+import { ContactLink, Copyright, StyledFooter } from './Footer.styles';
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
 interface StaticQueryProps {
@@ -54,13 +54,6 @@ const Footer: React.FC = () => {
               <FontAwesomeIcon icon={faGithub} />
             </ContactLink>
             <ContactLink
-              href={`https://gitlab.com/${data.site.siteMetadata.author.social.gitlab}`}
-              target="_blank"
-              title={`${data.site.siteMetadata.author.firstName} on GitLab`}
-            >
-              <FontAwesomeIcon icon={faGitlab} />
-            </ContactLink>
-            <ContactLink
               href={`https://twitter.com/${data.site.siteMetadata.author.social.twitter}`}
               target="_blank"
               title={`${data.site.siteMetadata.author.firstName} on Twitter`}
@@ -75,12 +68,20 @@ const Footer: React.FC = () => {
               <FontAwesomeIcon icon={faLinkedin} />
             </ContactLink>
             <ContactLink
+              href={`https://gitlab.com/${data.site.siteMetadata.author.social.gitlab}`}
+              target="_blank"
+              title={`${data.site.siteMetadata.author.firstName} on GitLab`}
+            >
+              <FontAwesomeIcon icon={faGitlab} />
+            </ContactLink>
+            <ContactLink
               href={`mailto:${data.site.siteMetadata.author.email}`}
               title={`Send ${data.site.siteMetadata.author.firstName} an e-mail`}
             >
               <FontAwesomeIcon icon={faEnvelopeOpenText} />
             </ContactLink>
           </div>
+          <Copyright>Nikl.me © 2020</Copyright>
         </StyledFooter>
       )}
     />
