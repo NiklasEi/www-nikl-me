@@ -73,11 +73,7 @@ export const query = graphql`
             apple
             android
             privacy
-            cover {
-              childImageSharp {
-                gatsbyImageData(width: 200)
-              }
-            }
+            cover
           }
           fields {
             slug

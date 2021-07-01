@@ -32,9 +32,6 @@ export const plugins = [
       path: `${__dirname}/../../projects/`
     }
   },
-  `gatsby-plugin-image`,
-  `gatsby-plugin-sharp`,
-  `gatsby-transformer-sharp`,
   {
     resolve: `gatsby-transformer-remark`,
     options: {
