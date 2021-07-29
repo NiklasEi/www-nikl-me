@@ -12,13 +12,13 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
-  const projectData = data.allMarkdownRemark.edges.map(({ node }) => node);
+  const projectData = data.allMarkdownRemark.edges.map(({ node }) => node).filter((project) => !project.frontmatter.hidden);
   const groupedTags = groupTags(
     projectData.map((post) => ({
       ...post.frontmatter
     }))
   );
-  projectData.sort((a, b) => a.frontmatter.update < b.frontmatter.update ? 1 : -1);
+  projectData.sort((a, b) => (a.frontmatter.update < b.frontmatter.update ? 1 : -1));
   return (
     <ContentContainer>
       <h1>Nikl's projects</h1>
@@ -55,6 +55,7 @@ interface ProjectFrontmatterData {
   update: string;
   tags: string[];
   cover: string | null;
+  hidden: boolean | null;
 }
 
 export const query = graphql`
@@ -77,6 +78,7 @@ export const query = graphql`
             privacy
             update
             cover
+            hidden
           }
           fields {
             slug
