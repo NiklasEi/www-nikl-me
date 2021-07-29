@@ -68,14 +68,14 @@ export const query = graphql`
         node {
           id
           frontmatter {
-            title
             date
-            tags
             github
             apple
             android
             privacy
+            title
             update
+            tags
             cover
           }
           fields {
