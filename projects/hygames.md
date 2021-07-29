@@ -1,6 +1,6 @@
 ---
 tags:
-- hytale
+- Hytale
 title: Hygames
 summary: Creating content for Hytale
 www: https://www.hygames.dev

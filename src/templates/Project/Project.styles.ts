@@ -9,6 +9,7 @@ export const StyledProject = styled.div`
 
 export const ProjectBody = styled.div`
   max-width: 800px;
+  padding-top: 10px;
   padding-bottom: 20px;
   h1 {
     font-size: 2rem;

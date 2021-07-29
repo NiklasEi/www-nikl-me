@@ -1,9 +1,9 @@
 ---
 title: GemCrush
 tags:
-- minecraft
-- spigot
-- gamebox 
+- Minecraft
+- Spigot
+- Gamebox 
 update: 2021-05-04
 spigot: 30138
 github: https://github.com/NiklasEi/gemcrush-for-gamebox

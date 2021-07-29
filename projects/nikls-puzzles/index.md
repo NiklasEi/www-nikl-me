@@ -1,7 +1,7 @@
 ---
 tags:
 - mobile app
-- Flutter 
+- Flutter
 cover: /projects/nikls-puzzles/icon.png
 title: Nikl's Puzzles 
 update: 2021-06-04

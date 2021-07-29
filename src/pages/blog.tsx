@@ -3,13 +3,19 @@ import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
 import { BlogPostList } from '../components/BlogPostList/BlogPostList';
 import { BlogListData } from '../modules/blog';
+import { CenteredTitle, ContentContainer } from '../layouts/default.styled';
 
 interface BlogProps {
   data: BlogListData;
 }
 
 const BlogPage: React.FC<PropsWithChildren<BlogProps>> = ({ data }) => {
-  return <BlogPostList posts={data.allMarkdownRemark.edges.map(({ node }) => node)} />;
+  return (
+    <ContentContainer>
+      <CenteredTitle>Nikl's blog</CenteredTitle>
+      <BlogPostList posts={data.allMarkdownRemark.edges.map(({ node }) => node)} />
+    </ContentContainer>
+  );
 };
 
 export default withDefaultLayout(BlogPage);

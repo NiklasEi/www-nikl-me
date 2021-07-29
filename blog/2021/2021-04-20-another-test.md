@@ -1,6 +1,6 @@
 ---
-title: "Another test"
-date: 2021-06-20
+title: "A test"
+date: 2021-04-20
 category: code
 tags:
 - webdev

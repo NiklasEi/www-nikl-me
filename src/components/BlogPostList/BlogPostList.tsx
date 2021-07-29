@@ -9,7 +9,6 @@ interface BlogPostListProps {
 export const BlogPostList: React.FC<BlogPostListProps> = ({ posts }) => {
   return (
     <div>
-      <h1>Blog posts</h1>
       {posts.map((post) => (
         <BlogPostPreview {...post} key={post.id} />
       ))}

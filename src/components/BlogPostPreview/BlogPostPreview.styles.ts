@@ -1,16 +1,18 @@
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 
-export const StyledProject = styled.div`
+export const StyledPost = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 10px 0;
 `;
 
-export const ProjectContainer = styled.div`
-  width: 300px;
+export const PostContainer = styled.div`
+  width: 100%;
   position: relative;
+  padding: 20px 0;
+  text-align: left;
 `;
 
 export const ContainerLink = styled(Link)`
@@ -26,10 +28,11 @@ export const ContainerLink = styled(Link)`
   }
 `;
 
-export const ProjectHeader = styled.div`
+export const PostHeader = styled.div`
   display: flex;
   position: static;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: 10px;
 `;
