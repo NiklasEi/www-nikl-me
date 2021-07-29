@@ -18,7 +18,7 @@ const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
       ...post.frontmatter
     }))
   );
-  projectData.sort((a, b) => (a.frontmatter.update < b.frontmatter.update ? 1 : -1));
+
   return (
     <ContentContainer>
       <CenteredTitle>Nikl's projects</CenteredTitle>
@@ -52,7 +52,6 @@ export type ProjectFrontmatter = ProjectFrontmatterData & ProjectLinksData;
 
 interface ProjectFrontmatterData {
   title: string;
-  update: string;
   tags: string[];
   cover: string | null;
 }
@@ -74,7 +73,6 @@ export const query = graphql`
             android
             privacy
             title
-            update
             tags
             cover
           }

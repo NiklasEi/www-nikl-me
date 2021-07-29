@@ -4,7 +4,7 @@ tags:
 title: Hygames
 summary: Creating content for Hytale
 www: https://www.hygames.dev
-update: 2021-05-03
+date: 2021-05-03
 hide: true
 discord: http://discord.hygames.dev
 ---

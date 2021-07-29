@@ -41,7 +41,6 @@ export const query = graphql`
         android
         privacy
         title
-        update
         tags
         cover
       }
