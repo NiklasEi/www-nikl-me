@@ -18,6 +18,10 @@ export const globalStyles = css`
   #gatsby-focus-wrapper {
     height: 100%;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -32,4 +36,12 @@ export const CenteredTitle = styled.h1`
   font-weight: 700;
   margin-top: 1rem;
   margin-bottom: 2rem;
+`;
+
+export const CenteredSubTitle = styled.h3`
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
 `;
