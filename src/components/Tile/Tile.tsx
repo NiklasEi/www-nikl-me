@@ -1,14 +1,12 @@
 import React from 'react';
-import { StyledLeftTile, StyledRightTile, StyledTile, TileContainer } from './Tile.styles';
+import { StyledTile } from './Tile.styles';
 import { navigate } from 'gatsby';
 
 export interface OuterProps {
-  left: React.ReactElement;
-  right?: React.ReactElement;
   link?: string;
 }
 
-export const Tile: React.FC<OuterProps> = ({ left, right, link }) => {
+export const Tile: React.FC<OuterProps> = ({ link, children }) => {
   const onClick =
     link !== undefined
       ? async () => {
@@ -16,13 +14,5 @@ export const Tile: React.FC<OuterProps> = ({ left, right, link }) => {
         }
       : undefined;
 
-  if (right === undefined) {
-    return <StyledTile onClick={onClick}>{left}</StyledTile>;
-  }
-  return (
-    <TileContainer onClick={onClick}>
-      <StyledLeftTile>{left}</StyledLeftTile>
-      <StyledRightTile>{right}</StyledRightTile>
-    </TileContainer>
-  );
+  return <StyledTile onClick={onClick}>{children}</StyledTile>;
 };

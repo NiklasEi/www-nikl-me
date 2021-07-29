@@ -1,9 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import withDefaultLayout from '../../layouts/default';
-import { ProjectBody, ProjectTitle, StyledProject } from './Project.styles';
+import { ProjectBody, StyledProject } from './Project.styles';
 import { ProjectLinks } from '../../components/ProjectLinks/ProjectLinks';
 import { ProjectFrontmatter } from '../../pages/projects';
+import { CenteredTitle } from '../../layouts/default.styled';
 
 interface ProjectProps {
   data: ProjectData;
@@ -13,7 +14,7 @@ const Project: React.FC<PropsWithChildren<ProjectProps>> = ({ data }) => {
   const project = data.markdownRemark;
   return (
     <StyledProject>
-      <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
+      <CenteredTitle>{project.frontmatter.title}</CenteredTitle>
       <ProjectLinks links={project.frontmatter} projectTitle={project.frontmatter.title} />
       <ProjectBody dangerouslySetInnerHTML={{ __html: project.html }} />
     </StyledProject>

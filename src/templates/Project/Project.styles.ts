@@ -7,14 +7,6 @@ export const StyledProject = styled.div`
   padding: 0 20px;
 `;
 
-export const ProjectTitle = styled.h1`
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-`;
-
 export const ProjectBody = styled.div`
   max-width: 800px;
   padding-bottom: 20px;

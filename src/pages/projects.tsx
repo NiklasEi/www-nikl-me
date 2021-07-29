@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../layouts/default';
 import { ProjectList } from '../components/ProjectList/ProjectList';
 import { ProjectLinksData } from '../components/ProjectLinks/ProjectLinks';
-import { ContentContainer } from '../layouts/default.styled';
+import { CenteredTitle, ContentContainer } from '../layouts/default.styled';
 import { groupTags } from '../utilities/tags';
 import { GroupedTags } from '../components/GroupedTags/GroupedTags';
 
@@ -21,7 +21,7 @@ const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
   projectData.sort((a, b) => (a.frontmatter.update < b.frontmatter.update ? 1 : -1));
   return (
     <ContentContainer>
-      <h1>Nikl's projects</h1>
+      <CenteredTitle>Nikl's projects</CenteredTitle>
       <GroupedTags groupedTags={groupedTags} />
       <ProjectList projects={projectData} />
     </ContentContainer>

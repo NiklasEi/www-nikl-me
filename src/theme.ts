@@ -5,5 +5,6 @@ export const colors = {
 };
 
 export const colorUsage = {
-  tileBorder: colors.secondary
+  tileBorder: colors.white,
+  hoverTileBorder: colors.secondary
 };

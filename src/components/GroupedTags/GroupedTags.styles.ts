@@ -7,3 +7,12 @@ export const TagsContainer = styled.div`
   width: 100%;
   padding: 5px 0;
 `;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  span {
+    margin-left: 5px;
+  }
+`;

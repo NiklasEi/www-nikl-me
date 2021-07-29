@@ -25,3 +25,11 @@ export const ContentContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
 `;
+
+export const CenteredTitle = styled.h1`
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+`;
