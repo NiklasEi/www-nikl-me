@@ -3,7 +3,8 @@ tags:
 - mobile app
 - Flutter 
 cover: /projects/nikls-puzzles/icon.png
-title: Nikl's Puzzles
+title: Nikl's Puzzles 
+update: 2021-06-04
 apple: https://apps.apple.com/us/app/nikls-puzzles/id1529182561
 android: https://play.google.com/store/apps/details?id=dev.nikl.puzzles
 privacy: /projects/nikls-puzzles/privacy
