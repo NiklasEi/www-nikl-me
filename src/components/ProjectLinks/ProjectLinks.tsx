@@ -2,7 +2,7 @@ import React from 'react';
 import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAndroid, faApple, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faFaucet, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import {faFaucet, faGem, faUserSecret} from '@fortawesome/free-solid-svg-icons';
 
 export interface ProjectLinksData {
   github: string | null;
@@ -10,6 +10,7 @@ export interface ProjectLinksData {
   spigot: string | null;
   android: string | null;
   privacy: string | null;
+  rubyGem: string | null;
 }
 
 interface ProjectLinksProps {
@@ -78,6 +79,18 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
     );
   }
 
+  function renderRubyGemLink() {
+    if (links.rubyGem === null) {
+      return undefined;
+    }
+
+    return (
+        <ProjectLink href={`https://rubygems.org/gems/${links.rubyGem}`} target="_blank" title={`${projectTitle} on Ruby gems`}>
+          <FontAwesomeIcon icon={faGem} size={'lg'} />
+        </ProjectLink>
+    );
+  }
+
   return (
     <ProjectLinksContainer>
       {renderGithubLink()}
@@ -85,6 +98,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
       {renderAppleLink()}
       {renderSpigotLink()}
       {renderPrivacyLink()}
+      {renderRubyGemLink()}
     </ProjectLinksContainer>
   );
 };
