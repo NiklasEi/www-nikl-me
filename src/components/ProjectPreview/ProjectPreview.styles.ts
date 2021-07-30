@@ -11,6 +11,8 @@ export const StyledProject = styled.div`
 export const ProjectContainer = styled.div`
   width: 350px;
   position: relative;
+  margin: 0 auto;
+  max-width: 95%;
   text-align: left;
 `;
 
