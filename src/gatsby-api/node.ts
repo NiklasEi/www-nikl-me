@@ -150,6 +150,7 @@ const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArg
                 tags
                 github
                 apple
+                spigot
                 android
                 privacy
                 cover

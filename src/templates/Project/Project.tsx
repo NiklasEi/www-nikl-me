@@ -38,6 +38,7 @@ export const query = graphql`
         date
         github
         apple
+        spigot
         android
         privacy
         title

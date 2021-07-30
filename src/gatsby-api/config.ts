@@ -37,8 +37,19 @@ export const plugins = [
     options: {
       plugins: [
         {
+          resolve: 'gatsby-remark-embed-video',
+          options: {
+            width: 800,
+            ratio: 1.77,
+            noIframeBorder: true,
+            containerClass: 'embedVideo-container',
+            iframeId: false
+          }
+        },
+        {
           resolve: `gatsby-remark-autolink-headers`,
           options: {
+            enableCustomId: true,
             offsetY: `100`,
             removeAccents: true
           }

@@ -25,6 +25,7 @@ const LandingPage: React.FC = () => {
                   date(formatString: "DD MMMM, YYYY")
                   github
                   apple
+                  spigot
                   android
                   privacy
                   tags
@@ -42,7 +43,10 @@ const LandingPage: React.FC = () => {
       `}
       render={(data: Content) => {
         const latestBlog: BlogPostData = data.allMarkdownRemark.edges.map(({ node }) => node).filter(isBlogPostData)[0];
-        const latestProjects: ProjectData[] = data.allMarkdownRemark.edges.map(({ node }) => node).filter(isProjectData).slice(0,2);
+        const latestProjects: ProjectData[] = data.allMarkdownRemark.edges
+          .map(({ node }) => node)
+          .filter(isProjectData)
+          .slice(0, 2);
         return (
           <ContentContainer>
             <StyledLandingPage>

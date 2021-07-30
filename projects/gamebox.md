@@ -1,11 +1,10 @@
 ---
-tags:
-- Hytale
-title: GameBox
-summary: GameBox is a collection of minigames
+title: "GameBox"
 github: https://github.com/hygames/gamebox
 date: 2021-06-03
 hide: true
+tags:
+- Hytale
 ---
 The development on GameBox is currently on hold, since there has yet not been any relevant information published about the Hytale API.
 
