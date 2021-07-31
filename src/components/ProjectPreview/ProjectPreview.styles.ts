@@ -4,16 +4,22 @@ import { Link } from 'gatsby';
 export const StyledProject = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   padding: 10px 0;
 `;
 
 export const ProjectContainer = styled.div`
-  width: 350px;
   position: relative;
-  margin: 0 auto;
-  max-width: 95%;
   text-align: left;
+  margin: 0 auto;
+  width: 100%;
+
+  /* 2*width*(1/0.95) (container has max width 95%) */
+  @media (min-width: 737px) {
+    width: 350px;
+    margin: 0 0;
+  }
 `;
 
 export const ContainerLink = styled(Link)`

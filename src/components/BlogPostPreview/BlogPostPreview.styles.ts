@@ -1,18 +1,12 @@
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 
-export const StyledPost = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 10px 0;
-`;
-
 export const PostContainer = styled.div`
   width: 100%;
   position: relative;
   padding: 20px 0;
   text-align: left;
+  margin: 0 auto;
 `;
 
 export const ContainerLink = styled(Link)`

@@ -26,8 +26,12 @@ export const globalStyles = css`
 
 export const ContentContainer = styled.div`
   width: 100%;
-  max-width: 800px;
   margin: 0 auto;
+  max-width: 95%;
+
+  @media (min-width: 840px) {
+    max-width: 800px;
+  }
 `;
 
 export const CenteredTitle = styled.h1`
