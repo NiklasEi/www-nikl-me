@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faDiscord, faGithub, faGitlab, faLinkedin, faTwitter} from '@fortawesome/free-brands-svg-icons';
+import { faDiscord, faGithub, faGitlab, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { ContactLink, Copyright, StyledFooter } from './Footer.styles';
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
@@ -49,23 +49,23 @@ const Footer: React.FC = () => {
         <StyledFooter>
           <div>
             <ContactLink
-                href={`https://twitter.com/${data.site.siteMetadata.author.social.twitter}`}
-                target="_blank"
-                title={`${data.site.siteMetadata.author.firstName} on Twitter`}
+              href={`https://twitter.com/${data.site.siteMetadata.author.social.twitter}`}
+              target="_blank"
+              title={`${data.site.siteMetadata.author.firstName} on Twitter`}
             >
               <FontAwesomeIcon icon={faTwitter} />
             </ContactLink>
             <ContactLink
-                href={`https://github.com/${data.site.siteMetadata.author.social.github}`}
-                target="_blank"
-                title={`${data.site.siteMetadata.author.firstName} on GitHub`}
+              href={`https://github.com/${data.site.siteMetadata.author.social.github}`}
+              target="_blank"
+              title={`${data.site.siteMetadata.author.firstName} on GitHub`}
             >
               <FontAwesomeIcon icon={faGithub} />
             </ContactLink>
             <ContactLink
-                href={`https://discord.gg/${data.site.siteMetadata.author.social.discord}`}
-                target="_blank"
-                title={`${data.site.siteMetadata.author.firstName} on GitHub`}
+              href={`https://discord.gg/${data.site.siteMetadata.author.social.discord}`}
+              target="_blank"
+              title={`${data.site.siteMetadata.author.firstName} on GitHub`}
             >
               <FontAwesomeIcon icon={faDiscord} />
             </ContactLink>

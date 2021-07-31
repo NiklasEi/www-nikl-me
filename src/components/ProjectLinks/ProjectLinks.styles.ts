@@ -5,7 +5,7 @@ export const ProjectLink = styled.a`
   z-index: 10;
   color: ${colors.background};
   margin: 0 5px;
-  
+
   svg {
     &:hover {
       color: ${colors.secondary};

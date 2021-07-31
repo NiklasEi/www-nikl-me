@@ -39,3 +39,13 @@ export const LinkRow = styled.div`
   flex-direction: row;
   align-items: center;
 `;
+
+export const NavBarContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  max-width: 95%;
+
+  @media (min-width: 840px) {
+    max-width: 800px;
+  }
+`;

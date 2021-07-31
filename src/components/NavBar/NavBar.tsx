@@ -1,12 +1,11 @@
 import React from 'react';
-import { NavBarFontAwesomeIcon, LinkRow, NavBarLink, StyledNavBar, StyledInnerNavBar } from './NavBar.styles';
+import { NavBarFontAwesomeIcon, LinkRow, NavBarLink, StyledNavBar, StyledInnerNavBar, NavBarContainer } from './NavBar.styles';
 import { faBookOpen, faFolderOpen, faHome } from '@fortawesome/free-solid-svg-icons';
-import { ContentContainer } from '../../layouts/default.styled';
 
 const NavBar: React.FC = () => {
   return (
     <StyledNavBar>
-      <ContentContainer>
+      <NavBarContainer>
         <StyledInnerNavBar>
           <NavBarLink to="/">
             <NavBarFontAwesomeIcon icon={faHome} />
@@ -23,7 +22,7 @@ const NavBar: React.FC = () => {
             </NavBarLink>
           </LinkRow>
         </StyledInnerNavBar>
-      </ContentContainer>
+      </NavBarContainer>
     </StyledNavBar>
   );
 };
