@@ -10,6 +10,7 @@ export const siteMetadata = {
     social: {
       github: 'NiklasEi',
       gitlab: 'NiklasEi',
+      discord: 'WgCrwXF',
       twitter: 'nikl_me',
       linkedin: 'neicker'
     }

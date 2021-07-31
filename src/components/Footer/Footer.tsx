@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faGitlab, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import {faDiscord, faGithub, faGitlab, faLinkedin, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import { ContactLink, Copyright, StyledFooter } from './Footer.styles';
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,6 +14,7 @@ interface StaticQueryProps {
         social: {
           github: string;
           gitlab: string;
+          discord: string;
           twitter: string;
           linkedin: string;
         };
@@ -35,6 +36,7 @@ const Footer: React.FC = () => {
                 social {
                   github
                   gitlab
+                  discord
                   twitter
                   linkedin
                 }
@@ -47,18 +49,25 @@ const Footer: React.FC = () => {
         <StyledFooter>
           <div>
             <ContactLink
-              href={`https://github.com/${data.site.siteMetadata.author.social.github}`}
-              target="_blank"
-              title={`${data.site.siteMetadata.author.firstName} on GitHub`}
+                href={`https://twitter.com/${data.site.siteMetadata.author.social.twitter}`}
+                target="_blank"
+                title={`${data.site.siteMetadata.author.firstName} on Twitter`}
+            >
+              <FontAwesomeIcon icon={faTwitter} />
+            </ContactLink>
+            <ContactLink
+                href={`https://github.com/${data.site.siteMetadata.author.social.github}`}
+                target="_blank"
+                title={`${data.site.siteMetadata.author.firstName} on GitHub`}
             >
               <FontAwesomeIcon icon={faGithub} />
             </ContactLink>
             <ContactLink
-              href={`https://twitter.com/${data.site.siteMetadata.author.social.twitter}`}
-              target="_blank"
-              title={`${data.site.siteMetadata.author.firstName} on Twitter`}
+                href={`https://discord.gg/${data.site.siteMetadata.author.social.discord}`}
+                target="_blank"
+                title={`${data.site.siteMetadata.author.firstName} on GitHub`}
             >
-              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faDiscord} />
             </ContactLink>
             <ContactLink
               href={`https://www.linkedin.com/in/${data.site.siteMetadata.author.social.linkedin}`}

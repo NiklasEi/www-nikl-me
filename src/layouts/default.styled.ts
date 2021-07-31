@@ -26,7 +26,7 @@ export const globalStyles = css`
 
 export const ContentContainer = styled.div`
   width: 100%;
-  margin: 0 auto;
+  margin: 15px auto;
   max-width: 95%;
 
   @media (min-width: 840px) {
