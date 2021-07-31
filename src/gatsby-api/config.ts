@@ -33,6 +33,14 @@ export const plugins = [
     }
   },
   {
+    resolve: "gatsby-plugin-react-svg",
+    options: {
+      rule: {
+        include: /src\/icons/
+      }
+    }
+  },
+  {
     resolve: `gatsby-transformer-remark`,
     options: {
       plugins: [

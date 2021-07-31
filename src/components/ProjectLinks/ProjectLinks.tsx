@@ -1,8 +1,9 @@
 import React from 'react';
-import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
+import {ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAndroid, faApple, faGithub } from '@fortawesome/free-brands-svg-icons';
 import {faFaucet, faGem, faUserSecret} from '@fortawesome/free-solid-svg-icons';
+import ItchIcon from "../../icons/itchio.svg";
 
 export interface ProjectLinksData {
   github: string | null;
@@ -10,7 +11,8 @@ export interface ProjectLinksData {
   spigot: string | null;
   android: string | null;
   privacy: string | null;
-  rubyGem: string | null;
+  rubygem: string | null;
+  itch: string | null;
 }
 
 interface ProjectLinksProps {
@@ -44,7 +46,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
   }
 
   function renderSpigotLink() {
-    if (links.spigot === null) {
+    if (links.spigot === null ) {
       return undefined;
     }
 
@@ -56,7 +58,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
   }
 
   function renderAndroidLink() {
-    if (links.android === null) {
+    if (links.android === null ) {
       return undefined;
     }
 
@@ -68,7 +70,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
   }
 
   function renderPrivacyLink() {
-    if (links.privacy === null) {
+    if (links.privacy === null ) {
       return undefined;
     }
 
@@ -80,13 +82,25 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
   }
 
   function renderRubyGemLink() {
-    if (links.rubyGem === null) {
+    if (links.rubygem === null ) {
       return undefined;
     }
 
     return (
-        <ProjectLink href={`https://rubygems.org/gems/${links.rubyGem}`} target="_blank" title={`${projectTitle} on Ruby gems`}>
+        <ProjectLink href={`https://rubygems.org/gems/${links.rubygem}`} target="_blank" title={`${projectTitle} on Ruby gems`}>
           <FontAwesomeIcon icon={faGem} size={'lg'} />
+        </ProjectLink>
+    );
+  }
+
+  function renderItchioLink() {
+    if (links.itch === null ) {
+      return undefined;
+    }
+
+    return (
+        <ProjectLink href={links.itch} target="_blank" title={`${projectTitle} on Itch.io`}>
+          <ItchIcon/>
         </ProjectLink>
     );
   }
@@ -99,6 +113,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
       {renderSpigotLink()}
       {renderPrivacyLink()}
       {renderRubyGemLink()}
+      {renderItchioLink()}
     </ProjectLinksContainer>
   );
 };

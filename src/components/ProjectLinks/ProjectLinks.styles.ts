@@ -5,9 +5,13 @@ export const ProjectLink = styled.a`
   z-index: 10;
   color: ${colors.background};
   margin: 0 5px;
-
-  &:hover {
-    color: ${colors.secondary};
+  
+  svg {
+    &:hover {
+      color: ${colors.secondary};
+    }
+    max-height: 22px;
+    max-width: 22px;
   }
 `;
 

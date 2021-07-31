@@ -1,7 +1,7 @@
 ---
 title: "Jekyll Exif data"
 date: 2021-05-04
-rubyGem: jekyll-exif-data
+rubygem: jekyll-exif-data
 github: https://github.com/NiklasEi/jekyll-exif-data
 tags:
 - Ruby gem

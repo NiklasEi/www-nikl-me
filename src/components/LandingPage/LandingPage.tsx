@@ -28,7 +28,8 @@ const LandingPage: React.FC = () => {
                   spigot
                   android
                   privacy
-                  rubyGem
+                  rubygem
+                  itch
                   tags
                   cover
                 }

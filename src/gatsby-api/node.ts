@@ -153,6 +153,8 @@ const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArg
                 spigot
                 android
                 privacy
+                rubygem
+                itch
                 cover
               }
               fields {

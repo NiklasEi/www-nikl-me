@@ -41,7 +41,8 @@ export const query = graphql`
         spigot
         android
         privacy
-        rubyGem
+        rubygem
+        itch
         title
         tags
         cover

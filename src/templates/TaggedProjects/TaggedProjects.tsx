@@ -11,7 +11,6 @@ interface TaggedProjectsProps {
 }
 
 const TaggedProjects: React.FC<PropsWithChildren<PageContext>> = ({ pageContext }: { pageContext: TaggedProjectsProps }) => {
-  console.dir(pageContext);
   return (
     <ContentContainer>
       <CenteredTitle>{`Projects tagged '${pageContext.tag}'`}</CenteredTitle>

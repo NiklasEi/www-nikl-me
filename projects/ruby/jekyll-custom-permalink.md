@@ -1,7 +1,7 @@
 ---
 title: "Jekyll custom permalink"
 date: 2021-05-04
-rubyGem: jekyll_custom_permalink
+rubygem: jekyll_custom_permalink
 github: https://github.com/NiklasEi/jekyll_custom_permalink
 tags:
 - Ruby gem
