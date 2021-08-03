@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
             <ContactLink
               href={`https://discord.gg/${data.site.siteMetadata.author.social.discord}`}
               target="_blank"
-              title={`${data.site.siteMetadata.author.firstName} on GitHub`}
+              title={`${data.site.siteMetadata.author.firstName}' Discord server`}
             >
               <FontAwesomeIcon icon={faDiscord} />
             </ContactLink>

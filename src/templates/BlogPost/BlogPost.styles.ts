@@ -4,7 +4,7 @@ export const StyledBlogPost = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 20px;
+  padding: 20px;
 `;
 
 export const BlogPostTitle = styled.h1`
@@ -43,5 +43,11 @@ export const BlogBody = styled.div`
     &:not(:first-child) {
       margin-top: 1rem;
     }
+  }
+  em {
+    font-style: italic;
+  }
+  p {
+    padding: 5px 0;
   }
 `;
