@@ -27,18 +27,24 @@ fn draw_the_player(
 }
 ```
 
-_Loading the texture where we need it_
+_Loading the player texture where and when it's needed_
 
-Here we are telling the asset server to load `player.png` from our `assets` directory. This will happen asynchronously. The SpriteBundle will be in our ECS at the end of the current frame, but will not be rendered for a few frames, because the asset handle is not yet loaded. As soon as the handle is loaded, our player texture will show up.
+Here we are telling the asset server to load `rust>"player.png"` from our `assets` directory. The actual loading of the file happens asynchronously. The SpriteBundle will be in our ECS at the end of the current frame, but will not be rendered until the asset is finished loading. As soon as the handle has the state `rust>LoadState::Loaded`, our player texture will show up.
 
-In most games there will be a lot more assets than just one player texture. Probably we also have heroic background music, sound effects and some fancy font for all the text. If we load all of those assets when we need them, most will start loading in the first frame. Some will be done after one frame, others will take a bit longer. If we imagine our first screen to be build from different textures, the screen will render texture for texture over some duration.  
-Loading handles were and when you need them is fine for small experiments, but most of the time, you will want something more elaborate.
+In most games there will be a lot more assets than just one player texture. Probably, we would also have heroic background music, sound effects, and some fancy font to tell a story. If we load all of those assets when we need them, most will start loading in the first frame. Some might be ready after one frame, others will take longer. If we imagine our first screen to be build from different textures, the screen will render texture for texture over some duration.  
+Loading handles were and when you need them is fine for small experiments, but most of the time, you will want something more elaborate. All required assets should already be finished loading when they are used. Additionally, there should be an easy way to use the same loaded handle at different points in the code.
 
-## Prepare all assets before starting the actual game
+## Prepare all assets in a "loading" state
 
-A common approach is to load all needed assets before starting the game. If the loading needs considerable time, one could even think about a cool loading screen. After loading, we can keep the handles around in resources and just pull them into any system were we need them. The previous example might look like this now:
+A common approach is to load all needed assets before starting the game. Most games have some sort of loading screen that gives them time to prepare their assets.  
+We can use [states][states] in Bevy to run a certain set of systems before our actual game logic runs. If we keep the loaded asset handles in resources, systems running during later states can use them. The previous example might look like this now:
 
 ```rust
+// the asset is loaded in a previous state and TextureAssets is inserted as a resource
+struct TextureAssets {
+   player: Handle<ColorMaterial>
+}
+
 fn draw_the_player(
     mut commands: Commands,
     texture_assets: Res<TextureAssets>,
@@ -50,23 +56,68 @@ fn draw_the_player(
 }
 ```
 
-_Using a resource that contains the needed handle_
+_Using a resource that contains the needed player material handle_
 
+There are three parts to implementing this in Bevy. 
+1. Start loading all required assets when entering the loading state
+2. Check the `rust>LoadState` of all the assets on update
+3. When the state of all assets is `rust>LoadState::Loaded`, add the handles to resources, insert the resources and change the state
 
-Implementing such a loading mechanism in Bevy can be done using States and [is partially demonstrated in the cookbook][loading_using_state]. In my first few Bevy projects I caught myself copying and pasting code for this kind of setup. Apart from the code duplication between projects, there were also a few other pain points:
-1. When adding new assets to an existing resource, several pieces of code had to be adjusted
-2. The paths to the assets where too far away from the resource field containing the asset handle
-    - when I see a piece of code that uses a handle from a resource, I want to be able to jump into the resource and find the corresponding asset path as fast as possible
-3. Adding new resources that contain asset handles required too much boilerplate
+You can find some more explanation on this in [the cookbook][loading_using_state]. 
+
+In my first few Bevy projects I caught myself copying and pasting the code for the loading state. Apart from the code duplication between projects, there were also a few other pain points:
+1. When adding new assets to an existing resource, the code had to be touched in several points
+2. Adding new resources that contain asset handles required too much boilerplate
+3. The paths to the assets where too far away from the resource field containing the asset handle
+
+The first two points are about boilerplate. The third point is more about code quality and ease of understanding for me. When I see a piece of code that uses a handle from a resource, I want to be able to find the corresponding asset path as fast as possible. The easiest way would be to have the path directly at the field. This literally screams for some macro magic.
+
+A perfect opportunity to write a Bevy plugin.
 
 ## Introducing `bevy_asset_loader`
 
-In many cases assets are needed at different places in the code base and at different times during the game.
+The idea of `bevy_asset_loader` is to solve the above mentioned pain points and stop code duplication. There should be minimal boilerplate when adding new resources containing asset handles (from here on called asset collections) or adding new assets to an existing collection. At the same time, the asset path should be close to the resource field containing its handle.  
+The current implementation of `bevy_asset_loader` delivers on all these points. An internal plugin that loads three asset collections during the state `rust>GameState::Loading` looks like this:
+```rust{numberLines: true}
+pub struct LoadingPlugin;
 
+impl Plugin for LoadingPlugin {
+    fn build(&self, app: &mut AppBuilder) {
+        AssetLoader::new(GameState::Loading, GameState::Menu)
+            .with_collection::<FontAssets>()
+            .with_collection::<AudioAssets>()
+            .with_collection::<TextureAssets>()
+            .build(app);
+    }
+}
 
-In many cases it makes sense to save the loaded handles in some
+#[derive(AssetCollection)]
+pub struct FontAssets {
+    #[asset(path = "fonts/FiraSans-Bold.ttf")]
+    pub fira_sans: Handle<Font>,
+}
+
+#[derive(AssetCollection)]
+pub struct AudioAssets {
+    #[asset(path = "audio/background.ogg")]
+    pub background: Handle<AudioSource>,
+    #[asset(path = "audio/lost.ogg")]
+    pub lost: Handle<AudioSource>,
+}
+
+#[derive(AssetCollection)]
+pub struct TextureAssets {
+    #[asset(path = "textures/jar.png")]
+    pub jar: Handle<Texture>,
+    #[asset(path = "textures/shelf.jpg")]
+    pub shelf: Handle<Texture>,
+}
+```
+
+_A Bevy plugin using `bevy⎯asset⎯loader` to load three different asset collections during the state `rust>GameState::Loading`_
 
 
 
 
 [loading_using_state]: https://bevy-cheatbook.github.io/cookbook/assets-ready.html
+[states]: https://bevy-cheatbook.github.io/programming/states.html

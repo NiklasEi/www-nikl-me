@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import emotionReset from 'emotion-reset';
+import emotionNormalize from 'emotion-normalize';
 
 export const StyledDefaultLayout = styled.div`
   display: flex;
@@ -10,13 +10,18 @@ export const StyledDefaultLayout = styled.div`
 `;
 
 export const globalStyles = css`
-  ${emotionReset}
+  ${emotionNormalize}
 
   html,
   body,
   #___gatsby,
   #gatsby-focus-wrapper {
     height: 100%;
+  }
+
+  .line-numbers-rows {
+    padding: 1em 0;
+    padding-left: 5px;
   }
 
   a {

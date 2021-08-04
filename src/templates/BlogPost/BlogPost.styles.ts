@@ -31,23 +31,11 @@ export const BlogBody = styled.div`
     font-size: 1.8rem;
     font-weight: 500;
     margin-bottom: 1rem;
-
-    &:not(:first-child) {
-      margin-top: 3rem;
-    }
+    margin-top: 3rem;
   }
   h3 {
     font-size: 1.2rem;
     margin-bottom: 0.4rem;
-
-    &:not(:first-child) {
-      margin-top: 1rem;
-    }
-  }
-  em {
-    font-style: italic;
-  }
-  p {
-    padding: 5px 0;
+    margin-top: 1rem;
   }
 `;
