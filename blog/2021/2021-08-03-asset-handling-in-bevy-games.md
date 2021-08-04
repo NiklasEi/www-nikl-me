@@ -13,7 +13,7 @@ Disclaimer, no bevy intro, link to bevy, not a discussion about asset loading in
 
 ## Minimalistic approach
 
-A very first usage of assets in your Bevy game might look like this
+A very first usage of assets in your Bevy game might look like this:
 ```rust
 fn draw_the_player(
     mut commands: Commands,
@@ -26,7 +26,6 @@ fn draw_the_player(
     });
 }
 ```
-
 _Loading the player texture where and when it's needed_
 
 Here we are telling the asset server to load `rust>"player.png"` from our `assets` directory. The actual loading of the file happens asynchronously. The SpriteBundle will be in our ECS at the end of the current frame, but will not be rendered until the asset is finished loading. As soon as the handle has the state `rust>LoadState::Loaded`, our player texture will show up.
@@ -55,7 +54,6 @@ fn draw_the_player(
     });
 }
 ```
-
 _Using a resource that contains the needed player material handle_
 
 There are three parts to implementing this in Bevy. 
@@ -113,11 +111,63 @@ pub struct TextureAssets {
     pub shelf: Handle<Texture>,
 }
 ```
-
 _A Bevy plugin using `bevy⎯asset⎯loader` to load three different asset collections during the state `rust>GameState::Loading`_
 
+This works very well for assets that can be loaded directly from files. The code above also requires there to be a one-to-one relationship of files to handles.
 
+For some use cases this is fine, but common assets like `rust>TextureAtlas` need some extra preparation steps. In Bevy, we can either build a `rust>TextureAtlas` out of many textures, or split a sprite sheet. In both cases we can load the initial textures like demonstrated above. The next part is still missing in the plugin though. We should be able to use `bevy_asset_loader` to remove the boilerplate of creating the texture atlas and inserting a resource with a handle.
 
+In the last update, the `rust>AssetLoader` got an `init_resource` function, that can be used to initialize and insert a resource implementing `rust>FromWorld`. For our texture atlas this means we can write a `rust>FromWorld` implementation. We have the guaranty that at the time when the resource is initialized, we can use our loaded asset collections to, e.g., retrieve the sprite sheet handle.
+
+```rust{numberLines: true}
+pub struct LoadingPlugin;
+
+impl Plugin for LoadingPlugin {
+    fn build(&self, app: &mut AppBuilder) {
+        AssetLoader::new(GameState::Loading, GameState::Menu)
+            .with_collection::<RawTextureAssets>()
+            .init_resource::<TextureAssets>()
+            .build(app);
+    }
+}
+
+#[derive(AssetCollection, Clone)]
+pub struct RawTextureAssets {
+    #[asset(path = "textures/cauldron.png")]
+    pub cauldron_sheet: Handle<Texture>,
+}
+
+pub struct TextureAssets {
+    pub cauldron: Handle<TextureAtlas>,
+}
+
+impl FromWorld for TextureAssets {
+    fn from_world(world: &mut World) -> Self {
+        let raw_textures = world.get_resource::<RawTextureAssets>().unwrap().clone();
+        let mut texture_atlases = world.get_resource_mut::<Assets<TextureAtlas>>().unwrap();
+        TextureAssets {
+            cauldron: texture_atlases.add(TextureAtlas::from_grid(
+                raw_textures.cauldron_sheet.clone(),
+                Vec2::new(192., 192.),
+                6,
+                1,
+            )),
+        }
+    }
+}
+```
+
+## Future improvements
+
+All in all the current state made it a lot easier to load assets in a "loading" state. But common asset types like `rust>TextureAtlas` could be better supported. I would like to extend the derive macro for `rust>AssetCollection` to add more helper annotations. Maybe in the future it will be possible to have asset collections like:
+```rust
+#[derive(AssetCollection)]
+pub struct TextureAssets {
+    #[texture_atlas(cell_width = 192., cell_height = 192., columns = 6, rows = 1)]
+    #[asset(path = "textures/cauldron.png")]
+    pub cauldron: Handle<TextureAtlas>,
+}
+```
 
 [loading_using_state]: https://bevy-cheatbook.github.io/cookbook/assets-ready.html
 [states]: https://bevy-cheatbook.github.io/programming/states.html
