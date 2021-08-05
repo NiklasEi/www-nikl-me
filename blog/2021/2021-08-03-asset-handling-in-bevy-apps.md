@@ -1,7 +1,8 @@
 ---
-title: "Asset handling in Bevy games"
+title: "Asset handling in Bevy apps"
 date: 2021-08-03
 category: code
+summary: "Thoughts on asset loading in Bevy apps, and the plugin bevy_asset_loader"
 tags:
 - gamedev
 - rust
