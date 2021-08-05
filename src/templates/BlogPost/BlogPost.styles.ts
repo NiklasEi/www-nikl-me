@@ -16,6 +16,7 @@ export const BlogPostTitle = styled.h1`
 `;
 
 export const BlogBody = styled.div`
+  width: 100%;
   max-width: 800px;
   padding-bottom: 20px;
   h1 {

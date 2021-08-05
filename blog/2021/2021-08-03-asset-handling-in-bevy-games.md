@@ -143,8 +143,13 @@ pub struct TextureAssets {
 
 impl FromWorld for TextureAssets {
     fn from_world(world: &mut World) -> Self {
-        let raw_textures = world.get_resource::<RawTextureAssets>().unwrap().clone();
-        let mut texture_atlases = world.get_resource_mut::<Assets<TextureAtlas>>().unwrap();
+        let cell = world.cell();
+        let raw_textures = cell
+            .get_resource::<RawTextureAssets>()
+            .expect("RawTextureAssets not loaded");
+        let mut texture_atlases = cell
+            .get_resource_mut::<Assets<TextureAtlas>>()
+            .expect("Could not get TextureAtlas assets");
         TextureAssets {
             cauldron: texture_atlases.add(TextureAtlas::from_grid(
                 raw_textures.cauldron_sheet.clone(),
@@ -159,11 +164,11 @@ impl FromWorld for TextureAssets {
 
 ## Future improvements
 
-All in all the current state made it a lot easier to load assets in a "loading" state. But common asset types like `rust>TextureAtlas` could be better supported. I would like to extend the derive macro for `rust>AssetCollection` to add more helper annotations. Maybe in the future it will be possible to have asset collections like:
+All in all the current state made it a lot easier to load assets in a "loading" state. The support for common asset types like `rust>TextureAtlas` could be improved though. I would like to extend the derive macro for `rust>AssetCollection` to add more helper annotations. Maybe in the future it will be possible to create asset collections like below.
 ```rust
 #[derive(AssetCollection)]
 pub struct TextureAssets {
-    #[texture_atlas(cell_width = 192., cell_height = 192., columns = 6, rows = 1)]
+    #[asset(texture_atlas(cell_width = 192., cell_height = 192., columns = 6, rows = 1))]
     #[asset(path = "textures/cauldron.png")]
     pub cauldron: Handle<TextureAtlas>,
 }
