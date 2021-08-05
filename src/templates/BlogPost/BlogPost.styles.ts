@@ -39,7 +39,7 @@ export const BlogBody = styled.div`
     margin-bottom: 0.4rem;
     margin-top: 1rem;
   }
-  p {
+  p, hr {
     margin: 0;
     margin-bottom: 2rem;
   }
