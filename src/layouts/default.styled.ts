@@ -27,6 +27,10 @@ export const globalStyles = css`
   a {
     text-decoration: none;
   }
+
+  p {
+    line-height: 1.5;
+  }
 `;
 
 export const ContentContainer = styled.div`
