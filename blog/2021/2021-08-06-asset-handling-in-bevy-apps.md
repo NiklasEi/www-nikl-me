@@ -1,13 +1,12 @@
 ---
 title: "Asset handling in Bevy apps"
-date: 2021-08-03
+date: 2021-08-06
 category: code
 summary: "My path to writing bevy_asset_loader and thoughts on current and future functionality of the crate"
 tags:
 - gamedev
 - rust
 - bevy
-hide: true
 ---
 
 *This post outlines the path that lead to me writing bevy\_asset\_loader ([repository][repo]), a plugin to simplify asset handling in [Bevy][bevy] applications. The later part of the post is about current features of the plugin and thoughts on improvements.*
