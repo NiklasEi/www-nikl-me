@@ -84,8 +84,6 @@ interface Content {
 }
 
 function isBlogPostData(content: ContentNode): content is BlogPostData & { fields: { group: string } } {
-  console.dir(content);
-  console.log(`is ${content.fields.group === 'blog'}`);
   return content.fields.group === 'blog';
 }
 

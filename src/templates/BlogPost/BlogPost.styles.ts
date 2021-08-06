@@ -11,8 +11,8 @@ export const BlogPostTitle = styled.h1`
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 `;
 
 export const BlogBody = styled.div`
@@ -31,8 +31,8 @@ export const BlogBody = styled.div`
   h2 {
     font-size: 1.8rem;
     font-weight: 500;
-    margin-bottom: 1rem;
-    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    margin-top: 4rem;
   }
   h3 {
     font-size: 1.2rem;

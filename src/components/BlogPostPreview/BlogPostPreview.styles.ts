@@ -29,4 +29,5 @@ export const PostHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding-bottom: 10px;
+  align-items: center;
 `;
