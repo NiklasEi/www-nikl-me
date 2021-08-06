@@ -109,9 +109,9 @@ pub struct TextureAssets {
 ```
 *A Bevy plugin using bevy_asset_loader to load three different asset collections during the state `rust>GameState::Loading`*
 
-All the boilerplate for the "loading state" is gone. Annotations directly at the fields contain the asset paths, which keeps the internal name of the asset close to the file name. The derive macro currently works for structs with named fields. The field types need to be handles for assets that can be loaded directly from a file. This requires a one-to-one relationship of files to handles.
+All the boilerplate for the "loading state" is gone. Annotations directly at the fields contain the asset paths, keeping the internal name of the asset close to the file name. The derive macro currently works for structs with named fields. The field types need to be handles for assets that can be loaded directly from a file. This requires a one-to-one relationship of files to handles.
 
-For some use cases this is fine, but common assets like `rust>TextureAtlas` need some extra steps. In Bevy, we can either build an atlas out of many textures ([Bevy example][bevy_atlas_example]), or split a sprite sheet ([Bevy example][bevy_sprite_sheet_example]). In both cases, we can load the initial textures like demonstrated above. The plugin currently cannot create the atlas out of the textures though. It would be nice to be able to use bevy\_asset\_loader to remove the boilerplate of creating the texture atlas and inserting a resource with the handle.
+For some use cases this is fine, but common assets like `rust>TextureAtlas` need some extra steps. In Bevy, we can either build an atlas out of many textures ([example][bevy_atlas_example]), or split a sprite sheet ([example][bevy_sprite_sheet_example]). In both cases, we can load the initial textures like demonstrated above. The plugin currently cannot create the atlas out of the textures though. It would be nice to be able to use bevy\_asset\_loader to remove the boilerplate of creating the texture atlas and inserting a resource with the handle.
 
 In the last update, a small feature in this direction was added to bevy\_asset\_loader. The `rust>AssetLoader` struct got an `init_resource` function, that can be used to initialize and insert a resource implementing `rust>FromWorld`. The only difference of this function to Bevy's `rust>AppBuilder::init_resource` is the timing of the initialisation. Bevy builds the resource on startup, while the `rust>AssetLoader` will do it after inserting all our asset collections into the ECS. We can write a `rust>FromWorld` implementation and retrieve our asset collections in it to, e.g., use the loaded sprite sheet to create a texture atlas.
 
@@ -163,7 +163,7 @@ This removes some boilerplate, but at the same time moves the asset path further
 
 ## Future improvements
 
-The current state of the plugin already made it a lot easier to prepare assets in a "loading state". The support for common asset types like `rust>TextureAtlas` could be improved though. I would like to extend the derive macro for `rust>AssetCollection` to add more helper annotations. Maybe in the future it will be possible to create asset collections like below.
+The current state of the plugin already makes it a lot easier to prepare assets in a "loading state". The support for common asset types like `rust>TextureAtlas` could be improved though. I would like to extend the derive macro for `rust>AssetCollection` to add more helper annotations. Maybe in the future it will be possible to create asset collections like below.
 
 ```rust
 #[derive(AssetCollection)]
