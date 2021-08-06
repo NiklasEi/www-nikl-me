@@ -68,7 +68,14 @@ export const plugins = [
           options: {
             inlineCodeMarker: '>'
           }
-        }
+        },
+        {
+          resolve: 'gatsby-remark-external-links',
+          options: {
+            target: '_blank'
+          }
+        },
+        `gatsby-plugin-catch-links`
       ]
     }
   },
