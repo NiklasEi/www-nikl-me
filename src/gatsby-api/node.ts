@@ -155,6 +155,7 @@ const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArg
                 privacy
                 rubygem
                 itch
+                crate
                 cover
               }
               fields {

@@ -75,6 +75,7 @@ export const query = graphql`
             privacy
             rubygem
             itch
+            crate
             title
             tags
             cover

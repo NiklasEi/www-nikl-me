@@ -30,6 +30,7 @@ const LandingPage: React.FC = () => {
                   privacy
                   rubygem
                   itch
+                  crate
                   tags
                   cover
                 }

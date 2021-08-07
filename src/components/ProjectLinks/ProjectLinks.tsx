@@ -2,7 +2,7 @@ import React from 'react';
 import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAndroid, faApple, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faFaucet, faGem, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { faBox, faFaucet, faGem, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import ItchIcon from '../../icons/itchio.svg';
 
 export interface ProjectLinksData {
@@ -13,6 +13,7 @@ export interface ProjectLinksData {
   privacy: string | null;
   rubygem: string | null;
   itch: string | null;
+  crate: string | null;
 }
 
 interface ProjectLinksProps {
@@ -93,7 +94,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
     );
   }
 
-  function renderItchioLink() {
+  function renderItchIoLink() {
     if (links.itch === null) {
       return undefined;
     }
@@ -101,6 +102,18 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
     return (
       <ProjectLink href={links.itch} target="_blank" title={`${projectTitle} on Itch.io`}>
         <ItchIcon />
+      </ProjectLink>
+    );
+  }
+
+  function renderCratesIoLink() {
+    if (links.crate === null) {
+      return undefined;
+    }
+
+    return (
+      <ProjectLink href={`https://crates.io/crates/${links.crate}`} target="_blank" title={`${projectTitle} on crates.io`}>
+        <FontAwesomeIcon icon={faBox} size={'lg'} />
       </ProjectLink>
     );
   }
@@ -113,7 +126,8 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
       {renderSpigotLink()}
       {renderPrivacyLink()}
       {renderRubyGemLink()}
-      {renderItchioLink()}
+      {renderItchIoLink()}
+      {renderCratesIoLink()}
     </ProjectLinksContainer>
   );
 };
