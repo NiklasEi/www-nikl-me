@@ -31,7 +31,7 @@ _A system that loads the player texture where and when it's needed._
 Here we are telling the asset server to load `rust>"player.png"` from our `assets` directory. The actual loading of the file happens asynchronously. The `rust>SpriteBundle` will be in the ECS at the end of the current frame, but will not be rendered until the asset finished loading. As soon as the handle has the state `rust>LoadState::Loaded`, our player texture will show up.
 
 In most games there will be a lot more assets than just one player texture. Probably, we would also have heroic background music, sound effects, and some fancy font to tell a story. If we load all of those assets when we need them, most will start loading in the first frame. Some might be ready after one frame, others will take longer. Imagine our first screen is build from different textures; the screen will render texture for texture over some duration. Not that nice...  
-Loading handles were and when you need them is fine for small experiments, but most of the time, you want something more elaborate. All required assets should already be finished loading when they are used. Additionally, there should be an easy way to use the same handle at different points in the code.
+Loading handles where and when you need them is fine for small experiments, but most of the time, you want something more elaborate. All required assets should already be finished loading when they are used. Additionally, there should be an easy way to use the same handle at different points in the code.
 
 ## Preparing all assets in a "loading state"
 
