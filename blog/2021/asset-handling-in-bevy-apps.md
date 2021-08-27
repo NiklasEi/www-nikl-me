@@ -9,7 +9,7 @@ tags:
 - bevy
 ---
 
-*This post outlines the path that lead to me writing bevy\_asset\_loader ([repository][repo]), a plugin to simplify asset handling in [Bevy][bevy] applications. The later part of the post is about current features of the plugin and thoughts on improvements.*
+*This post outlines the path that led to me writing bevy\_asset\_loader ([repository][repo]), a plugin to simplify asset handling in [Bevy][bevy] applications. The later part of the post is about current features of the plugin and thoughts on improvements.*
 
 ## Minimalistic approach
 
@@ -39,7 +39,8 @@ A common approach is to load all needed assets before starting the game. Most ga
 We can use [states][states] in Bevy to run a certain set of systems before our actual game logic runs. If we keep the loaded asset handles in resources, systems running during later states can use them through the ECS. The previous example might then look like this:
 
 ```rust
-// the asset is loaded in a previous state and TextureAssets is inserted as a resource
+// the asset is loaded in a previous state and 
+// TextureAssets is inserted as a resource
 struct TextureAssets {
    player: Handle<ColorMaterial>
 }
@@ -147,7 +148,8 @@ impl FromWorld for TextureAssets {
             .get_resource_mut::<Assets<TextureAtlas>>()
             .expect("Could not get TextureAtlas assets");
         TextureAssets {
-            cauldron: texture_atlases.add(TextureAtlas::from_grid(
+            cauldron: texture_atlases
+              .add(TextureAtlas::from_grid(
                 raw_textures.cauldron_sheet.clone(),
                 Vec2::new(192., 192.),
                 6,
@@ -168,12 +170,12 @@ The current state of the plugin already makes it a lot easier to prepare assets 
 ```rust
 #[derive(AssetCollection)]
 pub struct TextureAssets {
-    #[asset(texture_atlas(cell_width = 192., cell_height = 192., columns = 6, rows = 1))]
-    #[asset(path = "textures/cauldron.png")]
-    pub cauldron: Handle<TextureAtlas>,
+    #[asset(texture_atlas(tile_size_x = 192., tile_size_y = 192., columns = 6, rows = 1))]
+    #[asset(path = "textures/sprite_sheet.png")]
+    pub sprite: Handle<TextureAtlas>,
 }
 ```
-_Maybe in future versions of the library, texture atlases can be created with attributes on a derived `rust>AssetCollection`._
+_Maybe in future versions of the library, texture atlases can be created with attributes on a derived `rust>AssetCollection` (edit: this is possible since version 0.5.0)._
 
 I would also like to make it easier for users of bevy\_asset\_loader to build nice loading screens. There is an [open issue on GitHub asking for loading statistics][loading_statistics_issue], which should help a lot. The idea would be to offer a resource that keeps track of how many assets are currently loading, how many are done, and how many have not yet started to load. A system running during the "loading state" could then show a progress indicator based on this information.
 
