@@ -17,6 +17,40 @@ export const siteMetadata = {
   }
 };
 
+const token = process.env.GITHUB_TOKEN ?? 'not-configured';
+let discussions_query = `
+query {
+  repository(owner:"niklasei",name:"www-nikl-me"){
+    discussions (first: 10, categoryId: "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNjE5MDA5") {
+      totalCount # Int!
+
+      edges {
+        # type: DiscussionEdge
+        cursor
+        node {
+          # type: Discussion
+          id
+          category {
+            id
+          }
+          comments (first: 10) {
+            edges {
+              node {
+                bodyHTML
+              }
+            }
+          }
+        }
+      }
+
+      nodes {
+        # type: Discussion
+        id
+      }
+    }
+  }
+}`;
+
 export const plugins = [
   'gatsby-plugin-typescript',
   {
@@ -31,6 +65,14 @@ export const plugins = [
     options: {
       name: `projects`,
       path: `${__dirname}/../../projects/`
+    }
+  },
+  {
+    resolve: `gatsby-source-github-api`,
+    options: {
+      token: token,
+      variables: {},
+      graphQLQuery: discussions_query
     }
   },
   {
