@@ -35,13 +35,16 @@ export const globalStyles = css`
   
   .copy-code-button-container {
     top: 50px;
+    right: 8px;
     margin-top: -50px;
+  }
+  
+  .gatsby-code-button-buffer {
+    display: none;
   }
 
   .copy-code-icon {
     fill: ${colors.white};
-    padding-top: 16px;
-    padding-right: 8px;
   }
 `;
 
