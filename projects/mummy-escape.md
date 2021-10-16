@@ -5,6 +5,7 @@ itch: https://niklme.itch.io/mummy-escape
 date: 2021-06-03
 tags:
 - Game
+- Jam entry
 ---
 
 You are a mummy trying to leave your pyramid. A browser game developed in 10 days for the Scream game jam 2020.

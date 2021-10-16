@@ -7,6 +7,7 @@ tags:
 - Game
 - Rust
 - Bevy
+- Jam entry
 ---
 
 **Game submission for Mini Jam 71**

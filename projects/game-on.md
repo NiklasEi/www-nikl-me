@@ -6,6 +6,7 @@ date: 2021-06-03
 tags:
 - Game
 - Multiplayer
+- Jam entry
 ---
 
 Multiplayer game developed in one month (although real work was only done in the last week ^^) for the Game off jam 2020.
