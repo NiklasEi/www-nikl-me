@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
+import {colors} from "../theme";
 
 export const StyledDefaultLayout = styled.div`
   display: flex;
@@ -30,6 +31,17 @@ export const globalStyles = css`
 
   p {
     line-height: 1.5;
+  }
+  
+  .copy-code-button-container {
+    top: 50px;
+    margin-top: -50px;
+  }
+
+  .copy-code-icon {
+    fill: ${colors.white};
+    padding-top: 16px;
+    padding-right: 8px;
   }
 `;
 

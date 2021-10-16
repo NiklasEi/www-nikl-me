@@ -98,6 +98,19 @@ export const plugins = [
           }
         },
         {
+          resolve: 'gatsby-remark-code-buttons',
+          options: {
+            buttonContainerClass: `copy-code-button-container`,
+            buttonClass: `copy-code-button`,
+            buttonText: ``,
+            svgIconClass: `copy-code-icon`,
+            // tooltipText: ``,
+            toasterClass: `copied-toaster`,
+            // toasterTextClass: ``,
+            // toasterText: 'Copied',
+          }
+        },
+        {
           resolve: `gatsby-remark-autolink-headers`,
           options: {
             enableCustomId: true,
