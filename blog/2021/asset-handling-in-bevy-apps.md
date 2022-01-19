@@ -65,9 +65,9 @@ There are three parts to implementing a "loading state" in Bevy.
 I will not show all of that code here. In case you want to implement this yourself, you can take a look at [the cookbook][loading_using_state] for an example of checking asset loading state. You can of course also look at the [implementation in bevy\_asset\_loader on GitHub][loading_state_implementation].
 
 In my first few Bevy projects I found myself copying and pasting the "loading state" plugin. Apart from the code duplication between projects, there were also a few other pain points. There was too much boilerplate when adding new resources or adding more handles to existing resources. In both cases the code had to be adjusted in several places.  
-Another issue I had with my code at that point has to do with readability. When I see a piece of code that uses a handle from a resource, I want to be able to find the corresponding asset file path as fast as possible. With the initial implementation, the asset file paths where defined pretty far away from the resources and multiple jumps in my IDE where needed to get to them. The best case scenario would be to have the paths directly at their corresponding handle fields. This literally screams for some macro magic.
+Another issue I had with my code at that point has to do with readability. When I see a piece of code that uses a handle from a resource, I want to be able to find the corresponding asset file path as fast as possible. With the initial implementation, the asset file paths where defined pretty far away from the resources, and it took multiple jumps in my IDE to get to them. The best case scenario would be to have the paths directly at their corresponding handle fields. This literally screams for some macro magic.
 
-A perfect opportunity to write a Bevy plugin.
+*A perfect opportunity to write a Bevy plugin.*
 
 ## Introducing bevy\_asset\_loader
 
