@@ -26,8 +26,7 @@ Apart from simple assets like above you can also define more complex assets with
 ```rust
 #[derive(AssetCollection)]
 pub struct SomeAssets {
-    #[asset(standard_material)]
-    #[asset(path = "sounds/image.png")]
+    #[asset(path = "sounds/image.png", standard_material)]
     pub standard_material: Handle<StandardMaterial>,
     #[asset(texture_atlas(tile_size_x = 32., tile_size_y = 64., columns = 8, rows = 2))]
     #[asset(path = "images/sprite_sheet.png")]
@@ -38,14 +37,14 @@ pub struct SomeAssets {
 You can also configure the path to a certain asset file at run time. This is done via a mapping defined in a resource.
 ```rust
 #[derive(AssetCollection)]
-pub struct DynamicAsset {
+pub struct DynamicAssetCollection {
     #[asset(key = "character")]
     player: Handle<Image>,
 }
 ```
-For this to work, the key `character` needs to be defined in the `AssetKeys` resource before entering the loading state.
+For this to work, the key `character` needs to be defined in the `AssetKeys` resource before entering the loading state. This can either be done manually or by loading `ron` files (see my [blog post on dynamic assets][dynamic-assets-in-bevy_asset_loader]).
 
-The above example can all be found in complete bevy examples in [the plugin's GitHub repository](https://github.com/NiklasEi/bevy_asset_loader/tree/main/bevy_asset_loader/examples).
+The features described here can all be found in complete bevy examples in [the plugin's GitHub repository](https://github.com/NiklasEi/bevy_asset_loader/tree/main/bevy_asset_loader/examples).
 
 For a background of why I wrote this plugin and thoughts on future functionality, see the post ["Asset handling in Bevy apps"][asset_handling_in_bevy_apps].
 
@@ -55,3 +54,4 @@ For an example game using `bevy_asset_loader`, you can take a look at the intern
 
 [bevy_game_template]: https://github.com/NiklasEi/bevy_game_template/blob/0ff7b1fc2384c16934ce54bac0473bd40d24ba91/game_plugin/src/loading.rs
 [asset_handling_in_bevy_apps]: /blog/2021/asset-handling-in-bevy-apps/
+[dynamic-assets-in-bevy_asset_loader]: /blog/2022/dynamic-assets-in-bevy_asset_loader/
