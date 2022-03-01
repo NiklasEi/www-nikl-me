@@ -82,10 +82,10 @@ export const plugins = [
             inlineCodeMarker: '>',
             languageExtensions: [
               {
-                language: "ron",
-                extend: "yaml",
-                definition: {},
-              },
+                language: 'ron',
+                extend: 'yaml',
+                definition: {}
+              }
             ]
           }
         },

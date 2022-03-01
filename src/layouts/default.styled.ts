@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
-import {colors} from "../theme";
+import { colors } from '../theme';
 
 export const StyledDefaultLayout = styled.div`
   display: flex;
@@ -32,13 +32,13 @@ export const globalStyles = css`
   p {
     line-height: 1.5;
   }
-  
+
   .copy-code-button-container {
     top: 50px;
     right: 8px;
     margin-top: -50px;
   }
-  
+
   .gatsby-code-button-buffer {
     display: none;
   }
