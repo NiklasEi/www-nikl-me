@@ -9,7 +9,7 @@ tags:
 - Bevy
 ---
 
-This Bevy plugin reduces boilerplate when loading game assets. The crate offers the `rust>AssetCollection` trait and can automatically load structs that implement it. The trait can be derived.
+This Bevy plugin reduces boilerplate when loading game assets. The crate offers the `rust$AssetCollection` trait and can automatically load structs that implement it. The trait can be derived.
 
 Deriving `AssetCollection` leads to a readable definition of assets in your game code. A simple example loading an image and a sound file looks like this:
 ```rust
@@ -48,7 +48,7 @@ The features described here can all be found in complete bevy examples in [the p
 
 For a background of why I wrote this plugin and thoughts on future functionality, see the post ["Asset handling in Bevy apps"][asset_handling_in_bevy_apps].
 
-For an example game using `bevy_asset_loader`, you can take a look at the internal `rust>LoadingPlugin` of [`bevy_game_template`][bevy_game_template].
+For an example game using `bevy_asset_loader`, you can take a look at the internal `rust$LoadingPlugin` of [`bevy_game_template`][bevy_game_template].
 
 
 

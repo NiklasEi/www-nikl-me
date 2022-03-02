@@ -79,7 +79,7 @@ export const plugins = [
         {
           resolve: `gatsby-remark-prismjs`,
           options: {
-            inlineCodeMarker: '>',
+            inlineCodeMarker: '$',
             languageExtensions: [
               {
                 language: 'ron',
