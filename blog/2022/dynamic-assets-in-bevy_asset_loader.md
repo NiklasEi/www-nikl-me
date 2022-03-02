@@ -10,7 +10,7 @@ tags:
 - bevy
 ---
 
-*One of my favorite Bevy projects at the moment is my plugin [`bevy_asset_loader`][project] ([repository][repo]). Its goal is to minimize boilerplate for asset handling while improving code readability and maintainability for games with a lot of assets. I wrote about the motivation and basic idea of the plugin in [a previous blog post][asset_handling_post]. Most of the future functionality mentioned in the post is now implemented. The biggest feature added to [`bevy_asset_loader`][project] since the last blog post was not discussed though. That's what this post is all about.*
+*One of my favorite Bevy projects at the moment is my plugin [`bevy_asset_loader`][project] ([repository][repo]). Its goal is to minimize boilerplate for asset handling while improving code readability and maintainability for games with a lot of assets. I wrote about the motivation and basic idea of the plugin in [a previous blog post][asset_handling_post]. Most of the future functionality mentioned in the post is now implemented. The biggest feature added to [`bevy_asset_loader`][project] since then, was not discussed though. That's what this post is all about.*
 
 ## The idea
 
@@ -110,15 +110,21 @@ _Setup to load asset configurations from a `ron` file._
 
 That's it. We now moved all asset configuration out of our code.
 
-## Extras
+## Supported extras
 
-I showed examples for loading a texture atlas and loading "simple" assets from files dynamically. In the same way you can also load an image directly as a `rust$StandardMaterial` and load a complete directory as a vector of untyped handles. You can even have optional fields on asset collections now. If the key cannot be resoled at run time, the field will be `rust$None`.
+I showed examples for loading a texture atlas and "simple" files as dynamic assets. You can also load an image directly as a `rust$StandardMaterial`, and load a complete directory as a vector of untyped handles. With dynmais assets it is also possible to have optional fields on asset collections. If the key cannot be resoled at run time, the field will be `rust$None`.
 
-In some cases, it is required to give more info at compile time than just the key. For example, when loading a directory, the field needs to be additionally annotated with `rust$#[asset(folder)]`. In the same way, optional fields need `rust$#[asset(optional)]`. This is a limitation I have not been able to lift, because I need to handle return types that are different from `rust$Handle<T>` separately at compile time.
+In some cases, it is required to give more information at compile time than just the key. For example, when loading a directory, the field needs to be additionally annotated with `rust$#[asset(folder)]`. In the same way, optional fields need `rust$#[asset(optional)]`. This is a limitation I have not been able to lift, because I need to handle return types that are different from `rust$Handle<T>` separately at compile time.
 
-## More to come
+## Some open issues
 
-but what?...
+There are a few things I am not yet happy with. Admittedly, the API to load `.assets` files feels a bit clunky. One of the original ideas for this new functionality was that it should be easy to internationalize assets. If you have assets that need to be localized, you could configure them in different `ron` files and load them according to the user language. Currently, this would require the usage of internal APIs.
+
+I think the biggest missing feature at this point, is an ergonomic way to define dependencies between asset collections. It should be possible to load `.assets` files as part of collections and tell [`bevy_asset_loader`][project] to load and apply certain collections before others.
+
+There is also more design work to be done when thinking about different loading states in a "real" game. There are multiple szenarios in which a game would want to change the loaded assets. For example, localized assets need to be reloaded when the user changes the game language at run time. Even more common: the player might be switching between different levels requiring different asset collections to get loaded and unloaded.
+
+At the moment, all `.assets` files only get loaded and applied the first time a loading state is entered. If the same key gets overwritten in a later loading state, it's value would be wrong when re-entering the first loading state again.
 
 ---
 
