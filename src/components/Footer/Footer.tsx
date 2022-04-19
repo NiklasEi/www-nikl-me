@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
               <FontAwesomeIcon icon={faEnvelopeOpenText} />
             </ContactLink>
           </div>
-          <Copyright>Nikl.me © 2021</Copyright>
+          <Copyright>Nikl.me © 2022</Copyright>
         </StyledFooter>
       )}
     />
