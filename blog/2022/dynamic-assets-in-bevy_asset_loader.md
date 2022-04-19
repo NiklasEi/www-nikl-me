@@ -111,7 +111,7 @@ That's it. We now moved all asset configuration out of our code.
 
 ## Supported extras
 
-I showed examples for loading a texture atlas and "simple" files as dynamic assets. You can also load an image directly as a `rust$StandardMaterial` or load a complete directory as a vector of untyped handles. With dynamic assets it is also possible to have optional fields on asset collections. If the key cannot be resoled at run time, the field will be `rust$None`.
+I showed examples for loading a texture atlas and "simple" files as dynamic assets. You can also load an image directly as a `rust$StandardMaterial` or load a complete directory as a vector of untyped handles. With dynamic assets it is also possible to have optional fields on asset collections. If the key cannot be resolved at run time, the field will be `rust$None`.
 
 In some cases, it is required to give more information at compile time than just the key. For example, when loading a directory, the field needs to be additionally annotated with `rust$#[asset(folder)]`. In the same way, optional fields need `rust$#[asset(optional)]`. This is a limitation I have not been able to lift, because I need to handle return types that are different from `rust$Handle<T>` separately at compile time.
 
