@@ -1,12 +1,12 @@
 import { CreateNodeArgs, CreatePagesArgs } from 'gatsby';
 import { createFilePath } from 'gatsby-source-filesystem';
 import * as path from 'path';
-import { ProjectData } from '../pages/projects';
+import {ProjectData} from "./src/pages/projects";
 
 export const onCreateNode = ({ node, getNode, actions }: CreateNodeArgs) => {
   const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {
-    const fileNode = getNode(node.parent!);
+    const fileNode = getNode(node.parent!)!;
     switch (fileNode.sourceInstanceName) {
       case 'blog': {
         const basePath = 'blog';
@@ -96,7 +96,7 @@ const createTagPages = async (args: CreatePagesArgs) => {
   let projects = new Map<string, string[]>();
   let blogPosts = new Map<string, string[]>();
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const fileNode = getNode(node.parent.id!);
+    const fileNode = getNode(node.parent.id!)!;
     switch (fileNode.sourceInstanceName) {
       case 'blog':
         {
@@ -212,7 +212,7 @@ const createBlogPostsAndProjects = async ({ graphql, actions, getNode }: CreateP
     return;
   }
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const fileNode = getNode(node.parent.id!);
+    const fileNode = getNode(node.parent.id!)!;
     switch (fileNode.sourceInstanceName) {
       case 'blog':
         {

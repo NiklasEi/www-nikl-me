@@ -7,6 +7,7 @@ tags:
 - Rust
 - Gamedev
 - Bevy
+- Crate
 ---
 
 This bevy plugin integrates [Kira][kira] into Bevy. The goal is to replace or update bevy_audio, if Kira turns out to be a good approach. Currently, this plugin can play ogg, mp3, flac, and wav formats and supports web builds for everything except mp3. It also supports streaming of generated audio.

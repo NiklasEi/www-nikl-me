@@ -7,6 +7,7 @@ tags:
 - Rust
 - Gamedev
 - Bevy
+- Crate
 ---
 
 This Bevy plugin reduces boilerplate when loading game assets. The crate offers the `rust$AssetCollection` trait and can automatically load structs that implement it. The trait can be derived.
