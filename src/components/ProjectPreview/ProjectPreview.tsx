@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProjectData } from '../../pages/projects';
-import { ContainerLink, ProjectContainer, ProjectHeader, StyledProject } from './ProjectPreview.styles';
+import { ContainerLink, ProjectContainer, ProjectHeader, ProjectTitle, StyledProject } from './ProjectPreview.styles';
 import { ProjectLinks } from '../ProjectLinks/ProjectLinks';
 
 export const ProjectPreview: React.FC<ProjectData> = (project) => {
@@ -9,7 +9,7 @@ export const ProjectPreview: React.FC<ProjectData> = (project) => {
       <ContainerLink to={project.fields.slug} />
       <StyledProject>
         <ProjectHeader>
-          <h1>{project.frontmatter.title}</h1>
+          <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
           <ProjectLinks links={project.frontmatter} projectTitle={project.frontmatter.title} />
         </ProjectHeader>
         <p>{project.excerpt}</p>

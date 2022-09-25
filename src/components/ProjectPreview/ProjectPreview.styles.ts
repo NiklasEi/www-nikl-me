@@ -42,3 +42,8 @@ export const ProjectHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+export const ProjectTitle = styled.h1`
+  white-space: pre-line;
+  word-break: break-word;
+`;
