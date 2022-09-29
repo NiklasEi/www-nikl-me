@@ -10,7 +10,7 @@ tags:
 - Crate
 ---
 
-This Bevy plugin offers generic asset loaders for common file formats. Currently supported formats are `json`, `msgpack`, `ron`, `toml`, and `yaml`.
+This Bevy plugin offers generic asset loaders for common file formats, allowing you to define your own asset types and load them from asset files. Supported formats are `json`, `msgpack`, `ron`, `toml`, and `yaml`.
 
 The following example defines a custom asset `rust$Level` and registers asset loaders for all supported formats. These asset loaders are able to load the custom asset type from the different file types now.
 ```rust
