@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord, faGithub, faGitlab, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faDiscord, faGithub, faLinkedin, faMastodon, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { ContactLink, Copyright, StyledFooter } from './Footer.styles';
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,10 +13,10 @@ interface StaticQueryProps {
         firstName: string;
         social: {
           github: string;
-          gitlab: string;
           discord: string;
           twitter: string;
           linkedin: string;
+          mastodon: string;
         };
       };
     };
@@ -35,10 +35,10 @@ const Footer: React.FC = () => {
                 firstName
                 social {
                   github
-                  gitlab
                   discord
                   twitter
                   linkedin
+                  mastodon
                 }
               }
             }
@@ -48,6 +48,14 @@ const Footer: React.FC = () => {
       render={(data: StaticQueryProps) => (
         <StyledFooter>
           <div>
+            <ContactLink
+              href={data.site.siteMetadata.author.social.mastodon}
+              target="_blank"
+              rel="me"
+              title={`${data.site.siteMetadata.author.firstName} on Mastodon`}
+            >
+              <FontAwesomeIcon icon={faMastodon} />
+            </ContactLink>
             <ContactLink
               href={`https://twitter.com/${data.site.siteMetadata.author.social.twitter}`}
               target="_blank"
@@ -75,13 +83,6 @@ const Footer: React.FC = () => {
               title={`${data.site.siteMetadata.author.firstName} on LinkedIn`}
             >
               <FontAwesomeIcon icon={faLinkedin} />
-            </ContactLink>
-            <ContactLink
-              href={`https://gitlab.com/${data.site.siteMetadata.author.social.gitlab}`}
-              target="_blank"
-              title={`${data.site.siteMetadata.author.firstName} on GitLab`}
-            >
-              <FontAwesomeIcon icon={faGitlab} />
             </ContactLink>
             <ContactLink
               href={`mailto:${data.site.siteMetadata.author.email}`}

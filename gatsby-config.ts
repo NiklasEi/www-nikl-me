@@ -12,7 +12,8 @@ export const siteMetadata = {
       gitlab: 'NiklasEi',
       discord: 'WgCrwXF',
       twitter: 'nikl_me',
-      linkedin: 'neicker'
+      linkedin: 'neicker',
+      mastodon: 'https://mastodon.online/@nikl_me'
     }
   }
 };
