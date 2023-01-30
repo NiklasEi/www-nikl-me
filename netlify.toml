@@ -3,3 +3,8 @@ publish = "public"
 
 [[plugins]]
 package = "netlify-plugin-gatsby-cache"
+
+[[redirects]]
+  from = "/discord"
+  to = "https://discord.gg/WgCrwXF"
+  status = 302
