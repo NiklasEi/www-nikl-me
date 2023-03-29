@@ -9,7 +9,7 @@ tags:
 - bevy
 ---
 
-*One of my favorite Bevy projects at the moment is my plugin [bevy\_asset\_loader][project] ([repository][repo]). Its goal is to minimize boilerplate for asset handling while improving code readability and maintainability for games with a lot of assets. I wrote about the motivation and basic idea of the plugin in [a previous blog post][asset_handling_post]. Most of the future functionality mentioned in the post is now implemented. The biggest feature added to [`bevy_asset_loader`][project] since then, was not discussed though. That's what this post is all about.*
+*One of my favorite Bevy projects at the moment is the plugin [bevy\_asset\_loader][project] ([repository][repo]). Its goal is to minimize boilerplate for asset handling while improving code readability and maintainability for games with a lot of assets. I wrote about the motivation and basic idea of the plugin in [a previous blog post][asset_handling_post]. Most of the future functionality mentioned in the post is now implemented. The biggest feature added to [`bevy_asset_loader`][project] since then, was not discussed though. That's what this post is all about.*
 
 ## The idea
 

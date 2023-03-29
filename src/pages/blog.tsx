@@ -23,7 +23,7 @@ export default withDefaultLayout(BlogPage);
 export const query = graphql`
   query {
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { fields: { group: { eq: "blog" } }, frontmatter: { hide: { ne: true } } }
     ) {
       totalCount

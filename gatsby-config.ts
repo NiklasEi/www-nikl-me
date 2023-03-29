@@ -100,6 +100,5 @@ export const plugins = [
       ]
     }
   },
-  'gatsby-plugin-react-helmet',
-  'gatsby-plugin-fontawesome-css'
+  'gatsby-plugin-react-helmet'
 ];

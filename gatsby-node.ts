@@ -1,7 +1,7 @@
 import { CreateNodeArgs, CreatePagesArgs } from 'gatsby';
 import { createFilePath } from 'gatsby-source-filesystem';
 import * as path from 'path';
-import {ProjectData} from "./src/pages/projects";
+import { ProjectData } from './src/pages/projects';
 
 export const onCreateNode = ({ node, getNode, actions }: CreateNodeArgs) => {
   const { createNodeField } = actions;
@@ -141,7 +141,7 @@ const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArg
   const projects = await graphql<TaggedProjectList>(
     `
       query {
-        allMarkdownRemark(sort: { fields: [frontmatter___title], order: DESC }) {
+        allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
           edges {
             node {
               id

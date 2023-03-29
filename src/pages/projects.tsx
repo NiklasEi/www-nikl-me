@@ -59,7 +59,7 @@ interface ProjectFrontmatterData {
 export const query = graphql`
   query {
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       filter: { fields: { group: { eq: "projects" } }, frontmatter: { hide: { ne: true } } }
     ) {
       totalCount
