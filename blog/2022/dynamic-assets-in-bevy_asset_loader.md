@@ -127,11 +127,11 @@ At the moment, all `.assets` files only get loaded and applied the first time a 
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me on Twitter ([@nikl_me][twitter]) or on the [Bevy Discord server][bevy_discord] (@Nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at ([@nikl_me@mastodon.online ][mastodon]) or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [repo]: https://github.com/NiklasEi/bevy_asset_loader
 [project]: /projects/bevy_asset_loader
 [bevy]: https://bevyengine.org/
-[twitter]: https://twitter.com/nikl_me
+[mastodon]: https://mastodon.online/@nikl_me
 [bevy_discord]: https://discord.gg/bevy
 [asset_handling_post]: /blog/2021/asset-handling-in-bevy-apps
