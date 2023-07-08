@@ -9,9 +9,9 @@ tags:
 - bevy
 ---
 
-While working on an Android logic puzzle app with [Bevy], I learned some things about the current state of Android support in Bevy and its dependencies. The following are a few notes that hopefully are not only useful to myself, but also to others who would like to use Bevy to write an Android app.
+While working on an Android logic puzzle app with [Bevy], I learned some things about the current state of Android support in the engine and its dependencies. The following are a few notes that hopefully are not only useful to myself, but also to others who would like to use Bevy to write an Android app.
 
-The starting point is [Bevy's mobile example][mobile_example]. Take a look at [the example Readme for instructions on how to run it][mobile_example_readme]. For now I will ignore all things iOS since I don't have a setup for iOS development anyways. When my app was only the Bevy example, I could connect my phone, run `bash$cargo apk run -p <app_lib_name>` and the example would open on my phone after around one and a half minutes. Let's work on that. 
+The starting point is [Bevy's mobile example][mobile_example]. Take a look at [the example Readme for instructions on how to run it][mobile_example_readme]. For now, I will ignore all things iOS since I don't have a setup for iOS development. When my app was only a copy of the Bevy example, I could connect my phone, run `bash$cargo apk run -p <app_lib_name>` and the example would open up after around one and a half minutes. Let's work on that. 
 
 ## Shorter feedback cycles
 
@@ -46,9 +46,9 @@ Now `bash$cargo watch -x run` restarts the app on my desktop after every code ch
 
 ## Where to render
 
-Different mobile devices have different screen forms and cut-outs for e.g. cameras. A mobile application should not render behind the info bar or software buttons. This is one of the challenges I have not completely solved yet.
+Different mobile devices have different screen geometries and cut-outs for e.g. cameras. A mobile application should not render content behind the info bar or software buttons. This is one of the challenges I have not completely solved yet.
 
-My current attempt is the following system that runs in an early state and every time the orientation changes
+My current attempt is the following system that runs in an early state and every time the orientation changes:
 ```rust
 
 pub fn calculate_layout(
@@ -61,6 +61,7 @@ pub fn calculate_layout(
     let primary = windows.get_window(primary_entity).unwrap();
     let inner = primary.inner_size();
     let scale = primary.scale_factor();
+
     let content_rect = if cfg!(target_os = "android") {
         use winit::platform::android::WindowExtAndroid;
         let content_rect = primary.content_rect();
@@ -70,10 +71,7 @@ pub fn calculate_layout(
             right: (inner.width as f32 - content_rect.right as f32) / scale as f32,
             top: content_rect.top as f32 / scale as f32,
         };
-        info!(
-            "Adjusting content to {:?} due to {:?}, content {:?} and scale {}",
-            content, inner, content_rect, scale
-        );
+        info!("Adjusting content to {content:?} due to inner {inner:?}, content {content_rect:?} and scale {scale}");
 
         content
     } else {
@@ -100,9 +98,9 @@ pub struct ContentRect {
     pub left: f32,
 }
 ```
-*This system calculates the pixels that I should keep away from the borders of the screen to not overlap with cut-outs or things like software buttons. The pixel values are stored in a resource and default to 0 on other platforms than Android.*
+*This system calculates the distance in pixels that content should keep from the borders of the screen to not overlap with cut-outs or things like software buttons. The pixel values are stored in a resource and default to 0 on other platforms than Android.*
 
-The idea is to use the `rust$Layout` resource in all systems that spawn sprites/UI and use the `top`, `bottom`, `left` and `right` values to keep appropriate distance from software buttons and cut-outs. On my S10+, this works perfectly for the software buttons on the bottom, but not for the info bar on top of my screen. The content rect reports too big numbers for the top and I opened [rust-windowing/winit#2931] for that (but I am not convinced if this is really a winit issue or further upstream).
+The idea is to use the `rust$Layout` resource in all systems that spawn sprites or UI and use the `top`, `bottom`, `left` and `right` values to keep appropriate distance from software buttons and cut-outs. On my S10+, this works perfectly for the software buttons on the bottom, but not for the info bar on top of my screen. The content rect reports too big numbers for the top and I opened [rust-windowing/winit#2931] for that (but I am not sure if this is really a winit issue or further upstream).
 
 ## Performance
 
@@ -114,11 +112,11 @@ These winit settings can break animations, since the screen effectively freezes 
 
 My app will only contain logic puzzles and as such doesn't need input apart from touch events; I thought. Then I attempted to use the software back button on my phone and didn't get any keyboard input. This seems to be an open issue in winit ([rust-windowing/winit#2304]). After a little investigation, [I hacked something in my bevy fork and moved on][back_button_hack] (for now).
 
-On desktop, I am used to navigate backwards with my mouse. This is not supported in the latest winit release, [but was merged recently][rust-windowing/winit#2770] and should make its way to Bevy soon. For now, I hardcoded `rust$MouseButton::Other(8)` to be back navigation.
+On desktop, I am used to navigating backwards with my mouse. This is not supported in the latest winit release, [but was merged recently][rust-windowing/winit#2770] and should make its way to Bevy soon. For now, I hardcoded `rust$MouseButton::Other(8)` to be back navigation.
 
 ## Moving the app to the background
 
-Anyone playing around with Bevy on Android will notice, that the App lifecycle events are not yet completely handled. After minimizing the app it will not resume where you left of, but start up again. This issue is known and solutions were discussed a bit in [bevyengine/bevy#86], but since I couldn't find an open issue for the specific problem, I opened [bevyengine/bevy#9057] to track it.
+Anyone playing around with Bevy on Android will notice, that the App lifecycle events are not yet completely handled. When you minimize and open the app back up, it will not resume where you left of, but start from the beginning. This issue is known and solutions were discussed a bit in [bevyengine/bevy#86], but since I couldn't find an open issue for the specific problem, I opened [bevyengine/bevy#9057] to track it.
 For now, my workaround in the app is to save the current state in a database, so the app can always go back to where the user left.
 
 ---
