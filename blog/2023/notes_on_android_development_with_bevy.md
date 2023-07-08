@@ -2,7 +2,7 @@
 title: "Notes on Android development with Bevy"
 date: 2023-07-06
 category: code
-summary: "Notes on Android app development with current Bevy. A loose collection of learnings and issues + (attempted) solutions."
+summary: "A loose collection of learnings and issues + (attempted) solutions containing notes on how to shorten the feedback cycle and figuring out the correct places to render things on a phone screen."
 tags:
 - gamedev
 - rust
