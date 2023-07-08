@@ -1,6 +1,6 @@
 ---
 title: "Notes on Android development with Bevy"
-date: 2023-07-06
+date: 2023-07-08
 category: code
 summary: "A loose collection of learnings and issues + (attempted) solutions containing notes on how to shorten the feedback cycle and figuring out the correct places to render things on a phone screen."
 tags:
