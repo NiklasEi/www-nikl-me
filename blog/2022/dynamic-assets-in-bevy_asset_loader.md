@@ -127,7 +127,7 @@ At the moment, all `.assets` files only get loaded and applied the first time a 
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me at ([@nikl_me@mastodon.online ][mastodon]) or on the [Bevy Discord server][bevy_discord] (@nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [repo]: https://github.com/NiklasEi/bevy_asset_loader
 [project]: /projects/bevy_asset_loader
