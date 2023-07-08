@@ -14,7 +14,6 @@ interface StaticQueryProps {
         social: {
           github: string;
           discord: string;
-          twitter: string;
           linkedin: string;
           mastodon: string;
         };
@@ -36,7 +35,6 @@ const Footer: React.FC = () => {
                 social {
                   github
                   discord
-                  twitter
                   linkedin
                   mastodon
                 }
@@ -55,13 +53,6 @@ const Footer: React.FC = () => {
               title={`${data.site.siteMetadata.author.firstName} on Mastodon`}
             >
               <FontAwesomeIcon icon={faMastodon} />
-            </ContactLink>
-            <ContactLink
-              href={`https://twitter.com/${data.site.siteMetadata.author.social.twitter}`}
-              target="_blank"
-              title={`${data.site.siteMetadata.author.firstName} on Twitter`}
-            >
-              <FontAwesomeIcon icon={faTwitter} />
             </ContactLink>
             <ContactLink
               href={`https://github.com/${data.site.siteMetadata.author.social.github}`}

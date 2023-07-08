@@ -11,7 +11,6 @@ export const siteMetadata = {
       github: 'NiklasEi',
       gitlab: 'NiklasEi',
       discord: 'WgCrwXF',
-      twitter: 'nikl_me',
       linkedin: 'neicker',
       mastodon: 'https://mastodon.online/@nikl_me'
     }
