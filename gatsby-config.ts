@@ -1,7 +1,7 @@
 export const siteMetadata = {
   title: 'Nikl.me',
-  description: 'Personal website with projects (mainly small games), pictures and a blog',
-  keywords: 'nikl, nikl.me, gamedev',
+  description: 'Personal website with programming projects and related blog posts',
+  keywords: 'nikl, nikl.me, gamedev, Bevy, rust',
   siteUrl: 'https://www.nikl.me',
   author: {
     name: 'Niklas Eicker',
@@ -96,6 +96,60 @@ export const plugins = [
           }
         },
         `gatsby-plugin-catch-links`
+      ]
+    }
+  },
+  {
+    resolve: `gatsby-plugin-feed`,
+    options: {
+      query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+      feeds: [
+        {
+          serialize: ({ query: { site, allMarkdownRemark } }) => {
+            return allMarkdownRemark.nodes.map((node) => {
+              return Object.assign({}, node.frontmatter, {
+                description: node.excerpt,
+                date: node.frontmatter.date,
+                url: site.siteMetadata.siteUrl + node.fields.slug,
+                guid: site.siteMetadata.siteUrl + node.fields.slug,
+                custom_elements: [{ 'content:encoded': node.html }]
+              });
+            });
+          },
+          query: `
+              {
+                allMarkdownRemark(
+                  sort: {frontmatter: {date: DESC}},
+                  filter: { fields: { group: { eq: "blog" } }, frontmatter: { hide: { ne: true } } }
+                ) {
+                  nodes {
+                    excerpt
+                    html
+                    fields { 
+                      slug 
+                    }
+                    frontmatter {
+                      title
+                      date
+                    }
+                  }
+                }
+              }
+            `,
+          output: '/rss.xml',
+          title: "Nikl's Blog"
+        }
       ]
     }
   },
