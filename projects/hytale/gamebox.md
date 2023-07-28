@@ -2,7 +2,7 @@
 title: "GameBox"
 github: https://github.com/hygames/gamebox
 date: 2021-06-03
-hide: true
+hidden: true
 tags:
 - Hytale
 ---
