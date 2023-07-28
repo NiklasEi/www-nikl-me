@@ -131,7 +131,7 @@ export const plugins = [
               {
                 allMarkdownRemark(
                   sort: {frontmatter: {date: DESC}},
-                  filter: { fields: { group: { eq: "blog" } }, frontmatter: { hide: { ne: true } } }
+                  filter: { fields: { group: { eq: "blog" } }, frontmatter: { hidden: { ne: true } } }
                 ) {
                   nodes {
                     excerpt
