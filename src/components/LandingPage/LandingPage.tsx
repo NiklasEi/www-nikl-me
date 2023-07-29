@@ -2,13 +2,13 @@ import React from 'react';
 import { LandingPageTitle, StyledLandingPage } from './LandingPage.styles';
 import { graphql, Link, StaticQuery } from 'gatsby';
 import { BlogPostData } from '../../modules/blog';
-import { BlogPostPreview } from '../BlogPostPreview/BlogPostPreview';
 import { CenteredSubTitle, ContentContainer } from '../../layouts/default.styled';
 import { ProjectData } from '../../pages/projects';
 import withDefaultLayout from '../../layouts/default';
 import { ProjectList } from '../ProjectList/ProjectList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { BlogPostList } from '../BlogPostList/BlogPostList';
 
 const LandingPage: React.FC = () => {
   return (
@@ -45,7 +45,10 @@ const LandingPage: React.FC = () => {
         }
       `}
       render={(data: Content) => {
-        const latestBlog: BlogPostData = data.allMarkdownRemark.edges.map(({ node }) => node).filter(isBlogPostData)[0];
+        const latestBlogs: BlogPostData[] = data.allMarkdownRemark.edges
+          .map(({ node }) => node)
+          .filter(isBlogPostData)
+          .slice(0, 3);
         const latestProjects: ProjectData[] = data.allMarkdownRemark.edges
           .map(({ node }) => node)
           .filter(isProjectData)
@@ -54,14 +57,27 @@ const LandingPage: React.FC = () => {
           <ContentContainer>
             <StyledLandingPage>
               <LandingPageTitle>Hi, I'm Niklas</LandingPageTitle>
-              <p>And this is my spot on the internet</p>
+              <p>
+                This page contains a few of my <Link to={'/projects'}>projects</Link>. Nowadays, many of them are using the{' '}
+                <a href={'https://www.rust-lang.org/'} target="_blank">
+                  Rust programming language
+                </a>{' '}
+                and mostly concern the{' '}
+                <a href={'https://bevyengine.org'} target="_blank">
+                  game engine Bevy
+                </a>
+                .
+              </p>
+              <p>
+                Sometimes I feel like writing a <Link to={'/blog'}>blog</Link> post about something...
+              </p>
               <CenteredSubTitle>Latest projects:</CenteredSubTitle>
               <ProjectList projects={latestProjects} />
               <Link to={'/projects'}>
                 See all projects <FontAwesomeIcon icon={faArrowRight} />
               </Link>
-              <CenteredSubTitle>Latest post:</CenteredSubTitle>
-              <BlogPostPreview {...latestBlog} />
+              <CenteredSubTitle>Latest posts:</CenteredSubTitle>
+              <BlogPostList posts={latestBlogs} />
               <Link to={'/blog'}>
                 See all posts <FontAwesomeIcon icon={faArrowRight} />
               </Link>
