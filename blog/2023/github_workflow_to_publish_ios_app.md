@@ -1,6 +1,6 @@
 ---
 title: "GitHub workflow to publish an iOS app"
-date: 2023-07-08
+date: 2023-07-29
 category: code
 summary: "A guide on how to set up and configure a GitHub workflow that builds and publishes an iOS app."
 tags:
@@ -10,7 +10,6 @@ tags:
 - ios
 - automation
 - ci/cd
-hidden: true
 ---
 
 I built a GitHub workflow to bundle, sign and publish an iOS app. There are already a couple guides on how to do this, but none of them worked out of the box for me (an iOS/mac noob). With lots of googling plus trial and error, I pieced together the missing and broken parts. Since I wouldn't wish that on anyone, here are some information on how to use the workflow I ended up with.
@@ -184,11 +183,11 @@ You will need:
 
 ## Final comments
 
-The version input of the workflow is only used as GitHub release to upload the artefact. The actual app version is defined in your `Info.plist` and needs to be new for the App Store to accept your build.
+The version input of the workflow is only used as GitHub release to upload the artifact. The actual app version is defined in your `Info.plist` and needs to be new for the App Store to accept your build.
 
 You cannot easily install the signed ipa on any device without going through the App Store or TestFlight. For macOS apps, there is a different certificate type called "Developer ID Installer" to do so, but there doesn't seem to be something similar for iOS apps.
 
-Workflow runs are free for public repositories on GitHub. If your project is private, it will use build minutes from your allowance ([2000 per month on a free account][github-actions-free]). Know that [every minute with a macOS runner is billed as 10 minutes][github-actions-multipliers].
+Workflow runs are free for public repositories on GitHub. If your project is private, it will use build minutes from your allowance ([2000 minutes per month on a free account][github-actions-free]). Know that [every minute with a macOS runner is billed as 10 minutes][github-actions-multipliers].
 
 ---
 
