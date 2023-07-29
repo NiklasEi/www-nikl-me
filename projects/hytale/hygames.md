@@ -2,7 +2,7 @@
 title: "Hygames"
 www: https://www.hygames.dev
 date: 2021-05-03
-hide: true
+hidden: true
 discord: http://discord.hygames.dev
 tags:
 - Hytale

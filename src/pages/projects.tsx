@@ -60,7 +60,7 @@ export const query = graphql`
   query {
     allMarkdownRemark(
       sort: { frontmatter: { date: DESC } }
-      filter: { fields: { group: { eq: "projects" } }, frontmatter: { hide: { ne: true } } }
+      filter: { fields: { group: { eq: "projects" } }, frontmatter: { hidden: { ne: true } } }
     ) {
       totalCount
       edges {

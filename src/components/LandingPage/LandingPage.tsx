@@ -15,7 +15,7 @@ const LandingPage: React.FC = () => {
     <StaticQuery
       query={graphql`
         query LandingPageQuery {
-          allMarkdownRemark(sort: { frontmatter: { date: DESC } }, filter: { frontmatter: { hide: { ne: true } } }) {
+          allMarkdownRemark(sort: { frontmatter: { date: DESC } }, filter: { frontmatter: { hidden: { ne: true } } }) {
             totalCount
             edges {
               node {
