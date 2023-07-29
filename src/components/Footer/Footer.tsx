@@ -1,9 +1,9 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import {graphql, StaticQuery} from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord, faGithub, faLinkedin, faMastodon, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { ContactLink, Copyright, StyledFooter } from './Footer.styles';
-import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
+import { faDiscord, faGithub, faLinkedin, faMastodon } from '@fortawesome/free-brands-svg-icons';
+import {ContactLink, Copyright, FooterContent, RssLink, StyledFooter, Contacts} from './Footer.styles';
+import { faEnvelopeOpenText, faRssSquare } from '@fortawesome/free-solid-svg-icons';
 
 interface StaticQueryProps {
   site: {
@@ -45,7 +45,9 @@ const Footer: React.FC = () => {
       `}
       render={(data: StaticQueryProps) => (
         <StyledFooter>
-          <div>
+          <FooterContent>
+          <RssLink to={"/rss.xml"}><FontAwesomeIcon icon={faRssSquare} title={"RSS Feed for Nikl's blog"} /></RssLink>
+          <Contacts>
             <ContactLink
               href={data.site.siteMetadata.author.social.mastodon}
               target="_blank"
@@ -81,8 +83,9 @@ const Footer: React.FC = () => {
             >
               <FontAwesomeIcon icon={faEnvelopeOpenText} />
             </ContactLink>
-          </div>
+          </Contacts>
           <Copyright>Nikl.me © 2022</Copyright>
+          </FooterContent>
         </StyledFooter>
       )}
     />
