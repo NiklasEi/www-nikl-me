@@ -121,11 +121,11 @@ The workflow requires multiple secrets to be configured in GitHub. Some of those
    - Provisioning profiles are picked up by Xcode from `~/Library/MobileDevice/Provisioning\ Profiles/`. I use its uuid as file name, because I had some issues where Xcode couldn't find the correct profile, but I am not sure if this is actually needed.
 5. Use `bash$xcodebuild` to archive your project.
 6. Use `ExportOptions.plist` to export an `ipa` from the archive.
-7. Decode the API to talk to the app store. The key is moved to `~/private_keys` and needs to contain the key id in its name for `bash$altool` to find it.
-8. Talk to the app store to validate and upload the `ipa`.
+7. Decode the API to talk to the App Store. The key is moved to `~/private_keys` and needs to contain the key id in its name for `bash$altool` to find it.
+8. Talk to the App Store to validate and upload the `ipa`.
 9. Upload the self-signed `ipa` to a GitHub release.
 
-After the workflow has completed, your app will automatically show up in "TestFlight" after a short processing period.
+After the workflow has completed, your app will automatically show up in TestFlight after a short processing period.
 
 ## Setting up the secrets
 
@@ -186,7 +186,7 @@ You will need:
 
 The version input of the workflow is only used as GitHub release to upload the artefact. The actual app version is defined in your `Info.plist` and needs to be new for the App Store to accept your build.
 
-You cannot easily install the signed ipa on any device without going through the app store. For macOS apps, there is a different certificate type called "Developer ID Installer" to do so, but there doesn't seem to be something similar for iOS apps.
+You cannot easily install the signed ipa on any device without going through the App Store or TestFlight. For macOS apps, there is a different certificate type called "Developer ID Installer" to do so, but there doesn't seem to be something similar for iOS apps.
 
 Workflow runs are free for public repositories on GitHub. If your project is private, it will use build minutes from your allowance ([2000 per month on a free account][github-actions-free]). Know that [every minute with a macOS runner is billed as 10 minutes][github-actions-multipliers].
 
