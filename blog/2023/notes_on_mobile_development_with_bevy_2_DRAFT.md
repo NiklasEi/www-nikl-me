@@ -10,7 +10,7 @@ tags:
 - ios
 - automation
 - ci/cd
-hidden: false
+hidden: true
 ---
 
 ## Getting an App bundle
