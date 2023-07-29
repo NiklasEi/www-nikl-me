@@ -125,6 +125,8 @@ The workflow requires multiple secrets to be configured in GitHub. Some of those
 8. Talk to the app store to validate and upload the `ipa`.
 9. Upload the self-signed `ipa` to a GitHub release.
 
+After the workflow has completed, your app will automatically show up in "TestFlight" after a short processing period.
+
 ## Setting up the secrets
 
 Simple strings like passwords can directly go into a GitHub secret. Files will be encoded first using base64 (e.g. `bash$openssl base64 -in ~/ExportOptions.plist`).
