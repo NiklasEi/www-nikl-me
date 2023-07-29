@@ -124,7 +124,7 @@ The workflow requires multiple secrets to be configured in GitHub. Some of those
 8. Talk to the App Store to validate and upload the `ipa`.
 9. Upload the self-signed `ipa` to a GitHub release.
 
-After the workflow has completed, your app will automatically show up in TestFlight after a short processing period.
+Before starting the workflow for the first time, your app should be configured in App Store Connect. The builds will automatically show up in TestFlight after a short processing period.
 
 ## Setting up the secrets
 
