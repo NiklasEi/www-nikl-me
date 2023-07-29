@@ -35,15 +35,8 @@ export const ContainerLink = styled(Link)`
   }
 `;
 
-export const ProjectHeader = styled.div`
-  display: flex;
-  position: static;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
 export const ProjectTitle = styled.h1`
   white-space: pre-line;
   word-break: break-word;
+  margin: 0;
 `;

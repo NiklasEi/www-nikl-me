@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { colors } from '../../theme';
-import {Link} from "gatsby";
 
 export const StyledFooter = styled.div`
   width: 100%;
@@ -22,13 +21,13 @@ export const FooterContent = styled.div`
   @media (min-width: 840px) {
     flex-direction: row;
   }
-`
+`;
 
 export const Contacts = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-`
+`;
 
 export const Copyright = styled.small`
   flex: 1;
@@ -47,14 +46,17 @@ export const ContactLink = styled.a`
   }
 `;
 
-export const RssLink = styled(Link)`
+export const RssLink = styled.div`
   flex: 1;
   display: flex;
   justify-content: flex-start;
-  color: ${colors.secondary};
-  margin: 5px 0;
 
-  &:hover {
-    color: ${colors.white};
+  & > a {
+    color: ${colors.secondary};
+    margin: 5px 0;
+
+    &:hover {
+      color: ${colors.white};
+    }
   }
 `;

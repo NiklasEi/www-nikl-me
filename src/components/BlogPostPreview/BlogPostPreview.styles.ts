@@ -21,13 +21,3 @@ export const ContainerLink = styled(Link)`
     cursor: pointer;
   }
 `;
-
-export const PostHeader = styled.div`
-  display: flex;
-  position: static;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-bottom: 10px;
-  align-items: center;
-`;

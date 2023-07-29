@@ -18,6 +18,7 @@ export const ProjectLink = styled.a`
 export const ProjectLinksContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin-bottom: 5px;
 `;
