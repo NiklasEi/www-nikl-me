@@ -2,7 +2,7 @@
 title: "GitHub workflow to publish an iOS app"
 date: 2023-07-08
 category: code
-summary: "A guide on how to setup and configure a GitHub workflow that builds and publishes an iOS app."
+summary: "A guide on how to set up and configure a GitHub workflow that builds and publishes an iOS app."
 tags:
 - gamedev
 - rust
