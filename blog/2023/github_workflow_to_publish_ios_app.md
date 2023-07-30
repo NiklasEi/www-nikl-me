@@ -139,7 +139,7 @@ You will need:
    - [Export the certificate][xcode-docs-export-cert] as `.p12` from xbuild and set the password while doing so
    - The exported `.p12` file needs to be base64 encoded before adding it as a GitHub secret
  - **IOS_PROVISION_PROFILE**
-   - After creating your distribution certificate, you can visit your [developer account resources][developer-account-resources] to create a new distribution profile. Select "+", chose *Distribution* - *App Store*, then select your app and the previously created distribution certificate. The final step is setting the name of your profile, which you should note down for the next step. After clicking "Generate", you can download your `.mobileprovision` file and proceed with base64 encoding and configuring the secret in GitHub.
+   - After creating your distribution certificate, you can visit your [developer account resources][developer-account-resources] to create a new distribution profile. Select "+", chose *Distribution* - *App Store*, then select your app and the previously created distribution certificate. The final step is setting the name of your profile, which you should remember for the export options further down. After clicking "Generate", you can download your `.mobileprovision` file and proceed with base64 encoding and configuring the secret in GitHub.
  - **IOS_KEYCHAIN_PASSWORD**
    - This can be any string since it is only used to create and open a temporary keychain on the action runner
  - **IOS_EXPORT_PRODUCTION**
