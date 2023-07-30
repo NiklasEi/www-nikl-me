@@ -13,7 +13,9 @@ tags:
 hidden: true
 ---
 
-My app is missing content and features, but I would like to be able to distribute test build early on. That means my Android builds need to be acceptable for the Play Store and the iOS builds need to pass Apple's bar for the App Store. On the way to that goal there are a couple technical issues to solve and a lot of configuration to do in App Store Connect / Google Play Console. I will mostly concentrate on the technical challenges while just mentioning some of the store configurations.
+My app is missing content and features, but I would like to be able to distribute test builds early on. That means my Android builds need to be acceptable for the Play Store and the iOS builds need to pass Apple's bar for the App Store. On the way to that goal there are a couple technical issues to solve and a lot of configuration to do in App Store Connect and Google Play Console. I will mostly concentrate on the technical challenges while just mentioning some of the store configurations.
+
+Most of this effort did not go into my current app project directly. I decided to add iOS and Android support to [`bevy_game_template`][bevy_game_template] first. This way, the whole community might benefit from the solutions and I can just copy the setup to other projects.
 
 ## Android
 
@@ -76,19 +78,34 @@ The bundle still contains lib directories for `x86` and `x86_64` due to the "dum
 
 ## iOS
 
-### Icons
+I don't own a mac or iPhone, but still want to support iOS. I borrowed a mac for a couple of days to get everything sorted out in `bevy_game_template`. From there I just copied the whole setup to my main project.
 
-The App Store requires apps for iOS 11 or later to include app icons with an asset catalog. https://developer.apple.com/documentation/xcode/configuring-your-app-icon
+The first time I tried to let Xcode publish the app with a copied setup from the Bevy mobile example, the process ended in a list of errors from the App Store. The required changes mainly boil down to adding an app icon and a launch screen.
+
+### Add Icons
+
+The App Store requires apps for iOS 11 or later to include app icons with an asset catalog. I did this following the [developer documentation from Apple][apple-docs-icon] ([icon][template-add-icon] + [name][template-add-icon-name]).
 
 ### Adding a launch screen
 
-Apple requires a launch screen. The `Info.plist` from the Bevy mobile example includes an entry for `UILaunchStoryboardName`, but the launch screen itself is not included. I created one following  
+Our app requires a launch screen. The `Info.plist` from the Bevy mobile example includes an entry for `UILaunchStoryboardName`, but the launch screen itself is not included. I created one in Xcode following a [stack overflow answer][launch-screen-so] that just contains a centered icon.
 
+### Continuous deployment
 
+At this point, Xcode can create app builds and push them to App Store Connect. I spend some time on creating a [GitHub workflow][workflow-ios] to automate the process. The iOS workflow requires a bit more setup than the Android one, but hopefully I don't need to organize a mac again anytime soon.
 
-## Getting screenshots
+### One issue left...
 
-Adapt window size to needed screenshot size, then add the screenshot system from the bevy example
+...the app has no audio on iOS. I have only tested this with `bevy_kira_audio` so far, so `bevy_audio` might be fine. Maybe someone else knows what's going on here?
+
+## Getting ready for a release
+
+Both stores require some setup for the store pages. The app from `bevy_game_template` is not supposed to go live to the app stores, but it would be nice to be able to share a link that allows anyone to install it. For iOS the goal is "external testing" in AppFlight. In Google Play this release type is called "open testing". Both of these programs require the App to go through review and the store page to be mostly complete.
+
+### Getting screenshots
+
+Screenshots are a big part of finishing the required setup for publishing. Luckily the last Bevy update came with a screenshot API that is handy for this. Setting the window dimension and adding the below system gives nice screenshots in configurable resolution. 
+
 ```rust
 fn screenshot_on_spacebar(
     input: Res<Input<KeyCode>>,
@@ -105,6 +122,7 @@ fn screenshot_on_spacebar(
     }
 }
 ```
+*This system is borrowed from the [Bevy screenshot example][bevy-screenshot-example].*
 
 ---
 
@@ -129,3 +147,10 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [workflow-android]: https://www.nikl.me/blog/2023/github_workflow_to_publish_android_app/
 [workflow-ios]: https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/
 [gradle-abis]: https://developer.android.com/ndk/guides/abis?hl=en#gradle
+[launch-screen-so]: https://stackoverflow.com/a/57201089
+[apple-docs-icon]: https://developer.apple.com/documentation/xcode/configuring-your-app-icon
+[template-add-icon]: https://github.com/NiklasEi/bevy_game_template/pull/61/commits/cf89f657ceeed5b244ac6db482f584be8310a27c
+[template-add-icon-name]: https://github.com/NiklasEi/bevy_game_template/pull/61/commits/e70601eab140c3d18973d8138999dceed781eedb
+[template-add-launch-screen]: https://github.com/NiklasEi/bevy_game_template/pull/61/commits/4c982c2e4061b2de807f90bd77041065cc5c0a97
+[bevy-screenshot-example]: https://github.com/bevyengine/bevy/blob/main/examples/window/screenshot.rs
+[bevy_game_template]: https://github.com/NiklasEi/bevy_game_template
