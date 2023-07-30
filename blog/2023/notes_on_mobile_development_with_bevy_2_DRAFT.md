@@ -13,11 +13,30 @@ tags:
 hidden: true
 ---
 
-## Getting an App bundle
+My app is missing content and features, but I would like to be able to distribute test build early on. That means my Android builds need to be acceptable for the Play Store and the iOS builds need to pass Apple's bar for the App Store. On the way to that goal there are a couple technical issues to solve and a lot of configuration to do in App Store Connect / Google Play Console. I will mostly concentrate on the technical challenges while just mentioning some of the store configurations.
 
-With `cargo-apk` we get apk files as the name of the tool suggests. The play store no longer accept APKs, but [requires app bundles][app-bundles-only]. This makes sense to keep downloads small and still support multiple device ABIs ([**A**plication **B**inary **I**nterface][abi-wiki]), but currently makes publishing a Bevy game a bit harder.
+## Android
 
-The only tool I could convince to create an app bundle from my Bevy project is [`xbuild`][xbuild], the WIP successor of `cargo-apk`[^1]. Adding a `manifest.yml` file with some configuration and running `x build --platform android --store play` gives us an `.aab` bundle, but derived APKs instantly crash. Let's fix that.
+### Getting an App bundle
+
+With cargo-apk we get apk files as the name of the tool suggests. The Play Store no longer accept APKs, but [requires app bundles][app-bundles-only]. This makes sense to keep downloads small and still support multiple device ABIs ([**A**plication **B**inary **I**nterface][abi-wiki]), but it requires some extra work to get a bundle for a Bevy game.
+
+The only tool I could convince to create an app bundle from my Bevy project is [xbuild][xbuild], the WIP successor of cargo-apk[^1]. We can configure xbuild to bundle our project for Android with the following `manifest.yaml`
+
+```yaml
+android:
+  gradle: true
+  icon: "your_icon.png"
+  manifest:
+    package: "me.nikl.bevygame"
+    version_code: 1
+    application:
+      label: "Bevy game"
+```
+
+Currently, xbuild decides to create app bundles only when using `yaml$gradle: true` and only for production builds. Running `x build --platform android --store play` gave me an app bundle, but derived APKs instantly crash.
+
+> I had to do a couple changes to get xbuild to create working app bundles. Some of them might get upstreamed, but a few are obvious hacks that only work for the bevy project structure (like a single `assets` directory). For the `bash$x ...` commands in this post to work as expected, you need to install my fork: `bash$cargo install --git https://github.com/NiklasEi/xbuild`.
 
 ### libc++ shared is missing
 
@@ -27,33 +46,44 @@ java.lang.UnsatisfiedLinkError: Unable to load native library "/data/app/~~0cxWI
 ```
 *The helpful line among hundreds of unhelpful ones.*
 
-Opening the APK as an archive indeed shows that `lib/arm64-v8a/` does not include `libc++_shared.so`, while an APK built with `cargo-apk` includes it. This library is required for audio support in Bevy. I probably could have just ripped out audio for now and continued with the other issues (there are more), but who am I kidding? I want audio!
+Opening the APK as an archive indeed shows that `lib/arm64-v8a/` does not include `libc++_shared.so`, while an APK built with `cargo-apk` includes it. This library is required for audio support in Bevy. I probably could have just ripped out audio for now and moved on, but who am I kidding? I want audio!
 
-Telling gradle to include `libc++_shared.so` turned out to be quite a rabbit hole. Usually it should realize on its own that it's needed and "just include" it. Our problem is that we are not using gradle to build the game library, but cargo. This leads to gradle having no way of knowing that we need `libc++_shared.so`. At the end I gave up on a clean and nice solution and went with a hack. I basically [told gradle that we have a c++ library to build][xcode-hack-libc-shared] which requires `libc++_shared.so`. The c++ project is empty, but it does the trick.
+Telling gradle to include `libc++_shared.so` turned out to be quite a rabbit hole. Usually, it should realize on its own that the library is needed and include it. The problem is, that we are not using gradle to build the game library, but cargo. So gradle has no way of knowing that we need `libc++_shared.so`. At the end I gave up on a "clean" solution and went with a hack. I basically [told gradle that the project includes a c++ library][xcode-hack-libc-shared] which requires the shared library. The c++ project is empty, but it does the trick and creates minimal bloat (~4kB).
 
-With this change the `UnsatisfiedLinkError` from above is gone, but our game still doesn't work.
+With this change the `UnsatisfiedLinkError` from above is gone, but the game still doesn't work.
 
 ### Include assets
 
-While `cargo-apk` allows to simply configure an asset directory, `xbuild` does not jet support that. There is an [open PR to add support for assets to the non-gradle builds][xbuild-assets-pr], but that only yields APKs, not app bundles.
+While `cargo-apk` allows to simply configure an asset directory, xbuild does not jet support that. There is an [open PR to add support for assets][xbuild-assets-pr] to the non-gradle builds, but that only works for APKs[^2].
 
 Since Bevy usually comes with a single `assets` directory in the root of the project, [I told gradle to just include that][xcode-hack-include-assets].
 
+At this point, the build generated by xbuild using gradle runs properly. You can test this by connecting an Android phone and running `bash$x run --device <device id>`. You can find the correct device ID with `bash$x devices`.
 
-## CI/CD
+### Continuous deployment
 
-I do not own a mac, but still want to support iPhones and iPads. Apple does not make that easy.
+The app bundle needs to be signed with jarsigner and can then be uploaded to Google Play Console. Doing this manually for every version is no fun, so [I wrote a GitHub workflow for it][workflow-android].
 
-Links to posts about the workflows.
+### Support more Android devices
 
-## Decide what Android devices to support
+After uploading an app bundle, we can use the app bundle explorer in the Google Play Console to check bundle exports for different devices. My early bundles contained libraries for 4 different ABIs due to the dummy c++ library and [gradle compiling for all non-deprecated ABIs by default][gradle-abis]. The game on the other hand, was only compiled for `arm64-v8a`, which was hardcoded in xbuild.
+https://developer.android.com/ndk/guides/abis?hl=en has some info on Android ABIs and how to tell gradle to build only for a certain set of ABIs. By default, gradle will build for all non-deprecated ABIS ()
 
-After uploading an app bundle, we can use the app bundle explorer in the google play console to explore bundle exports for (a lot of) different devices. Our aab contains libs for 4 different ABIs due to the dummy c++ lib hack, but our game is only compiled for `arm64-v8a` (for compile speed reasons; see previous post).
-https://developer.android.com/ndk/guides/abis?hl=en has some info on Android ABIs and how to tell gradle to build only for a certain set of ABIs. By default, gradle will build for all non-deprecated ABIS (https://developer.android.com/ndk/guides/abis?hl=en#gradle)
-
-The device list in the app bundle explorer can be filtered by ABI. Out of the 18.919 devices, 8.599 are `arm64-v8a` and 10.096 `armeabi-v7a`, so I decided to ignore the other ABIs (side note: the bevy mobile example does the same as I now understand :D). I went back to xbuild and fixed the support for `arm` and told it to always build for `arm64` and `arm` when making a build with `--store` option: https://github.com/NiklasEi/xbuild/commit/57dacffc8e146e2d3cf7ada24eb90f3865fae568
+The device list in the app bundle explorer can be filtered by ABI. Out of the 18.919 devices, 8.599 are `arm64-v8a` and 10.096 `armeabi-v7a`. Most of the other couple hundred devices are `x86` or `x86_64`[^3]. I went back to xbuild, fixed the support for `arm` in gradle builds and told it to always build for `arm64` and `arm` when making a build with the `bash$--store` option.  https://github.com/NiklasEi/xbuild/commit/57dacffc8e146e2d3cf7ada24eb90f3865fae568
 
 The bundle still contains lib directories for `x86` and `x86_64` due to the "dummy cpp lib" workaround. Those lib directories tell the play store that our app bundle can generate APKs for those ABIs which is not correct since we do not build our game for them. To tell gradle to not build the cpp library for the `x86(64)` ABIs: https://github.com/NiklasEi/xbuild/commit/deddb185d5a8eaf120fff0a144dd4c18156aeecf
+
+
+## iOS
+
+### Icons
+
+The App Store requires apps for iOS 11 or later to include app icons with an asset catalog. https://developer.apple.com/documentation/xcode/configuring-your-app-icon
+
+### Adding a launch screen
+
+Apple requires a launch screen. The `Info.plist` from the Bevy mobile example includes an entry for `UILaunchStoryboardName`, but the launch screen itself is not included. I created one following  
+
 
 
 ## Getting screenshots
@@ -81,6 +111,8 @@ fn screenshot_on_spacebar(
 Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [^1]: [crossbow](https://github.com/dodorare/crossbow) might also work, but I didn't manage to set it up correctly. If you do, please tell me.
+[^2]: It also doesn't support globs yet, which is a bit unpractical for Bevy's asset directory. Every file and subdirectory needs to be listed. I added [simple glob support for apk builds][xbuild-fork-support-globs] on my fork and will try to upstream that once basic assets support has landed.
+[^3]: Now I understand why the bevy mobile example has the [two arm targets configured](https://github.com/bevyengine/bevy/blob/v0.11.0/examples/mobile/Cargo.toml#L23) for cargo-apk builds :D
 
 [bevy]: https://bevyengine.org/
 [mastodon]: https://mastodon.online/@nikl_me
@@ -89,7 +121,11 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [app-bundles-only]: https://android-developers.googleblog.com/2021/06/the-future-of-android-app-bundles-is.html
 [xbuild]: https://github.com/rust-mobile/xbuild
 [xbuild-fork]: https://github.com/NiklasEi/xbuild
+[xbuild-fork-support-globs]: https://github.com/rust-mobile/xbuild/commit/ba8d23a955723fe758ee0d1db49c872292c32e57
 [xcode-hack-libc-shared]: https://github.com/NiklasEi/xbuild/commit/a32cdc4300023c81586748b6d8cc9bef6c5e8155
 [xcode-hack-include-assets]: https://github.com/NiklasEi/xbuild/commit/a32cdc4300023c81586748b6d8cc9bef6c5e8155#diff-6279764828c50df7615545319f05789a4a73bd72f620f9c6033e7d8d712df8c0R101
 [xbuild-assets-pr]: https://github.com/rust-mobile/xbuild/pull/122
 [abi-wiki]: https://en.wikipedia.org/wiki/Application_binary_interface
+[workflow-android]: https://www.nikl.me/blog/2023/github_workflow_to_publish_android_app/
+[workflow-ios]: https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/
+[gradle-abis]: https://developer.android.com/ndk/guides/abis?hl=en#gradle
