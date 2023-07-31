@@ -111,6 +111,7 @@ jobs:
               tag: ${{ inputs.version }}
               overwrite: true
 ```
+*Configure the `env` section according to your project.*
 
 The workflow requires multiple secrets to be configured in GitHub. Some of those need an active membership in the Apple developer program, which costs 99$ per year. We'll get back to getting and configuring the secrets later. First, let's go through the workflow steps:
 
@@ -178,11 +179,13 @@ You will need:
    - Encode the file using base64 and add it to GitHub
  - **IOS_APPSTORE_API_PRIVATE_KEY** and **IOS_APPSTORE_API_KEY_ID**
     - Follow [the docs to create][create-api-key] a new API key
-    - I used the role "App Manager", but "Developer" [might be enough][app-store-key-roles]
+    - You can use [the role][app-store-key-roles] "Developer"
     - Download (`.p8`) and encode the key using base64 before adding it as a secret
     - Copy the key ID of the just created key from the table
  - **IOS_APPSTORE_ISSUER_ID**
     - Visit "[Users and Access][users-and-access]" to copy the issuer ID
+
+Now that all required secrets are configured, head over to the "Actions" tab in your repository. Find the workflow in the list on the left, select it and click "Run workflow" in the top right.
 
 ## Final comments
 

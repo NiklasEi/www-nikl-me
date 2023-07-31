@@ -2,7 +2,7 @@
 title: "Notes on mobile development with Bevy #2"
 date: 2023-07-08
 category: code
-summary: "A loose collection of learnings and issues + (attempted) solutions. Among others, contains notes on how to shorten the feedback cycle and figure out the correct places to render things on a phone screen."
+summary: "A collection of learnings and issues + (hacked) solutions. Among others, contains notes on getting an App bundle and preparing your Android and iOS builds for the stores."
 tags:
 - gamedev
 - rust
@@ -13,9 +13,9 @@ tags:
 hidden: true
 ---
 
-My app is missing content and features, but I would like to be able to distribute test builds early on. That means my Android builds need to be acceptable for the Play Store and the iOS builds need to pass Apple's bar for the App Store. On the way to that goal there are a couple technical issues to solve and a lot of configuration to do in App Store Connect and Google Play Console. I will mostly concentrate on the technical challenges while just mentioning some of the store configurations.
+My app is missing content and features, but I would like to be able to distribute test builds early on. That means my Android builds need to be acceptable for the Play Store and the iOS builds need to pass Apple's bar for the App Store. On the way to that goal there are a couple technical issues to solve and some configuration to do in App Store Connect and Google Play Console. I will mostly concentrate on the technical challenges while just mentioning some of the store configurations.
 
-Most of this effort did not go into my current app project directly. I decided to add iOS and Android support to [`bevy_game_template`][bevy_game_template] first. This way, the whole community might benefit from the solutions and I can just copy the setup to other projects.
+Most of this effort did not go into my current app project directly. I decided to add iOS and Android support to [`bevy_game_template`][bevy_game_template] first. This way, the community might benefit more from the solutions and I can just copy the setup to my other projects.
 
 ## Android
 
