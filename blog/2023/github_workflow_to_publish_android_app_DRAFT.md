@@ -118,7 +118,7 @@ jobs:
 ```
 *Change the `env` section according to your project. The bundle name is going to be your crate name with an `aab` file ending. If the crate that is built as a library for Android is in the root of your project, remove the `MOBILE_DIRECTORY` variable and its usage. Otherwise, adapt the value.*
 
-The workflow requires multiple secrets to be configured in GitHub. You need to have a Google Play Developer account which comes with a one-time 25$ registration fee. The workflow also requires the name of the release in Google Play Connect that it should push bundles into. Before running it for the first time, create a release in "Internal testing" and give it a name (e.g. "v0.1.0").
+The workflow requires multiple secrets to be configured in GitHub. You need to have a Google Play Developer account which comes with a one-time 25$ registration fee.
 
 Before configuring the required secrets, let's quickly go through the workflow steps:
 
@@ -162,11 +162,13 @@ To configure a secret go to your repository settings in GitHub. Navigate to "Sec
 
 
 
-Now that all required secrets are configured, head over to the "Actions" tab in your repository. Find the workflow in the list on the left, select it and click "Run workflow" in the top right.
+Before running the workflow for the first time, got to Play Store Connect and create a release in "Internal testing". Remember the name (e.g. "v0.1.0") since you will have to pass it to the workflow. Create a bundle on your machine following the workflow steps and upload it manually to the release. Otherwise, the Google Play API will return the error "Package not found".
+
+Now you can head over to the "Actions" tab in your repository. Find the workflow in the list on the left, select it and click "Run workflow" in the top right. Put a name for a GitHub release in the first input and the release name from Google Play Console in the second and press "Run workflow".
 
 ## Final comments
 
-The first input of the workflow is used as the GitHub release to upload the bundle. The second input parameter defines the release in Google Play Console. The app build number is taken from the `manifest.yaml`. The build number needs to be bumped for every build or the upload is not accepted by Google Play Console.
+The app build number is taken from the `manifest.yaml` and needs to be bumped for every build. Otherwise, the upload is not accepted by Google Play Console.
 
 Workflow runs are free for public repositories on GitHub. If your project is private, it will use build minutes from your allowance ([2000 minutes per month on a free account][github-actions-free]).
 
