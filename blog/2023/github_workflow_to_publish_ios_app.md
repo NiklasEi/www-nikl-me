@@ -24,90 +24,90 @@ The following goes into a `yaml` file in your GitHub workflows directory (for ex
 name: release-ios-testflight
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version - e.g. v1.2.3'
-        required: true
-        type: string
+   workflow_dispatch:
+      inputs:
+         version:
+            description: 'Version - e.g. v1.2.3'
+            required: true
+            type: string
 
 env:
-  # used for uploading the app to a GitHub release
-  APP_NAME: bevy_game
+   # used for uploading the app to a GitHub release
+   APP_NAME: bevy_game
 
 permissions:
-  contents: write
+   contents: write
 
 jobs:
-  build-for-iOS:
-    runs-on: macos-latest
-    timeout-minutes: 40
-    steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-      - name: Add iOS targets
-        run: rustup target add aarch64-apple-ios
-      - name: Install the Apple certificate and provisioning profile
-        id: profile
-        env:
-          IOS_CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
-          IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          IOS_PROVISION_PROFILE: ${{ secrets.IOS_PROVISION_PROFILE }}
-          IOS_KEYCHAIN_PASSWORD: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
-        run: |
-          # create variables
-          CERTIFICATE_PATH=${{ runner.temp }}/build_certificate.p12
-          PP_PATH=${{ runner.temp }}/profile.mobileprovision
-          KEYCHAIN_PATH=${{ runner.temp }}/app-signing.keychain-db
+   build-for-iOS:
+      runs-on: macos-latest
+      timeout-minutes: 40
+      steps:
+         - uses: actions/checkout@v3
+         - uses: dtolnay/rust-toolchain@stable
+         - name: Add iOS targets
+           run: rustup target add aarch64-apple-ios
+         - name: Install the Apple certificate and provisioning profile
+           id: profile
+           env:
+              IOS_CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
+              IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+              IOS_PROVISION_PROFILE: ${{ secrets.IOS_PROVISION_PROFILE }}
+              IOS_KEYCHAIN_PASSWORD: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
+           run: |
+              # create variables
+              CERTIFICATE_PATH=${{ runner.temp }}/build_certificate.p12
+              PP_PATH=${{ runner.temp }}/profile.mobileprovision
+              KEYCHAIN_PATH=${{ runner.temp }}/app-signing.keychain-db
 
-          # import certificate and provisioning profile from secrets
-          echo -n "$IOS_CERTIFICATE" | base64 --decode -o $CERTIFICATE_PATH
-          echo -n "$IOS_PROVISION_PROFILE" | base64 --decode -o $PP_PATH
-          uuid=`grep UUID -A1 -a $PP_PATH | grep -io "[-A-F0-9]\{36\}"`
-          echo "uuid=$uuid" >> $GITHUB_OUTPUT
+              # import certificate and provisioning profile from secrets
+              echo -n "$IOS_CERTIFICATE" | base64 --decode -o $CERTIFICATE_PATH
+              echo -n "$IOS_PROVISION_PROFILE" | base64 --decode -o $PP_PATH
+              uuid=`grep UUID -A1 -a $PP_PATH | grep -io "[-A-F0-9]\{36\}"`
+              echo "uuid=$uuid" >> $GITHUB_OUTPUT
 
-          # create temporary keychain
-          security create-keychain -p "$IOS_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$IOS_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+              # create temporary keychain
+              security create-keychain -p "$IOS_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+              security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+              security unlock-keychain -p "$IOS_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-          # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "$IOS_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security list-keychain -d user -s $KEYCHAIN_PATH
+              # import certificate to keychain
+              security import $CERTIFICATE_PATH -P "$IOS_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+              security list-keychain -d user -s $KEYCHAIN_PATH
 
-          # apply provisioning profile
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
-      - name: Build app for iOS
-        run: |
-          cd mobile
-          xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
-      - name: export ipa
-        env:
-          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
-        run: |
-          EXPORT_PLIST_PATH=${{ runner.temp }}/ExportOptions.plist
-          echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
-      - name: decode API key
-        env:
-          API_KEY_BASE64: ${{ secrets.IOS_APPSTORE_API_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/private_keys
-          echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.IOS_APPSTORE_API_KEY_ID }}.p8
-      - name: Upload to testflight
-        run: |
-          xcrun altool --validate-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
-          xcrun altool --upload-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
-      - name: Upload release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ runner.temp }}/export/mobile.ipa
-          asset_name: ${{ env.APP_NAME }}_${{ inputs.version }}_ios.ipa
-          release_name: ${{ inputs.version }}
-          tag: ${{ inputs.version }}
-          overwrite: true
+              # apply provisioning profile
+              mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+              cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+         - name: Build app for iOS
+           run: |
+              cd mobile
+              xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
+         - name: export ipa
+           env:
+              EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
+           run: |
+              EXPORT_PLIST_PATH=${{ runner.temp }}/ExportOptions.plist
+              echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
+              xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
+         - name: decode API key
+           env:
+              API_KEY_BASE64: ${{ secrets.IOS_APPSTORE_API_PRIVATE_KEY }}
+           run: |
+              mkdir -p ~/private_keys
+              echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.IOS_APPSTORE_API_KEY_ID }}.p8
+         - name: Upload to testflight
+           run: |
+              xcrun altool --validate-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
+              xcrun altool --upload-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
+         - name: Upload release
+           uses: svenstaro/upload-release-action@v2
+           with:
+              repo_token: ${{ secrets.GITHUB_TOKEN }}
+              file: ${{ runner.temp }}/export/mobile.ipa
+              asset_name: ${{ env.APP_NAME }}_${{ inputs.version }}_ios.ipa
+              release_name: ${{ inputs.version }}
+              tag: ${{ inputs.version }}
+              overwrite: true
 ```
 
 The workflow requires multiple secrets to be configured in GitHub. Some of those need an active membership in the Apple developer program, which costs 99$ per year. We'll get back to getting and configuring the secrets later. First, let's go through the workflow steps:
@@ -172,7 +172,8 @@ You will need:
         </plist>
         ```
    - Replace the application identifier, provisioning profile name and team ID
-   - Encode using base64 and add to GitHub
+     - You can find your teamID under "Membership details" in your [account info][apple-account-info]
+   - Encode the file using base64 and add it to GitHub
  - **IOS_APPSTORE_API_PRIVATE_KEY** and **IOS_APPSTORE_API_KEY_ID**
     - Follow [the docs to create][create-api-key] a new API key
     - I used the role "App Manager", but "Developer" [might be enough][app-store-key-roles]
@@ -206,3 +207,4 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [create-api-key]: https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api#3028599
 [github-actions-free]: https://github.com/pricing
 [github-actions-multipliers]: https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions#minute-multipliers
+[apple-account-info]: https://developer.apple.com/account
