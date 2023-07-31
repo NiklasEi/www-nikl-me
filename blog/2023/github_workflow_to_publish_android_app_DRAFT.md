@@ -15,13 +15,13 @@ hidden: true
 
 This is a guide on how to configure a GitHub workflow for building, signing and publishing an Android app that uses [Bevy][bevy] (there is a separate [guide for iOS][ios-workflow]; Todo: link ios to Android).
 
-The workflow uses the tool xbuild from a [customized fork][xbuild-fork], which includes a couple fixes and hacks needed to get app bundles. Some of these changes are explained and motivated in [a different post][note-mobile-bevy-2]. If you want to see the workflow in use, you can take a look at [bevy_game_template][bevy_game_template]
+The workflow uses the tool [xbuild][xbuild] from a [customized fork][xbuild-fork], which includes a couple fixes and hacks needed to get app bundles. Some of these changes are explained and motivated in [a separate post][note-mobile-bevy-2]. If you want to see the workflow in use, you can take a look at [bevy_game_template][bevy_game_template]
 
 ## xbuild setup
 
 You can install xbuild from my fork with `bash$cargo install --git https://github.com/NiklasEi/xbuild`. Check your environment with `bash$x doctor` and install missing dependencies.
 
-To run your project with xbuild, add a `manifest.yaml`
+To run your project with xbuild, add the following as `manifest.yaml`:
 
 ```yaml
 android:
@@ -35,7 +35,7 @@ android:
 ```
 *Make sure to correct the path to your app icon. Also update the package identifier and the app label.*
 
-Connect your Android device to your machine and note down the device id from `bash$x devices`. Now run `bash$x run --device <device ID>`. Gradle should build the project and then start your app on the device.
+Connect your Android device to your machine and note down the device id from `bash$x devices`. Now run `bash$x run --device <device ID>`. Gradle should build the project and then start your app on the device. If this works, you can also try building a bundle with `bash$x build --release --platform android --store play`.
 
 ## The workflow
 
@@ -58,9 +58,9 @@ on:
 
 env:
   # used for uploading the app to a GitHub release
-  GAME_EXECUTABLE_NAME: bevy_game
+  APP_NAME: bevy_game
   BUNDLE_PATH: "target/x/release/android/mobile.aab"
-  PACKAGE_NAME: "me.nikl.bevygame"
+  PACKAGE_NAME: "com.example.app"
   # release track; you can promote a build to "higher" tracks in the play console or publish to a different track directly
   # see track at https://github.com/r0adkll/upload-google-play#inputs for more options
   TRACK: internal
@@ -99,7 +99,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.BUNDLE_PATH }}
-          asset_name: ${{ env.GAME_EXECUTABLE_NAME }}_${{ inputs.version }}_android.aab
+          asset_name: ${{ env.APP_NAME }}_${{ inputs.version }}_android.aab
           release_name: ${{ inputs.version }}
           tag: ${{ inputs.version }}
           overwrite: true
@@ -118,7 +118,9 @@ jobs:
 ```
 *Change the `env` section according to your project. The bundle name is going to be your crate name with an `aab` file ending. If the crate that is build as a library for Android is in root, remove the `MOBILE_DIRECTORY` variable and its usage. Otherwise, adapt the value.*
 
-The workflow requires multiple secrets to be configured in GitHub. You need to have a Google Play Developer account which comes with a one-time 25$ registration fee. We'll get back to getting and configuring the secrets later. First, let's go through the workflow steps:
+The workflow requires multiple secrets to be configured in GitHub. You need to have a Google Play Developer account which comes with a one-time 25$ registration fee. The workflow also requires the name of the release in Google Play Store that it should publish to. Before running it for the first time, create a release in "Internal testing" and give it a name (e.g. "v0.1.0").
+
+Before configuring the required secrets, let's quickly go through the workflow steps:
 
 1. Install dependencies for Bevy and xbuild
 2. Check out the repository
@@ -138,40 +140,36 @@ Produced app bundles will contain libraries for the ABIs `arm64-v8a` and `armeab
 
 Simple strings like passwords can directly go into a GitHub secret. Files will be encoded first using base64 (e.g. `bash$openssl base64 -in ~/upload-keystore.jks`).
 
-To configure a secret go to your repository settings in GitHub. Navigate to *Security* - *Secrets and variables*, select *Actions* then click "New repository secret".
+To configure a secret go to your repository settings in GitHub. Navigate to "Security" -> "Secrets and variables", select "Actions" then click "New repository secret".
 
 - **PLAYSTORE_KEYSTORE** and **PLAYSTORE_KEYSTORE_PASSWORD**
-  - You can generate a keystore with
-    ```bash
-    keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
-    ```
+  - You can generate a keystore with `bash$keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload`
   - add the password and the base64 encoded keystore to GitHub
 - **PLAYSTORE_SERVICE_ACCOUNT**
-  - follow the [Google documentation][google-create-service-account] to create a new service account
+  - go to the [Service accounts page][service-accounts] to create a new service account
+    - select a project or create a new one, then click on "Create service account"
     - set a name and press "Continue"
     - click "Select a role", then find and select "Service Accounts" -> "Service Account User", and press "Done"
     - open the "Actions" vertical three-dot menu of the service account you just created
     - select "Manage keys" and click "Add Key" + "Create New Key"
     - chose the `json` type and press "Create"
     - the key should be automatically downloaded to your machine
-    - you can now encode the key and add it to GitHub
+    - encode the key and add it to GitHub
   - visit the Google Play Console and navigate to "Setup" -> "API access"
   - under "Service accounts", find your newly created account and click "Manage Play Console permissions"
-  - go to the "App permissions" tab and add you app
-  - click "Invite user" to finish up
+  - go to the "App permissions" tab and add your app
+  - click "Invite user" to finish the process
 
 
 
 Now that all required secrets are configured, head over to the "Actions" tab in your repository. Find the workflow in the list on the left, select it and click "Run workflow" in the top right.
 
+## Final comments
 
+The first input of the workflow is used as the GitHub release to upload the bundle. The second input parameter defines the release in Google Play Console and the app build number is taken from the `manifest.yaml`. The build number needs to be bumped for every build, otherwise the upload is not accepted by Google Play Console.
 
+Workflow runs are free for public repositories on GitHub. If your project is private, it will use build minutes from your allowance ([2000 minutes per month on a free account][github-actions-free]).
 
-- Export options had automatic signing configured. Error was only complaining about not finding a profile...
-- Export options needed to include provisioning profile 
-
-https://docs.flutter.dev/deployment/android#create-an-upload-keystore
-https://developers.google.com/identity/protocols/oauth2/service-account#creatinganaccount (https://docs.fastlane.tools/getting-started/android/setup/#collect-your-google-credentials)
 ---
 
 Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
@@ -181,7 +179,10 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [bevy_discord]: https://discord.gg/bevy
 [ios-workflow]: https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/
 [note-mobile-bevy-2]: https://www.nikl.me/blog/2023/notes_on_mobile_development_with_bevy_2/
-[note-mobile-bevy-2-abi-support]: https://www.nikl.me/blog/2023/notes_on_mobile_development_with_bevy_2/
+[note-mobile-bevy-2-abi-support]: https://www.nikl.me/blog/2023/notes_on_mobile_development_with_bevy_2#support-more-android-devices
 [xbuild-fork]: https://github.com/NiklasEi/xbuild
+[xbuild]: https://github.com/rust-mobile/xbuild
 [bevy_game_template]: https://github.com/NiklasEi/bevy_game_template/blob/main/.github/workflows/release-android-google-play.yaml
 [google-create-service-account]: https://developers.google.com/identity/protocols/oauth2/service-account#creatinganaccount
+[github-actions-free]: https://github.com/pricing
+[service-accounts]: https://console.developers.google.com/iam-admin/serviceaccounts
