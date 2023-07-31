@@ -162,7 +162,7 @@ To configure a secret go to your repository settings in GitHub. Navigate to "Sec
 
 
 
-Before running the workflow for the first time, got to Play Store Connect and create a release in "Internal testing". Remember the name (e.g. "v0.1.0") since you will have to pass it to the workflow. Create a bundle on your machine following the workflow steps and upload it manually to the release. Otherwise, the Google Play API will return the error "Package not found".
+Before running the workflow for the first time, got to Play Store Connect and create a release in "Internal testing". Remember the name (e.g. "v0.1.0") since you will have to pass it to the workflow. Create a bundle on your machine following the workflow steps 7 and 8, then upload it manually to the release. Otherwise, the Google Play API will return the error "Package not found".
 
 Now you can head over to the "Actions" tab in your repository. Find the workflow in the list on the left, select it and click "Run workflow" in the top right. Put a name for a GitHub release in the first input and the release name from Google Play Console in the second and press "Run workflow".
 
