@@ -33,7 +33,7 @@ android:
     application:
       label: "Bevy game"
 ```
-*Make sure to correct the path to your app icon. Also update the package identifier and the app label.*
+*Make sure to correct the path to your app icon. Also, update the package identifier and the app label.*
 
 Connect your Android device to your machine and note down the device id from `bash$x devices`. Now run `bash$x run --device <device ID>`. Gradle should build the project and then start your app on the device. If this works, you can also try building a bundle with `bash$x build --release --platform android --store play`.
 
@@ -116,9 +116,9 @@ jobs:
           releaseFiles: ${{ env.BUNDLE_PATH }}
           track: ${{ env.TRACK }}
 ```
-*Change the `env` section according to your project. The bundle name is going to be your crate name with an `aab` file ending. If the crate that is build as a library for Android is in root, remove the `MOBILE_DIRECTORY` variable and its usage. Otherwise, adapt the value.*
+*Change the `env` section according to your project. The bundle name is going to be your crate name with an `aab` file ending. If the crate that is built as a library for Android is in the root of your project, remove the `MOBILE_DIRECTORY` variable and its usage. Otherwise, adapt the value.*
 
-The workflow requires multiple secrets to be configured in GitHub. You need to have a Google Play Developer account which comes with a one-time 25$ registration fee. The workflow also requires the name of the release in Google Play Store that it should publish to. Before running it for the first time, create a release in "Internal testing" and give it a name (e.g. "v0.1.0").
+The workflow requires multiple secrets to be configured in GitHub. You need to have a Google Play Developer account which comes with a one-time 25$ registration fee. The workflow also requires the name of the release in Google Play Connect that it should push bundles into. Before running it for the first time, create a release in "Internal testing" and give it a name (e.g. "v0.1.0").
 
 Before configuring the required secrets, let's quickly go through the workflow steps:
 
@@ -127,14 +127,14 @@ Before configuring the required secrets, let's quickly go through the workflow s
 3. Install the stable toolchain of Rust
 4. Install Rust targets for Android
 5. Install cargo-binstall to significantly speed up the next step
-6. Install xbuild from my fork using a prebuild binary
+6. Install xbuild from my fork using a prebuilt binary
 7. Create an app bundle with xbuild
 8. Sign the app bundle using jarsigner
 9. Upload the bundle to a GitHub release
 10. Prepare the Google Play Store service account secret
 11. Upload the bundle to Google Play Store
 
-Produced app bundles will contain libraries for the ABIs `arm64-v8a` and `armeabi-v7a`, which covers more than 90% of the devices currently supported by Android (see [Notes on mobile development with Bevy #2][note-mobile-bevy-2-abi-support] for more details).
+Produced app bundles will contain libraries for the ABIs `arm64-v8a` and `armeabi-v7a`, which cover more than 90% of the devices currently supported by Android (see [Notes on mobile development with Bevy #2][note-mobile-bevy-2-abi-support] for more details).
 
 ## Setting up the secrets
 
@@ -166,7 +166,7 @@ Now that all required secrets are configured, head over to the "Actions" tab in 
 
 ## Final comments
 
-The first input of the workflow is used as the GitHub release to upload the bundle. The second input parameter defines the release in Google Play Console and the app build number is taken from the `manifest.yaml`. The build number needs to be bumped for every build, otherwise the upload is not accepted by Google Play Console.
+The first input of the workflow is used as the GitHub release to upload the bundle. The second input parameter defines the release in Google Play Console. The app build number is taken from the `manifest.yaml`. The build number needs to be bumped for every build or the upload is not accepted by Google Play Console.
 
 Workflow runs are free for public repositories on GitHub. If your project is private, it will use build minutes from your allowance ([2000 minutes per month on a free account][github-actions-free]).
 
