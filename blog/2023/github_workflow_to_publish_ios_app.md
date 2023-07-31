@@ -14,7 +14,7 @@ tags:
 
 I built a GitHub workflow to bundle, sign and publish an iOS app. There are already a couple guides on how to do this, but none of them worked out of the box for me (an iOS/mac noob). With lots of googling plus trial and error, I pieced together the missing and broken parts. Since I wouldn't wish that on anyone, here are some information on how to use the workflow I ended up with.
 
-The project that the workflow was build for might be a bit unconventional. It's a mobile app using the Rust game engine [Bevy][bevy]. The workflow expects a specific project structure with the Xcode project "mobile" living in a subdirectory of the same name. This structure and naming is hardcoded, but should be simple to adapt. The whole workflow is part of this post, but if you want to see it in use, you can look at [bevy_game_template][bevy_game_template].
+The project that the workflow was build for might be a bit unconventional. It's a mobile app using the Rust game engine [Bevy][bevy]. The workflow expects a specific project structure with the Xcode project living in a subdirectory. You can change the name of the subdirectory and the Xcode project in the `env` section. The whole workflow is part of this post, but if you want to see it in use, you can look at [bevy_game_template][bevy_game_template].
 
 ## The Workflow
 
@@ -34,6 +34,8 @@ on:
 env:
    # used for uploading the app to a GitHub release
    APP_NAME: bevy_game
+   XCODE_PROJECT: mobile
+   MOBILE_DIRECTORY: mobile
 
 permissions:
    contents: write
@@ -80,15 +82,15 @@ jobs:
               cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
          - name: Build app for iOS
            run: |
-              cd mobile
-              xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme mobile clean archive -archivePath "Actions" -configuration Release -arch arm64
+              cd ${{ env.MOBILE_DIRECTORY }}
+              xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme ${{ env.XCODE_PROJECT }} clean archive -archivePath "Actions" -configuration Release -arch arm64
          - name: export ipa
            env:
               EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
            run: |
               EXPORT_PLIST_PATH=${{ runner.temp }}/ExportOptions.plist
               echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-              xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -exportArchive -archivePath mobile/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
+              xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -exportArchive -archivePath ${{ env.MOBILE_DIRECTORY }}/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath ${{ runner.temp }}/export
          - name: decode API key
            env:
               API_KEY_BASE64: ${{ secrets.IOS_APPSTORE_API_PRIVATE_KEY }}
@@ -97,13 +99,13 @@ jobs:
               echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.IOS_APPSTORE_API_KEY_ID }}.p8
          - name: Upload to testflight
            run: |
-              xcrun altool --validate-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
-              xcrun altool --upload-app -f ${{ runner.temp }}/export/mobile.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
+              xcrun altool --validate-app -f ${{ runner.temp }}/export/${{ env.XCODE_PROJECT }}.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
+              xcrun altool --upload-app -f ${{ runner.temp }}/export/${{ env.XCODE_PROJECT }}.ipa -t ios --apiKey ${{ secrets.IOS_APPSTORE_API_KEY_ID }} --apiIssuer ${{ secrets.IOS_APPSTORE_ISSUER_ID }}
          - name: Upload release
            uses: svenstaro/upload-release-action@v2
            with:
               repo_token: ${{ secrets.GITHUB_TOKEN }}
-              file: ${{ runner.temp }}/export/mobile.ipa
+              file: ${{ runner.temp }}/export/${{ env.XCODE_PROJECT }}.ipa
               asset_name: ${{ env.APP_NAME }}_${{ inputs.version }}_ios.ipa
               release_name: ${{ inputs.version }}
               tag: ${{ inputs.version }}
