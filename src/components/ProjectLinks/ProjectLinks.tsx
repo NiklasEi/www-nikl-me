@@ -1,9 +1,7 @@
 import React from 'react';
 import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAndroid, faApple, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faBox, faFaucet, faGem, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import ItchIcon from '../../icons/itchio.svg';
+import {FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaUserSecret} from "react-icons/fa";
 
 export interface ProjectLinksData {
   github: string | null;
@@ -29,7 +27,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.github} target="_blank" title={`${projectTitle} on GitHub`}>
-        <FontAwesomeIcon icon={faGithub} size={'lg'} />
+        <FaGithub size={'lg'} />
       </ProjectLink>
     );
   }
@@ -41,7 +39,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.apple} target="_blank" title={`${projectTitle} in the App store`}>
-        <FontAwesomeIcon icon={faApple} size={'lg'} />
+        <FaApple size={'lg'} />
       </ProjectLink>
     );
   }
@@ -53,7 +51,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={`https://www.spigotmc.org/resources/${links.spigot}`} target="_blank" title={`${projectTitle} on SpigotMC`}>
-        <FontAwesomeIcon icon={faFaucet} size={'lg'} />
+        <FaFaucet size={'lg'} />
       </ProjectLink>
     );
   }
@@ -65,7 +63,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.android} target="_blank" title={`${projectTitle} in the Play store`}>
-        <FontAwesomeIcon icon={faAndroid} size={'lg'} />
+        <FaAndroid size={'lg'} />
       </ProjectLink>
     );
   }
@@ -77,7 +75,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.privacy} title={`${projectTitle} - Privacy`}>
-        <FontAwesomeIcon icon={faUserSecret} size={'lg'} />
+        <FaUserSecret size={'lg'} />
       </ProjectLink>
     );
   }
@@ -89,7 +87,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={`https://rubygems.org/gems/${links.rubygem}`} target="_blank" title={`${projectTitle} on Ruby gems`}>
-        <FontAwesomeIcon icon={faGem} size={'lg'} />
+        <FaGem size={'lg'} />
       </ProjectLink>
     );
   }
@@ -113,7 +111,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={`https://crates.io/crates/${links.crate}`} target="_blank" title={`${projectTitle} on crates.io`}>
-        <FontAwesomeIcon icon={faBox} size={'lg'} />
+        <FaBox size={'lg'} />
       </ProjectLink>
     );
   }

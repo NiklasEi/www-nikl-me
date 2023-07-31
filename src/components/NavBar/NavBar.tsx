@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavBarFontAwesomeIcon, LinkRow, NavBarLink, StyledNavBar, StyledInnerNavBar, NavBarContainer } from './NavBar.styles';
-import { faBookOpen, faFolderOpen, faHome } from '@fortawesome/free-solid-svg-icons';
+import { LinkRow, NavBarLink, StyledNavBar, StyledInnerNavBar, NavBarContainer } from './NavBar.styles';
+import {FaBookOpen, FaFolderOpen, FaHome} from "react-icons/fa";
 
 const NavBar: React.FC = () => {
   return (
@@ -8,16 +8,16 @@ const NavBar: React.FC = () => {
       <NavBarContainer>
         <StyledInnerNavBar>
           <NavBarLink to="/">
-            <NavBarFontAwesomeIcon icon={faHome} />
+            <FaHome/>
             Nikl.me
           </NavBarLink>
           <LinkRow>
             <NavBarLink to="/blog">
-              <NavBarFontAwesomeIcon icon={faBookOpen} />
+              <FaBookOpen />
               Blog
             </NavBarLink>
             <NavBarLink to="/projects">
-              <NavBarFontAwesomeIcon icon={faFolderOpen} />
+              <FaFolderOpen />
               Projects
             </NavBarLink>
           </LinkRow>

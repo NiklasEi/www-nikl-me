@@ -1,14 +1,13 @@
 import React from 'react';
-import { LandingPageTitle, StyledLandingPage } from './LandingPage.styles';
+import {CenterSvg, LandingPageTitle, StyledLandingPage} from './LandingPage.styles';
 import { graphql, Link, StaticQuery } from 'gatsby';
 import { BlogPostData } from '../../modules/blog';
 import { CenteredSubTitle, ContentContainer } from '../../layouts/default.styled';
 import { ProjectData } from '../../pages/projects';
 import withDefaultLayout from '../../layouts/default';
 import { ProjectList } from '../ProjectList/ProjectList';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { BlogPostList } from '../BlogPostList/BlogPostList';
+import {FaArrowRight} from "react-icons/fa";
 
 const LandingPage: React.FC = () => {
   return (
@@ -74,12 +73,12 @@ const LandingPage: React.FC = () => {
               <CenteredSubTitle>Latest projects:</CenteredSubTitle>
               <ProjectList projects={latestProjects} />
               <Link to={'/projects'}>
-                See all projects <FontAwesomeIcon icon={faArrowRight} />
+                <CenterSvg>See all projects <FaArrowRight/></CenterSvg>
               </Link>
               <CenteredSubTitle>Latest posts:</CenteredSubTitle>
               <BlogPostList posts={latestBlogs} />
               <Link to={'/blog'}>
-                See all posts <FontAwesomeIcon icon={faArrowRight} />
+                <CenterSvg>See all posts <FaArrowRight/></CenterSvg>
               </Link>
             </StyledLandingPage>
           </ContentContainer>

@@ -1,9 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery, Link } from 'gatsby';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord, faGithub, faLinkedin, faMastodon } from '@fortawesome/free-brands-svg-icons';
+import { FaDiscord, FaGithub, FaLinkedin, FaMastodon , FaEnvelopeOpenText, FaRssSquare} from 'react-icons/fa';
 import { ContactLink, Copyright, FooterContent, RssLink, StyledFooter, Contacts } from './Footer.styles';
-import { faEnvelopeOpenText, faRssSquare } from '@fortawesome/free-solid-svg-icons';
 
 interface StaticQueryProps {
   site: {
@@ -47,8 +45,8 @@ const Footer: React.FC = () => {
         <StyledFooter>
           <FooterContent>
             <RssLink>
-              <Link to={'/rss.xml'}>
-                <FontAwesomeIcon icon={faRssSquare} title={"RSS Feed for Nikl's blog"} />
+              <Link to={'/rss.xml'} title={"RSS Feed for Nikl's blog"}>
+                <FaRssSquare/>
               </Link>
             </RssLink>
             <Contacts>
@@ -58,34 +56,34 @@ const Footer: React.FC = () => {
                 rel="me"
                 title={`${data.site.siteMetadata.author.firstName} on Mastodon`}
               >
-                <FontAwesomeIcon icon={faMastodon} />
+                <FaMastodon/>
               </ContactLink>
               <ContactLink
                 href={`https://github.com/${data.site.siteMetadata.author.social.github}`}
                 target="_blank"
                 title={`${data.site.siteMetadata.author.firstName} on GitHub`}
               >
-                <FontAwesomeIcon icon={faGithub} />
+                <FaGithub/>
               </ContactLink>
               <ContactLink
                 href={`https://discord.gg/${data.site.siteMetadata.author.social.discord}`}
                 target="_blank"
                 title={`${data.site.siteMetadata.author.firstName}' Discord server`}
               >
-                <FontAwesomeIcon icon={faDiscord} />
+                <FaDiscord />
               </ContactLink>
               <ContactLink
                 href={`https://www.linkedin.com/in/${data.site.siteMetadata.author.social.linkedin}`}
                 target="_blank"
                 title={`${data.site.siteMetadata.author.firstName} on LinkedIn`}
               >
-                <FontAwesomeIcon icon={faLinkedin} />
+                <FaLinkedin />
               </ContactLink>
               <ContactLink
                 href={`mailto:${data.site.siteMetadata.author.email}`}
                 title={`Send ${data.site.siteMetadata.author.firstName} an e-mail`}
               >
-                <FontAwesomeIcon icon={faEnvelopeOpenText} />
+                <FaEnvelopeOpenText />
               </ContactLink>
             </Contacts>
             <Copyright>Nikl.me © 2022</Copyright>

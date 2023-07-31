@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { colors } from '../../theme';
 import { Link } from 'gatsby';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const StyledNavBar = styled.div`
   background-color: ${colors.background};
@@ -28,10 +27,10 @@ export const NavBarLink = styled(Link)`
   &:hover {
     color: ${colors.white};
   }
-`;
-
-export const NavBarFontAwesomeIcon = styled(FontAwesomeIcon)`
-  margin-right: 5px;
+  
+  & > svg {
+    margin-right: 5px;
+  }
 `;
 
 export const LinkRow = styled.div`
