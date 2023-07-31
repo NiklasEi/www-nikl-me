@@ -2,7 +2,7 @@
 title: "Notes on mobile development with Bevy #2"
 date: 2023-07-08
 category: code
-summary: "A collection of learnings and issues + (hacked) solutions. Among others, contains notes on getting an App bundle and preparing your Android and iOS builds for the stores."
+summary: "A collection of learnings and issues + (hacked) solutions. Among others, contains notes on getting an Android App Bundle and preparing your Android and iOS builds for the stores."
 tags:
 - gamedev
 - rust
@@ -13,15 +13,17 @@ tags:
 hidden: true
 ---
 
-My app is missing content and features, but I would like to be able to distribute test builds early on. That means my Android builds need to be acceptable for the Play Store and the iOS builds need to pass Apple's bar for the App Store. On the way to that goal there are a couple technical issues to solve and some configuration to do in App Store Connect and Google Play Console. I will mostly concentrate on the technical challenges while just mentioning some of the store configurations.
+My [Bevy][bevy] mobile app is short on content, but I would like to be able to distribute test builds early on. That means Android builds need to be acceptable for the Play Store and iOS builds need to pass Apple's bar for the App Store. On the way to that goal there are a couple technical issues to solve and some configuration to do in App Store Connect and Google Play Console. I will mostly concentrate on the technical challenges while just mentioning some of the store configurations.
 
-Most of this effort did not go into my current app project directly. I decided to add iOS and Android support to [`bevy_game_template`][bevy_game_template] first. This way, the community might benefit more from the solutions and I can just copy the setup to my other projects.
+Most of this effort did not directly go into my current app project. I decided to add iOS and Android support to [`bevy_game_template`][bevy_game_template] first. This way, the community might benefit more from my work and I can just copy the setup to my other projects.
+
+The starting point of this post is the [mobile example][mobile_example] from Bevy with small adjustments discussed in a [previous post][bevy-mobile-1].
 
 ## Android
 
-### Getting an App bundle
+### Getting an Android App Bundle
 
-With cargo-apk we get apk files as the name of the tool suggests. The Play Store no longer accept APKs, but [requires app bundles][app-bundles-only]. This makes sense to keep downloads small and still support multiple device ABIs ([**A**plication **B**inary **I**nterface][abi-wiki]), but it requires some extra work to get a bundle for a Bevy game.
+The cargo-apk setup from Bevy's mobile example allows us to build APK files. The Play Store no longer accept APKs, but [requires app bundles][app-bundles-only]. This makes sense to keep downloads small and still support multiple device ABIs ([**A**plication **B**inary **I**nterface][abi-wiki]), but it requires some extra work to get an app bundle for a Bevy game.
 
 The only tool I could convince to create an app bundle from my Bevy project is [xbuild][xbuild], the WIP successor of cargo-apk[^1]. We can configure xbuild to bundle our project for Android with the following `manifest.yaml`
 
@@ -30,57 +32,54 @@ android:
   gradle: true
   icon: "your_icon.png"
   manifest:
-    package: "me.nikl.bevygame"
+    package: "com.example.bevygame"
     version_code: 1
     application:
       label: "Bevy game"
 ```
 
-Currently, xbuild decides to create app bundles only when using `yaml$gradle: true` and only for production builds. Running `x build --platform android --store play` gave me an app bundle, but derived APKs instantly crash.
+Currently, xbuild decides to create app bundles only when using `yaml$gradle: true` and only for production builds. Running `x build --platform android --store play` creates an app bundle, but derived APKs instantly crash.
 
-> I had to do a couple changes to get xbuild to create working app bundles. Some of them might get upstreamed, but a few are obvious hacks that only work for the bevy project structure (like a single `assets` directory). For the `bash$x ...` commands in this post to work as expected, you need to install my fork: `bash$cargo install --git https://github.com/NiklasEi/xbuild`.
+> I had to do a couple changes to get xbuild to create working app bundles. Some of them might get upstreamed, but a few are obvious hacks that only work for the Bevy project structure (like a single, hardcoded `assets` directory). For the xcode commands in this post to work as expected, you need to install xbuild from my fork: `bash$cargo install --git https://github.com/NiklasEi/xbuild`.
 
 ### libc++ shared is missing
 
-Looking at the logs with `adb logcat` while trying to start the app on my phone yields the following error
-```text
+Looking at the logs with `adb logcat` while trying to start the app on my phone yields the following error:
+```log
 java.lang.UnsatisfiedLinkError: Unable to load native library "/data/app/~~0cxWIprct-rKy7Vggu9E4g==/me.nikl.bevygame-YTVT_qxOwHzm_kGsGV9cYw==/lib/arm64/libmobile.so": dlopen failed: library "libc++_shared.so" not found
 ```
 *The helpful line among hundreds of unhelpful ones.*
 
-Opening the APK as an archive indeed shows that `lib/arm64-v8a/` does not include `libc++_shared.so`, while an APK built with `cargo-apk` includes it. This library is required for audio support in Bevy. I probably could have just ripped out audio for now and moved on, but who am I kidding? I want audio!
+Opening the APK as an archive indeed shows that `lib/arm64-v8a/` does not include `libc++_shared.so`, while an APK built with cargo-apk includes it. This library is required for audio support in Bevy. I probably could have just ripped out audio for now and moved on, but who am I kidding? I want audio!
 
-Telling gradle to include `libc++_shared.so` turned out to be quite a rabbit hole. Usually, it should realize on its own that the library is needed and include it. The problem is, that we are not using gradle to build the game library, but cargo. So gradle has no way of knowing that we need `libc++_shared.so`. At the end I gave up on a "clean" solution and went with a hack. I basically [told gradle that the project includes a c++ library][xcode-hack-libc-shared] which requires the shared library. The c++ project is empty, but it does the trick and creates minimal bloat (~4kB).
+Telling gradle to include `libc++_shared.so` turned out to be more complicated than I had thought. Usually, it should realize on its own that the library is needed and include it. The problem is, that we are not using gradle to build the game library, but cargo. So gradle has no way of knowing that we need `libc++_shared.so`. At the end I gave up on a "clean" solution and went with a hack. I basically [told gradle that the project includes a c++ library][xbuild-hack-libc-shared] which requires the shared library. The c++ project is empty, but it does the trick and creates minimal bloat (~4kB).
 
 With this change the `UnsatisfiedLinkError` from above is gone, but the game still doesn't work.
 
 ### Include assets
 
-While `cargo-apk` allows to simply configure an asset directory, xbuild does not jet support that. There is an [open PR to add support for assets][xbuild-assets-pr] to the non-gradle builds, but that only works for APKs[^2].
+While cargo-apk allows to simply configure an asset directory, xbuild does not jet support that. There is an [open PR to add support for assets][xbuild-assets-pr] to the non-gradle builds, but that only works for APKs[^2].
 
-Since Bevy usually comes with a single `assets` directory in the root of the project, [I told gradle to just include that][xcode-hack-include-assets].
-
-At this point, the build generated by xbuild using gradle runs properly. You can test this by connecting an Android phone and running `bash$x run --device <device id>`. You can find the correct device ID with `bash$x devices`.
+Since Bevy usually comes with a single `assets` directory in the root of the project, [I told gradle to just include that][xbuild-hack-include-assets] with a hardcoded path from deep inside the target directory. At this point, the build generated by xbuild using gradle runs properly.
 
 ### Continuous deployment
 
-The app bundle needs to be signed with jarsigner and can then be uploaded to Google Play Console. Doing this manually for every version is no fun, so [I wrote a GitHub workflow for it][workflow-android].
+The app bundle needs to be signed with jarsigner and can then be uploaded to Google Play Console. Doing this manually for every version is no fun, so I wrote a [GitHub workflow for it][workflow-android].
 
 ### Support more Android devices
 
 After uploading an app bundle, we can use the app bundle explorer in the Google Play Console to check bundle exports for different devices. My early bundles contained libraries for 4 different ABIs due to the dummy c++ library and [gradle compiling for all non-deprecated ABIs by default][gradle-abis]. The game on the other hand, was only compiled for `arm64-v8a`, which was hardcoded in xbuild.
-https://developer.android.com/ndk/guides/abis?hl=en has some info on Android ABIs and how to tell gradle to build only for a certain set of ABIs. By default, gradle will build for all non-deprecated ABIS ()
 
-The device list in the app bundle explorer can be filtered by ABI. Out of the 18.919 devices, 8.599 are `arm64-v8a` and 10.096 `armeabi-v7a`. Most of the other couple hundred devices are `x86` or `x86_64`[^3]. I went back to xbuild, fixed the support for `arm` in gradle builds and told it to always build for `arm64` and `arm` when making a build with the `bash$--store` option.  https://github.com/NiklasEi/xbuild/commit/57dacffc8e146e2d3cf7ada24eb90f3865fae568
+The device list in the app bundle explorer can be filtered by ABI. Out of the 18.919 devices, 8.599 are `arm64-v8a` and 10.096 `armeabi-v7a`. Most of the other couple hundred devices are `x86` or `x86_64`[^3]. I went back to xbuild, [fixed the support for `arm` in gradle builds and told it to always build for `arm64` and `arm` when making a build with the `bash$--store` option][xbuild-fix-arm].
 
-The bundle still contains lib directories for `x86` and `x86_64` due to the "dummy cpp lib" workaround. Those lib directories tell the play store that our app bundle can generate APKs for those ABIs which is not correct since we do not build our game for them. To tell gradle to not build the cpp library for the `x86(64)` ABIs: https://github.com/NiklasEi/xbuild/commit/deddb185d5a8eaf120fff0a144dd4c18156aeecf
+The bundle still contains lib directories for `x86` and `x86_64` due to the "dummy cpp lib" workaround. Those lib directories tell the play store that our app bundle can generate APKs for those ABIs which is not correct since we do not build our game for them. A [small gradle configuration][xbuild-no-x86] tells it to not build the dummy library for the `x86(64)` ABIs.
 
 
 ## iOS
 
-I don't own a mac or iPhone, but still want to support iOS. I borrowed a mac for a couple of days to get everything sorted out in `bevy_game_template`. From there I just copied the whole setup to my main project.
+I don't own a mac or iPhone, but still want to support iOS. So I borrowed a mac for a couple of days to get everything set up in `bevy_game_template`.
 
-The first time I tried to let Xcode publish the app with a copied setup from the Bevy mobile example, the process ended in a list of errors from the App Store. The required changes mainly boil down to adding an app icon and a launch screen.
+The first time I tried to let Xcode publish the app with the copied setup from the Bevy mobile example, the process ended in a list of errors from the App Store. The required changes boiled down to adding an app icon and a launch screen.
 
 ### Add Icons
 
@@ -100,11 +99,11 @@ At this point, Xcode can create app builds and push them to App Store Connect. I
 
 ## Getting ready for a release
 
-Both stores require some setup for the store pages. The app from `bevy_game_template` is not supposed to go live to the app stores, but it would be nice to be able to share a link that allows anyone to install it. For iOS the goal is "external testing" in AppFlight. In Google Play this release type is called "open testing". Both of these programs require the App to go through review and the store page to be mostly complete.
+Both stores require some setup for the store pages. The app from `bevy_game_template` is not supposed to go live to the app stores, but it would be nice to be able to share a link that allows anyone to install it. For iOS the goal is "external testing" in AppFlight. In Google Play this release type is called "open testing". Both of these programs require the app to go through review and the store page to be mostly complete.
 
 ### Getting screenshots
 
-Screenshots are a big part of finishing the required setup for publishing. Luckily the last Bevy update came with a screenshot API that is handy for this. Setting the window dimension and adding the below system gives nice screenshots in configurable resolution. 
+Screenshots are a big part of finishing the required setup for publishing. Luckily, the last Bevy update came with a screenshot API that is very handy. Setting the window dimension and adding the below system gives nice screenshots in configurable resolution. 
 
 ```rust
 fn screenshot_on_spacebar(
@@ -122,30 +121,32 @@ fn screenshot_on_spacebar(
     }
 }
 ```
-*This system is borrowed from the [Bevy screenshot example][bevy-screenshot-example].*
+*The system is borrowed from the [Bevy screenshot example][bevy-screenshot-example].*
 
 ---
 
 Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
-[^1]: [crossbow](https://github.com/dodorare/crossbow) might also work, but I didn't manage to set it up correctly. If you do, please tell me.
-[^2]: It also doesn't support globs yet, which is a bit unpractical for Bevy's asset directory. Every file and subdirectory needs to be listed. I added [simple glob support for apk builds][xbuild-fork-support-globs] on my fork and will try to upstream that once basic assets support has landed.
+[^1]: [Crossbow](https://github.com/dodorare/crossbow) might also work, but I didn't manage to set it up correctly. If you do, please tell me.
+[^2]: It also doesn't support globs yet, which is a bit unpractical for Bevy's asset directory. Every file and subdirectory would need to be listed separately. I added [simple glob support for APK builds][xbuild-fork-support-globs] on my fork and will try to upstream that once basic assets support has landed.
 [^3]: Now I understand why the bevy mobile example has the [two arm targets configured](https://github.com/bevyengine/bevy/blob/v0.11.0/examples/mobile/Cargo.toml#L23) for cargo-apk builds :D
 
 [bevy]: https://bevyengine.org/
 [mastodon]: https://mastodon.online/@nikl_me
 [bevy_discord]: https://discord.gg/bevy
-[bevy_game_template]: https://github.com/NiklasEi/bevy_game_template/blob/main/.github/workflows/release-ios-testflight.yaml
 [app-bundles-only]: https://android-developers.googleblog.com/2021/06/the-future-of-android-app-bundles-is.html
 [xbuild]: https://github.com/rust-mobile/xbuild
 [xbuild-fork]: https://github.com/NiklasEi/xbuild
 [xbuild-fork-support-globs]: https://github.com/rust-mobile/xbuild/commit/ba8d23a955723fe758ee0d1db49c872292c32e57
-[xcode-hack-libc-shared]: https://github.com/NiklasEi/xbuild/commit/a32cdc4300023c81586748b6d8cc9bef6c5e8155
-[xcode-hack-include-assets]: https://github.com/NiklasEi/xbuild/commit/a32cdc4300023c81586748b6d8cc9bef6c5e8155#diff-6279764828c50df7615545319f05789a4a73bd72f620f9c6033e7d8d712df8c0R101
+[xbuild-hack-libc-shared]: https://github.com/NiklasEi/xbuild/commit/a32cdc4300023c81586748b6d8cc9bef6c5e8155
+[xbuild-hack-include-assets]: https://github.com/NiklasEi/xbuild/commit/a32cdc4300023c81586748b6d8cc9bef6c5e8155#diff-6279764828c50df7615545319f05789a4a73bd72f620f9c6033e7d8d712df8c0R101
 [xbuild-assets-pr]: https://github.com/rust-mobile/xbuild/pull/122
+[xbuild-fix-arm]: https://github.com/NiklasEi/xbuild/commit/57dacffc8e146e2d3cf7ada24eb90f3865fae568
+[xbuild-no-x86]: https://github.com/NiklasEi/xbuild/commit/deddb185d5a8eaf120fff0a144dd4c18156aeecf
 [abi-wiki]: https://en.wikipedia.org/wiki/Application_binary_interface
 [workflow-android]: https://www.nikl.me/blog/2023/github_workflow_to_publish_android_app/
 [workflow-ios]: https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/
+[bevy-mobile-1]: https://www.nikl.me/blog/2023/notes_on_android_development_using_bevy/
 [gradle-abis]: https://developer.android.com/ndk/guides/abis?hl=en#gradle
 [launch-screen-so]: https://stackoverflow.com/a/57201089
 [apple-docs-icon]: https://developer.apple.com/documentation/xcode/configuring-your-app-icon
@@ -154,3 +155,4 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [template-add-launch-screen]: https://github.com/NiklasEi/bevy_game_template/pull/61/commits/4c982c2e4061b2de807f90bd77041065cc5c0a97
 [bevy-screenshot-example]: https://github.com/bevyengine/bevy/blob/main/examples/window/screenshot.rs
 [bevy_game_template]: https://github.com/NiklasEi/bevy_game_template
+[mobile_example]: https://github.com/bevyengine/bevy/tree/main/examples/mobile

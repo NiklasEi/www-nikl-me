@@ -12,7 +12,6 @@ export const StyledDefaultLayout = styled.div`
 
 export const globalStyles = css`
   ${emotionNormalize}
-
   html,
   body,
   #___gatsby,
@@ -45,6 +44,62 @@ export const globalStyles = css`
 
   .copy-code-icon {
     fill: ${colors.white};
+  }
+
+  h1 {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    margin-block-start: .67em;
+    margin-block-end: .67em;
+  }
+
+  h2 {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-block-start: .99em;
+    margin-block-end: .83em;
+  }
+
+  h3 {
+    display: block;
+    font-size: 1.17em;
+    font-weight: bold;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+  }
+
+  h4 {
+    display: block;
+    font-size: 1.00em;
+    font-weight: bold;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+  }
+  
+  blockquote {
+    display: block;
+    background: #fff;
+    padding: 15px 20px 15px 45px;
+    margin: 0 0 20px;
+    position: relative;
+
+    /*Font*/
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #666;
+    text-align: justify;
+
+    /*Borders - (Optional)*/
+    border-left: 15px solid #494642;
+    border-right: 2px solid #494642;
+
+    /*Box Shadow - (Optional)*/
+    -moz-box-shadow: 2px 2px 15px #ccc;
+    -webkit-box-shadow: 2px 2px 15px #ccc;
+    box-shadow: 2px 2px 15px #ccc;
   }
 `;
 

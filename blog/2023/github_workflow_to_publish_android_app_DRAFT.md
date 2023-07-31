@@ -1,6 +1,6 @@
 ---
 title: "GitHub workflow to publish a Bevy Android app"
-date: 2023-07-08
+date: 2023-07-31
 category: code
 summary: "A guide on how to set up and configure a GitHub workflow that builds and publishes your Bevy Android app."
 tags:
