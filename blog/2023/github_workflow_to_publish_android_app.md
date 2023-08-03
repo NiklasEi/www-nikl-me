@@ -1,6 +1,6 @@
 ---
 title: "GitHub workflow to publish a Bevy Android app"
-date: 2023-07-31
+date: 2023-08-02
 category: code
 summary: "A guide on how to set up and configure a GitHub workflow that builds and publishes your Bevy Android app."
 tags:
@@ -10,10 +10,9 @@ tags:
 - android
 - automation
 - ci/cd
-hidden: true
 ---
 
-This is a guide on how to configure a GitHub workflow for building, signing and publishing an Android app that uses [Bevy][bevy] (there is a separate [guide for iOS][ios-workflow]; Todo: link ios to Android).
+This is a guide on how to configure a GitHub workflow for building, signing and publishing an Android app that uses [Bevy][bevy] (there is a separate [guide for iOS][ios-workflow]).
 
 The workflow uses the tool [xbuild][xbuild] from a [customized fork][xbuild-fork], which includes a couple fixes and hacks needed to get app bundles. Some of these changes are explained and motivated in [a separate post][note-mobile-bevy-2]. If you want to see the workflow in use, you can take a look at [bevy_game_template][bevy_game_template]
 
@@ -116,7 +115,7 @@ jobs:
           releaseFiles: ${{ env.BUNDLE_PATH }}
           track: ${{ env.TRACK }}
 ```
-*Change the `env` section according to your project. The bundle name is going to be your crate name with an `aab` file ending. If the crate that is built as a library for Android is in the root of your project, remove the `MOBILE_DIRECTORY` variable and its usage. Otherwise, adapt the value.*
+*Change the `env` section according to your project. The bundle name is going to be your crate name with an `aab` file ending. If the crate that is built as a library for Android is at the root of your project, remove the `MOBILE_DIRECTORY` variable and its usage. Otherwise, adapt the value.*
 
 The workflow requires multiple secrets to be configured in GitHub. You need to have a Google Play Developer account which comes with a one-time 25$ registration fee.
 

@@ -195,6 +195,8 @@ You cannot easily install the signed ipa on any device without going through the
 
 Workflow runs are free for public repositories on GitHub. If your project is private, it will use build minutes from your allowance ([2000 minutes per month on a free account][github-actions-free]). Know that [every minute with a macOS runner is billed as 10 minutes][github-actions-multipliers].
 
+In case you are also interested in Android development with Bevy, there is a separate [post about a workflow for Android builds][android-workflow].
+
 ---
 
 Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
@@ -202,6 +204,7 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [bevy]: https://bevyengine.org/
 [mastodon]: https://mastodon.online/@nikl_me
 [bevy_discord]: https://discord.gg/bevy
+[android-workflow]: https://www.nikl.me/blog/2023/github_workflow_to_publish_android_app/
 [bevy_game_template]: https://github.com/NiklasEi/bevy_game_template/blob/main/.github/workflows/release-ios-testflight.yaml
 [xcode-docs-create-cert]: https://help.apple.com/xcode/mac/current/#/dev154b28f09?sub=dev23755c6c6
 [xcode-docs-cert-types]: https://help.apple.com/xcode/mac/current/#/dev80c6204ec
