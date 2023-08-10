@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkRow, NavBarLink, StyledNavBar, StyledInnerNavBar, NavBarContainer } from './NavBar.styles';
-import {FaBookOpen, FaFolderOpen, FaHome} from "react-icons/fa";
+import { FaBookOpen, FaFolderOpen, FaHome } from 'react-icons/fa';
 
 const NavBar: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const NavBar: React.FC = () => {
       <NavBarContainer>
         <StyledInnerNavBar>
           <NavBarLink to="/">
-            <FaHome/>
+            <FaHome />
             Nikl.me
           </NavBarLink>
           <LinkRow>

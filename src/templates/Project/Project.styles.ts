@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { layout } from '../../theme';
 
 export const StyledProject = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ export const StyledProject = styled.div`
 
 export const ProjectBody = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: ${layout.max_width}px;
   padding-top: 10px;
   padding-bottom: 20px;
   h1 {

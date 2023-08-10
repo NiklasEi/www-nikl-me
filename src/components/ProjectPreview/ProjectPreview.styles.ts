@@ -16,8 +16,8 @@ export const ProjectContainer = styled.div`
   width: 100%;
 
   /* 2*width*(1/0.95) (container has max width 95%) */
-  @media (min-width: 737px) {
-    width: 350px;
+  @media (min-width: 842px) {
+    width: 400px;
     margin: 0 0;
   }
 `;
@@ -38,5 +38,5 @@ export const ContainerLink = styled(Link)`
 export const ProjectTitle = styled.h1`
   white-space: pre-line;
   word-break: break-word;
-  margin: 0;
+  margin: 0 0 4px;
 `;

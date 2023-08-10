@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors } from '../../theme';
+import { colors, layout } from '../../theme';
 
 export const StyledFooter = styled.div`
   width: 100%;
@@ -16,9 +16,9 @@ export const FooterContent = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 800px;
+  max-width: ${layout.max_width}px;
 
-  @media (min-width: 840px) {
+  @media (min-width: ${layout.switch_to_max_width_at}px) {
     flex-direction: row;
   }
 `;

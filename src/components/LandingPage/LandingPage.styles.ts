@@ -13,8 +13,8 @@ export const CenterSvg = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
+
   & > svg {
     margin-left: 5px;
   }
-`
+`;

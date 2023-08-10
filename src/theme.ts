@@ -8,3 +8,8 @@ export const colorUsage = {
   tileBorder: colors.white,
   hoverTileBorder: colors.secondary
 };
+
+export const layout = {
+  switch_to_max_width_at: 945,
+  max_width: 900
+};

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { layout } from '../../theme';
 
 export const StyledBlogPost = styled.div`
   display: flex;
@@ -17,9 +18,9 @@ export const BlogPostTitle = styled.h1`
 
 export const BlogBody = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: ${layout.max_width}px;
   padding-bottom: 20px;
-  
+
   p,
   hr {
     margin: 0;

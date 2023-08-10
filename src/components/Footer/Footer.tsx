@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, StaticQuery, Link } from 'gatsby';
-import { FaDiscord, FaGithub, FaLinkedin, FaMastodon , FaEnvelopeOpenText, FaRssSquare} from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaLinkedin, FaMastodon, FaEnvelopeOpenText, FaRssSquare } from 'react-icons/fa';
 import { ContactLink, Copyright, FooterContent, RssLink, StyledFooter, Contacts } from './Footer.styles';
 
 interface StaticQueryProps {
@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
           <FooterContent>
             <RssLink>
               <Link to={'/rss.xml'} title={"RSS Feed for Nikl's blog"}>
-                <FaRssSquare/>
+                <FaRssSquare />
               </Link>
             </RssLink>
             <Contacts>
@@ -56,14 +56,14 @@ const Footer: React.FC = () => {
                 rel="me"
                 title={`${data.site.siteMetadata.author.firstName} on Mastodon`}
               >
-                <FaMastodon/>
+                <FaMastodon />
               </ContactLink>
               <ContactLink
                 href={`https://github.com/${data.site.siteMetadata.author.social.github}`}
                 target="_blank"
                 title={`${data.site.siteMetadata.author.firstName} on GitHub`}
               >
-                <FaGithub/>
+                <FaGithub />
               </ContactLink>
               <ContactLink
                 href={`https://discord.gg/${data.site.siteMetadata.author.social.discord}`}

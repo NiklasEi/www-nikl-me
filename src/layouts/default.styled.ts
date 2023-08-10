@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
-import { colors } from '../theme';
+import { colors, layout } from '../theme';
 
 export const StyledDefaultLayout = styled.div`
   display: flex;
@@ -50,16 +50,16 @@ export const globalStyles = css`
     display: block;
     font-size: 2em;
     font-weight: bold;
-    margin-block-start: .67em;
-    margin-block-end: .67em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
   }
 
   h2 {
     display: block;
     font-size: 1.5em;
     font-weight: bold;
-    margin-block-start: .99em;
-    margin-block-end: .83em;
+    margin-block-start: 0.99em;
+    margin-block-end: 0.83em;
   }
 
   h3 {
@@ -72,12 +72,12 @@ export const globalStyles = css`
 
   h4 {
     display: block;
-    font-size: 1.00em;
+    font-size: 1em;
     font-weight: bold;
     margin-block-start: 1.33em;
     margin-block-end: 1.33em;
   }
-  
+
   blockquote {
     display: block;
     background: #fff;
@@ -108,8 +108,8 @@ export const ContentContainer = styled.div`
   margin: 15px auto;
   max-width: 95%;
 
-  @media (min-width: 840px) {
-    max-width: 800px;
+  @media (min-width: ${layout.switch_to_max_width_at}px) {
+    max-width: ${layout.max_width}px;
   }
 `;
 

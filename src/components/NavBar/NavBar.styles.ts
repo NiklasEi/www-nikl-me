@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors } from '../../theme';
+import { colors, layout } from '../../theme';
 import { Link } from 'gatsby';
 
 export const StyledNavBar = styled.div`
@@ -27,7 +27,7 @@ export const NavBarLink = styled(Link)`
   &:hover {
     color: ${colors.white};
   }
-  
+
   & > svg {
     margin-right: 5px;
   }
@@ -44,7 +44,7 @@ export const NavBarContainer = styled.div`
   margin: 0 auto;
   max-width: 95%;
 
-  @media (min-width: 840px) {
-    max-width: 800px;
+  @media (min-width: ${layout.switch_to_max_width_at}px) {
+    max-width: ${layout.max_width}px;
   }
 `;

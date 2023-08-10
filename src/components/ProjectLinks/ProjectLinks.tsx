@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
 import ItchIcon from '../../icons/itchio.svg';
-import {FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaUserSecret} from "react-icons/fa";
+import { FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaUserSecret } from 'react-icons/fa';
 
 export interface ProjectLinksData {
   github: string | null;
@@ -27,7 +27,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.github} target="_blank" title={`${projectTitle} on GitHub`}>
-        <FaGithub size={'lg'} />
+        <FaGithub size={20} />
       </ProjectLink>
     );
   }
@@ -39,7 +39,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.apple} target="_blank" title={`${projectTitle} in the App store`}>
-        <FaApple size={'lg'} />
+        <FaApple size={20} />
       </ProjectLink>
     );
   }
@@ -51,7 +51,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={`https://www.spigotmc.org/resources/${links.spigot}`} target="_blank" title={`${projectTitle} on SpigotMC`}>
-        <FaFaucet size={'lg'} />
+        <FaFaucet size={20} />
       </ProjectLink>
     );
   }
@@ -63,7 +63,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.android} target="_blank" title={`${projectTitle} in the Play store`}>
-        <FaAndroid size={'lg'} />
+        <FaAndroid size={20} />
       </ProjectLink>
     );
   }
@@ -75,7 +75,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.privacy} title={`${projectTitle} - Privacy`}>
-        <FaUserSecret size={'lg'} />
+        <FaUserSecret size={20} />
       </ProjectLink>
     );
   }
@@ -87,7 +87,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={`https://rubygems.org/gems/${links.rubygem}`} target="_blank" title={`${projectTitle} on Ruby gems`}>
-        <FaGem size={'lg'} />
+        <FaGem size={20} />
       </ProjectLink>
     );
   }
@@ -111,7 +111,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={`https://crates.io/crates/${links.crate}`} target="_blank" title={`${projectTitle} on crates.io`}>
-        <FaBox size={'lg'} />
+        <FaBox size={20} />
       </ProjectLink>
     );
   }
