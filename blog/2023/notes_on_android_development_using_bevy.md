@@ -130,7 +130,7 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [bevyengine/bevy#86]: https://github.com/bevyengine/bevy/issues/86
 [bevyengine/bevy#8932]: https://github.com/bevyengine/bevy/pull/8932
 [rust-windowing/winit#2304]: https://github.com/rust-windowing/winit/issues/2304
-[back_button_hack]: https://github.com/bevyengine/bevy/compare/main...NiklasEi:bevy:brain_games#diff-d689ab1249f088846da55ac1f42cec0404a4bee7d788b197c36e16a170752bd7
+[back_button_hack]: https://github.com/bevyengine/bevy/commit/bc88b818b0de76aa7249c07524803144b9790949
 [rust-windowing/winit#2770]: https://github.com/rust-windowing/winit/pull/2770
 [mobile_example]: https://github.com/bevyengine/bevy/tree/main/examples/mobile
 [mobile_example_readme]: https://github.com/bevyengine/bevy/blob/main/examples/README.md#android
