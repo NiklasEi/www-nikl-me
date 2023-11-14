@@ -12,7 +12,7 @@ tags:
 - ci/cd
 ---
 
-I built a GitHub workflow to bundle, sign and publish an iOS app. There are already a couple guides on how to do this, but none of them worked out of the box for me (an iOS/mac noob). With lots of googling plus trial and error, I pieced together the missing and broken parts. Since I wouldn't wish that on anyone, here are some information on how to use the workflow I ended up with.
+I built a GitHub workflow to bundle, sign and publish an iOS app. There are already a couple guides on how to do this, but none of them worked out of the box for me (an iOS/mac noob). With lots of googling plus trial and error, I pieced together the missing and broken parts. Since I wouldn't wish that on anyone, here is some information on how to set up the workflow.
 
 The project that the workflow was build for might be a bit unconventional. It's a mobile app using the Rust game engine [Bevy][bevy]. The workflow expects a specific project structure with the Xcode project living in a subdirectory. You can change the name of the subdirectory and the Xcode project in the `env` section. The whole workflow is part of this post, but if you want to see it in use, you can look at [bevy_game_template][bevy_game_template].
 
