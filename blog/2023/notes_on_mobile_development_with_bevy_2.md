@@ -22,7 +22,7 @@ The starting point of this post is the [mobile example][mobile_example] from Bev
 
 ### Getting an Android App Bundle
 
-The cargo-apk setup from Bevy's mobile example allows us to build APK files. The Play Store no longer accept APKs, but [requires app bundles][app-bundles-only]. This makes sense to keep downloads small and still support multiple device ABIs ([**A**pplication **B**inary **I**nterface][abi-wiki]), but it requires some extra work to get an app bundle for a Bevy game.
+The cargo-apk setup from Bevy's mobile example allows us to build APK files. The Play Store no longer accepts APKs, but [requires app bundles][app-bundles-only]. This makes sense to keep downloads small and still support multiple device ABIs ([**A**pplication **B**inary **I**nterface][abi-wiki]), but it requires some extra work to get an app bundle for a Bevy game.
 
 The only tool I could convince to create an app bundle from my Bevy project is [xbuild][xbuild], the WIP successor of cargo-apk[^1]. We can configure xbuild to bundle our project for Android with the following `manifest.yaml`
 

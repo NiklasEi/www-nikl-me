@@ -116,8 +116,10 @@ On desktop, I am used to navigating backwards with my mouse. This is not support
 
 ## Moving the app to the background
 
-Anyone playing around with Bevy on Android will notice, that the App lifecycle events are not yet completely handled. When you minimize and open the app back up, it will not resume where you left of, but start from the beginning. This issue is known and solutions were discussed a bit in [bevyengine/bevy#86], but since I couldn't find an open issue for the specific problem, I opened [bevyengine/bevy#9057] to track it.
+Anyone playing around with Bevy on Android will notice, that the App lifecycle events are not yet completely handled. When you minimize and open the app back up, it will not resume where you left of, but start from the beginning (Update - Fixed in Bevy 0.12). This issue is known and solutions were discussed a bit in [bevyengine/bevy#86], but since I couldn't find an open issue for the specific problem, I opened [bevyengine/bevy#9057] to track it.
 For now, my workaround in the app is to save the current state in a database, so the app can always go back to where the user left.
+
+> *There is [a follow-up post][bevy_mobile_2] concentrating on how to get a Bevy application into the app stores*
 
 ---
 
@@ -135,3 +137,4 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [mobile_example]: https://github.com/bevyengine/bevy/tree/main/examples/mobile
 [mobile_example_readme]: https://github.com/bevyengine/bevy/blob/main/examples/README.md#android
 [rust-windowing/winit#2931]: https://github.com/rust-windowing/winit/issues/2931
+[bevy_mobile_2]: https://www.nikl.me/blog/2023/notes_on_mobile_development_with_bevy_2/
