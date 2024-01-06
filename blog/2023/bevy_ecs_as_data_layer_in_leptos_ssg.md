@@ -2,7 +2,7 @@
 title: "Bevy ECS as a data layer for static site generation with Leptos"
 date: 2024-01-06
 category: code
-summary: "Bevy ECS works well as the backbone for games. It enables APIs in Bevy that I think would be awesome to have in the data layer of a static site generator. Why not try it out."
+summary: "Bevy ECS works well as the backbone for games. It enables APIs in Bevy that I think would be awesome to have in the data layer of a static site generator."
 tags:
 - rust
 - bevy
