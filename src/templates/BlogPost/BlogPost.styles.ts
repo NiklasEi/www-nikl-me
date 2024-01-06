@@ -9,6 +9,7 @@ export const StyledBlogPost = styled.div`
 `;
 
 export const BlogPostTitle = styled.h1`
+  max-width: ${layout.max_width}px;
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
