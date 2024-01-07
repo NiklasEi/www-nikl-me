@@ -12,7 +12,7 @@ tags:
 
 There are many static site generators and since I tend to use this website as a playground for learning new technologies, it has used a couple of different ones in the past. The current version is built using Gatsby which is in part because Gatsby uses React (which I wanted to learn at the time) and because I like their data layer.
 
-A data layer in a static site generator simplifies collecting and preparing data required to build the website. For example, a user might get their blog posts from a headless CMS and generate different resolutions for image assets. When deciding what routes to generate, users can look into the data layer to see what blog posts there are and then generate a route for every post. The just-generated smaller version of a post's image could be displayed on the list of blog posts while the post itself uses the original version.
+A data layer in a static site generator simplifies collecting and preparing data required to build the website. For example, a user might get their blog posts from a headless CMS and generate different resolutions for image assets. When deciding what routes to generate, they can look into the data layer to see what blog posts there are and then generate a route for every post. The just-generated smaller version of a post's image could be displayed on the list of blog posts while the post itself uses the original version.
 
 Many generators support a given structure of data and asset files but leave more complex data loading and preparation to their users. I think it is very helpful when a generator provides the structure and access for collecting, preparing and using any kind of data needed for building a website[^1]. This is especially the case if there is a good API for third-party plugins to hook into.
 
@@ -20,15 +20,15 @@ So... I have some time during the holidays... How about trying to build a static
 
 ## Static site generation with Leptos
 
-[Leptos][leptos] is an open source Rust framework for building websites. It supports both [client-side rendering and server-side rendering][leptos_get_started] utilizing [WebAssembly][wasm] (WASM) for reactivity in the browser. By default, the client-side rendered approach is a single page application, where the `index.html` loads a wasm binary that will render the website and handle navigation client-side. Every component that you write will be rendered out of the same wasm binary in the browser. Leptos uses an [interesting setup][leptos_auto_dependency_tracking] for fine-grained reactivity that performs very well.
+[Leptos][leptos] is an open source Rust framework for building websites. It supports both [client-side rendering and server-side rendering][leptos_get_started] utilizing [WebAssembly][wasm] (WASM) for reactivity in the browser. By default, the client-side rendered approach is a single page application, where the `index.html` loads a WASM binary that will render the website and handle navigation client-side. Every component that you write will be rendered out of the same WASM binary in the browser. Leptos uses an [interesting setup][leptos_auto_dependency_tracking] for fine-grained reactivity that performs very well.
 
-Since version 0.5, Leptos supports basic static site generation ([see the release notes on "Static Site Generation"][leptos_0_5]). It can be used to pre-generate some routes in a server-side-rendered application for improved performance. If you restrict your whole website to static routes, you can generate a complete website with multiple pages.
+Since version 0.5, Leptos supports basic static site generation ([see the release notes on "Static Site Generation"][leptos_0_5]). It can be used to pre-generate some routes in a server-side-rendered application for improved performance. If you restrict your whole project to static routes, you can generate the complete website with multiple pages.
 
-In the same update, Leptos also released an experimental feature called "islands" ([see the release notes on Islands][leptos_0_5]). When using islands, "normal" components are static and served as HTML instead of being rendered client-side through WASM. Only islands will use WebAssembly for reactivity in the browser.
+In the same update, Leptos also released an experimental feature called "islands" ([see the release notes on Islands][leptos_0_5]). When using islands, "normal" Leptos components are static and served as HTML instead of being rendered client-side through WASM. Only islands will use WebAssembly for reactivity in the browser.
 
 I think the combination of islands and static site generation is perfect for a website like mine. Leptos is the first web framework in Rust that seriously tempts me to rewrite this website (again). If you are interested in web development with Rust, [check it out][leptos_get_started]!
 
-What has been keeping me from rewriting this blog using Leptos, is that I use Gatsby's GraphQL data layer to do a bunch of stuff that is not supported in Leptos itself. I could do things like reading all my markdown files and converting them to HTML as part of the Leptos app, but it feels like there should be a general data layer that one can fill and manipulate before reading it from the Leptos components. Things like automatically creating anchors for headers, properly embedding videos, or generating an RSS feed from all blog posts are easier with a data layer.
+What has been keeping me from rewriting this blog using Leptos, is that I use Gatsby's GraphQL data layer to do a bunch of stuff that is not supported in Leptos itself. I could do things like reading all my markdown files and converting them to HTML as part of the Leptos app, but it feels like there should be a general data layer that one can fill and manipulate before reading it from the Leptos components. Things like automatically creating anchors for headers or generating an RSS feed from all blog posts are easier with a data layer.
 
 ## Bevy ECS
 
@@ -53,7 +53,7 @@ Functionality like converting markdown to HTML could be shared in the form of Be
 
 ## What does it look like
 
-When I started to write this post, the whole thing was only an idea. Some days later, I had a working integration of Bevy ECS into Leptos and had to give it a name. It's now called Cinnog[^3]. On GitHub, you can find the WIP [code][cinnog] as well as an [example website][cinnog_example] that is hosted on Netlify.
+When I started to write this post, the whole thing was only an idea. Some days later, I had a working integration of Bevy ECS into Leptos and had to give it a name. It's now called Cinnog[^3]. You can find the [main repository][cinnog] on GitHub as well as an [example website][cinnog_example] that is hosted on Netlify.
 
 In the main function of the example website, the data layer is filled from the file system. Some ron files are read from the `people` directory and markdown files are read from the `blog` directory. All markdown in the data layer is then converted to HTML.  
 ```rust
@@ -117,7 +117,7 @@ impl Ingest for PostFrontMatter {
 }
 ```
 
-So far, I like the direction Cinnog is taking. There are a lot of rough edges, but basic functionality works. Since the Holidays are over, development might slow down a bit. But I will try to get Cinnog to the point where it can be used for this website. It's definitely a fun project! One could attempt to upstream the required changes to Leptos[^4]. Smaller things like removing the `.static` file ending for statically generated files [will probably not be an issue][remove_static], but I had to make some changes to `leptos_router` to integrate with Bevy ECS and for those I am unsure how that could be upstreamed.
+So far, I like the direction Cinnog is taking. There are a lot of rough edges, but basic functionality works. Since the Holidays are over, development might slow down a bit. But I will try to get Cinnog to the point where it can be used for this website. It's definitely a fun project! I might attempt to upstream the required changes to Leptos[^4]. Smaller things like removing the `.static` file ending for statically generated files [will probably not be an issue][remove_static], but I had to make some changes to `leptos_router` to integrate with Bevy ECS and for those I am unsure how that could be upstreamed.
 
 ---
 
@@ -125,7 +125,7 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 
 [^1]: This increases complexity and the gained flexibility might not always be needed. But the generator could use the data layer to easily support a classic structure with data files. Simple projects would almost work out of the box, but if they grow and need more flexibility, the data layer could offer it.
 [^2]: Properly explaining ECS is out of scope here, but there are already a lot of good resources for that. You could take a look at [Sander's ECS FAQ][sander_ecs_faq] for general information and the [Bevy ECS docs][bevy_ecs_readme] for some code examples.
-[^3]: Following the naming of Leptos ("thin", "small" in Greek), Cinnog means "small" in one of Tolkien's Elvish languages. I just thought reads nice ^^
+[^3]: Following the naming of Leptos ("thin", "small" in Greek), Cinnog means "small" in one of Tolkien's Elvish languages. I just thought it reads nice ^^
 [^4]: Some smaller changes have been upstreamed already: [leptos-rs/leptos#2113][leptos_2113]
 
 [bevy]: https://bevyengine.org/
