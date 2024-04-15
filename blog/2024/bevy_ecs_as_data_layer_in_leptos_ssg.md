@@ -9,6 +9,8 @@ tags:
 - leptos
 - cinnog
 ---
+ 
+*TLDR: I wrote a static site generator using Leptos and Bevy ECS called [Cinnog][cinnog-crates]*.
 
 There are many static site generators and since I tend to use this website as a playground for learning new technologies, it has used a couple of different ones in the past. The current version is built using Gatsby which is in part because Gatsby uses React (which I wanted to learn at the time) and because I like their data layer.
 
@@ -119,6 +121,10 @@ impl Ingest for PostFrontMatter {
 
 So far, I like the direction Cinnog is taking. There are a lot of rough edges, but basic functionality works. Since the Holidays are over, development might slow down a bit. But I will try to get Cinnog to the point where it can be used for this website. It's definitely a fun project! I might attempt to upstream the required changes to Leptos[^4]. Smaller things like removing the `.static` file ending for statically generated files [will probably not be an issue][remove_static], but I had to make some changes to `leptos_router` to integrate with Bevy ECS and for those I am unsure how that could be upstreamed.
 
+> Update: Cinnog no longer relies on a custom fork of Leptos as of Leptos version 0.6. Cinnog is now available on [crates.io][cinnog-crates].
+> 
+> All changes from the custom fork were either upstreamed ([#2113][leptos_2113] and [#2207][leptos_2207]) or no longer needed after a refactor of the Bevy ECS integration into Leptos.
+
 ---
 
 Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
@@ -142,3 +148,5 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [bevy_ecs_readme]: https://docs.rs/bevy_ecs/latest/bevy_ecs/
 [remove_static]: https://github.com/leptos-rs/leptos/issues/1594#issuecomment-1845939151
 [leptos_2113]: https://github.com/leptos-rs/leptos/pull/2113
+[leptos_2207]: https://github.com/leptos-rs/leptos/pull/2207
+[cinnog-crates]: https://crates.io/crates/cinnog
