@@ -11,7 +11,9 @@ tags:
   - Bevy
 ---
 
-Cinnog uses Leptos with static site generation and islands mode to render a static website with dynamic parts using WebAssembly. As a preparation step, a data layer is constructed using a Bevy ECS World as an in-memory Database.
+Cinnog uses Leptos with static site generation and island mode to render a static website. Dynamic parts of the website (islands) use WebAssembly to hydrate in the browser.
+
+All date required to build the website is collected and prepared in a data layer. Cinnog's data layer is a Bevy ECS World and can be queried using Bevy systems.
 
 I wrote an [example project][example-repo] using Cinnog and [deployed it][example-deployed].
 
@@ -19,14 +21,13 @@ The preparation of the data layer currently looks like this in the example proje
 ```rust
 #[tokio::main]
 async fn main() -> io::Result<()> {
-    let mut data = DataLayer::new();
-    data.insert_resource(SiteName("Bevy ECS + Leptos = 💕".to_owned()));
-
-    data.run(read_ron_files_from_directory::<PersonData>, "people")?;
-    data.run(read_markdown_from_directory::<PostFrontMatter>, "blog")?;
-    data.run(convert_markdown_to_html, ());
-
-    data.build(App).await
+    DataLayer::new()
+        .insert_resource(SiteName("Bevy ECS + Leptos = 💕".to_owned()))
+        .read_markdown_directory::<PostFrontMatter>("blog")
+        .read_ron_directory::<PersonData>("people")
+        .add_plugins(ConvertMarkdownToHtml)
+        .build(App)
+        .await
 }
 ```
 
