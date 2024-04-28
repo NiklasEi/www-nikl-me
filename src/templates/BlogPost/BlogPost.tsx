@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import withDefaultLayout from '../../layouts/default';
-import { BlogBody, BlogPostTitle, StyledBlogPost } from './BlogPost.styles';
+import { BlogBody, BlogDate, BlogPostTitle, StyledBlogPost } from './BlogPost.styles';
 import Helmet from 'react-helmet';
 
 interface BlogEntryProps {
@@ -21,6 +21,7 @@ const BlogPost: React.FC<PropsWithChildren<BlogEntryProps>> = ({ data }) => {
       />
       <StyledBlogPost>
         <BlogPostTitle>{post.frontmatter.title}</BlogPostTitle>
+        <BlogDate>{post.frontmatter.date}</BlogDate>
         <BlogBody dangerouslySetInnerHTML={{ __html: post.html }} />
       </StyledBlogPost>
     </>
@@ -35,6 +36,7 @@ interface BlogEntryData {
     frontmatter: {
       title: string;
       summary: string;
+      date: string;
       tags: string[];
     };
   };
@@ -48,6 +50,7 @@ export const query = graphql`
         title
         summary
         tags
+        date(formatString: "DD MMMM, YYYY")
       }
     }
   }

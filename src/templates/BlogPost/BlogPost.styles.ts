@@ -17,6 +17,10 @@ export const BlogPostTitle = styled.h1`
   margin-bottom: 3rem;
 `;
 
+export const BlogDate = styled.small`
+  margin-bottom: 1rem;
+`;
+
 export const BlogBody = styled.div`
   width: 100%;
   max-width: ${layout.max_width}px;
