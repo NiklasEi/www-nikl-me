@@ -26,7 +26,7 @@
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "emotion-normalize": "11.0.1",
-    "gatsby": "5.10.0",
+    "gatsby": "5.13.6",
     "gatsby-plugin-catch-links": "5.8.0",
     "gatsby-plugin-feed": "5.11.0",
     "gatsby-plugin-react-helmet": "6.8.0",
