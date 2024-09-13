@@ -138,36 +138,34 @@ interface TaggedProjectList {
 const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArgs) => {
   const { graphql, actions } = args;
   const { createPage } = actions;
-  const projects = await graphql<TaggedProjectList>(
-    `
-      query {
-        allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
-          edges {
-            node {
-              id
-              frontmatter {
-                title
-                tags
-                github
-                apple
-                spigot
-                android
-                privacy
-                rubygem
-                itch
-                crate
-                cover
-              }
-              fields {
-                slug
-              }
-              excerpt
+  const projects = await graphql<TaggedProjectList>(`
+    query {
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              tags
+              github
+              apple
+              spigot
+              android
+              privacy
+              rubygem
+              itch
+              crate
+              cover
             }
+            fields {
+              slug
+            }
+            excerpt
           }
         }
       }
-    `
-  );
+    }
+  `);
 
   if (projects.data === undefined) {
     console.error(`Failed to get projects`);

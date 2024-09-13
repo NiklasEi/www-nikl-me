@@ -42,27 +42,20 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-helmet": "6.1.0",
-    "react-icons": "4.10.1",
+    "react-icons": "5.3.0",
     "ts-node": "10.9.1"
   },
   "devDependencies": {
-    "@types/react": "18.0.31",
-    "@types/react-dom": "18.0.11",
-    "@types/react-helmet": "6.1.6",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
-    "@typescript-eslint/parser": "^5.57.0",
-    "eslint": "8.37.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jest-dom": "4.0.3",
-    "eslint-plugin-jsdoc": "40.1.0",
+    "@types/react": "18.3.5",
+    "@types/react-dom": "18.3.0",
+    "@types/react-helmet": "6.1.11",
+    "@typescript-eslint/eslint-plugin": "8.5.0",
+    "@typescript-eslint/parser": "8.5.0",
+    "eslint": "9.10.0",
+    "eslint-plugin-jest-dom": "5.4.0",
+    "eslint-plugin-jsdoc": "50.2.3",
     "eslint-plugin-prefer-arrow": "1.2.3",
-    "eslint-plugin-testing-library": "5.10.2",
-    "prettier": "2.8.7",
+    "prettier": "3.3.3",
     "typescript": "5.0.2"
-  },
-  "overrides": {
-    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
-      "react": "^18.2.0"
-    }
   }
 }

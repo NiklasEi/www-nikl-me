@@ -18,19 +18,17 @@ interface StaticQueryProps {
 
 const withDefaultLayout = <P extends PropsWithChildren<{}>>(Component: React.FC<P>): React.FC<P> => {
   return (props: P) => {
-    const data: StaticQueryProps = useStaticQuery(
-      graphql`
-        query DefaultLayoutQuery {
-          site {
-            siteMetadata {
-              title
-              description
-              keywords
-            }
+    const data: StaticQueryProps = useStaticQuery(graphql`
+      query DefaultLayoutQuery {
+        site {
+          siteMetadata {
+            title
+            description
+            keywords
           }
         }
-      `
-    );
+      }
+    `);
     return (
       <StyledDefaultLayout>
         <Helmet
