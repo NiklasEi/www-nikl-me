@@ -16,7 +16,8 @@ const BlogPost: React.FC<PropsWithChildren<BlogEntryProps>> = ({ data }) => {
         title={post.frontmatter.title}
         meta={[
           { name: 'description', content: post.frontmatter.summary },
-          { name: 'keywords', content: post.frontmatter.tags.join(', ') }
+          { name: 'keywords', content: post.frontmatter.tags.concat(['nikl', 'nikl.me']).join(', ') },
+          { name: 'fediverse:creator', content: '@nikl_me@mastodon.online' }
         ]}
       />
       <StyledBlogPost>

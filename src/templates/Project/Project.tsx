@@ -5,6 +5,7 @@ import { ProjectBody, StyledProject } from './Project.styles';
 import { ProjectLinks } from '../../components/ProjectLinks/ProjectLinks';
 import { ProjectFrontmatter } from '../../pages/projects';
 import { CenteredTitle } from '../../layouts/default.styled';
+import Helmet from 'react-helmet';
 
 interface ProjectProps {
   data: ProjectData;
@@ -13,11 +14,21 @@ interface ProjectProps {
 const Project: React.FC<PropsWithChildren<ProjectProps>> = ({ data }) => {
   const project = data.markdownRemark;
   return (
-    <StyledProject>
-      <CenteredTitle>{project.frontmatter.title}</CenteredTitle>
-      <ProjectLinks links={project.frontmatter} projectTitle={project.frontmatter.title} />
-      <ProjectBody dangerouslySetInnerHTML={{ __html: project.html }} />
-    </StyledProject>
+    <>
+      <Helmet
+        title={project.frontmatter.title}
+        meta={[
+          { name: 'description', content: project.excerpt },
+          { name: 'keywords', content: project.frontmatter.tags.concat(['nikl', 'nikl.me']).join(', ') },
+          { name: 'fediverse:creator', content: '@nikl_me@mastodon.online' }
+        ]}
+      />
+      <StyledProject>
+        <CenteredTitle>{project.frontmatter.title}</CenteredTitle>
+        <ProjectLinks links={project.frontmatter} projectTitle={project.frontmatter.title} />
+        <ProjectBody dangerouslySetInnerHTML={{ __html: project.html }} />
+      </StyledProject>
+    </>
   );
 };
 
@@ -27,6 +38,7 @@ interface ProjectData {
   markdownRemark: {
     html: string;
     frontmatter: ProjectFrontmatter;
+    excerpt: string;
   };
 }
 
@@ -48,6 +60,7 @@ export const query = graphql`
         tags
         cover
       }
+      excerpt
     }
   }
 `;
