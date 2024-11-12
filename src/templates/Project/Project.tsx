@@ -19,7 +19,7 @@ const Project: React.FC<PropsWithChildren<ProjectProps>> = ({ data }) => {
         title={project.frontmatter.title}
         meta={[
           { name: 'description', content: project.excerpt },
-          { name: 'keywords', content: project.frontmatter.tags.concat(['nikl', 'nikl.me']).join(', ') },
+          { name: 'keywords', content: (project.frontmatter.tags ?? []).concat(['nikl', 'nikl.me']).join(', ') },
           { name: 'fediverse:creator', content: '@nikl_me@mastodon.online' }
         ]}
       />
