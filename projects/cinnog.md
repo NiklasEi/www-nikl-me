@@ -11,9 +11,11 @@ tags:
   - Bevy
 ---
 
+Cinnog is an experimental static site generator using Leptos and Bevy ECS.
+
 Cinnog uses Leptos with static site generation and island mode to render a static website. Dynamic parts of the website (islands) use WebAssembly to hydrate in the browser.
 
-All date required to build the website is collected and prepared in a data layer. Cinnog's data layer is a Bevy ECS World and can be queried using Bevy systems.
+All data required to build the website is collected and prepared in a data layer. Cinnog's data layer is a Bevy ECS World and can be queried using Bevy systems.
 
 I wrote an [example project][example-repo] using Cinnog and [deployed it][example-deployed].
 
