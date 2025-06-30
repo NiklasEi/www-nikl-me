@@ -43,9 +43,19 @@ Solutions in the second and third category are often GUI based and export to som
 
 - Limited cross platform support
 
+## Free and markup based layouting
 
-A common approach is to maintain templates for such documents as HTML.
+Classic markdown does not have enough layouting features for complex PDF templating. A complete solution is LaTeX. LaTeX can create very complicated documents and can share components and layouts through packages. But, LaTeX is rather complicated (macro based) and not that easy to run on different systems. Rendering larger documents can take multiple seconds.
 
-Better typesetting: LaTeX, Typst (open source compiler)
+A more modern option is Typst.
+
+### Typst
+
+
+## PDF templating with Typst
+
+
+
+
 
 Wrap rust library for multiple targets (web, C#)
