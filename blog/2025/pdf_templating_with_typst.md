@@ -18,7 +18,22 @@ A PDF templating solution should allow to share parts of the document to, for ex
 
 ## Existing solutions
 
-There is a large number of (non-)commercial products offering such PDF templating. They usually fall into one of three categories:
+There is a large number of (non-)commercial products offering such PDF templating. From libraries that allow building PDF documents completely out of code to rendering an HTML template with a headless browser you can find all kinds of solutions. I am unhappy with most of them. Let's go through some of the issues I see.
+
+Many commercial solutions come with a GUI editor only and export templates in some binary format. My biggest gripe with that is maintainability. I am looking at this issue from the point of view of a software developer. As such, I want to be able to put the templates into version control. Changes to templates should be reviewed in a pull request. Clicking and dragging a template together in a GUI is just not reproducible enough in my opinion.
+
+Additionally, sharing layouts or some template elements is often complicated in these GUI solutions or not possible at all. It also makes it more difficult to allow end users to provide some parts of the template.
+
+With these arguments I would discard any GUI based solution and only consider markup-based approaches for templates from here on out.
+
+
+
+
+
+
+
+
+They usually fall into one of three categories:
 1. HTML based templates
 2. Custom typesetter
 3. Integration for existing typesetting software
