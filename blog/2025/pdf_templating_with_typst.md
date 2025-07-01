@@ -10,16 +10,18 @@ tags:
 - oicana
 ---
 
-A large number of businesses software needs to create documents at some point. Often output of these systems are PDFs that are archived and/or distributed (think invoices or reports).
+A large number of businesses software needs to create documents at some point. Some kind of template will define a layout and general look, while dynamic content is provided by the software's users and/or database. Often the preferred output for storage and distribution is PDF files. In this post, I want to discuss existing solutions and a rather modern approach using the typesetter Typst.
 
-To offer such document generation, we need to have a form of template that can be rendered with data from different sources like the user or a database. Common elements are tables that need to be flexible enough to stretch over multiple pages, images, headers, and footers.
+We will concentrate on PDF file output with a high quality and total control in the templates. File generation should be as fast as possible and should run in different environments. The backend, using some tech-stack, can create documents and a potetial frontend in the browser can generate and display live previews.
+
+A PDF templating solution should allow to share parts of the document to, for example, use the same header and footer for all your buisiness reports. Common elements of documents are tables, images, headers, and footers. These elements need to be flexible and customizable. Think of tables in invoices which might need to stretch over multiple pages, have subtotals on each table page, or merge some columns/rows. The typesetter needs to be able to calculate things like the subtotals for every table page.
 
 ## Existing solutions
 
 There is a large number of (non-)commercial products offering such PDF templating. They usually fall into one of three categories:
 1. HTML based templates
-2. Custom layouting implementation
-3. Integrate into existing software for layouting
+2. Custom typesetter
+3. Integration for existing typesetting software
 
 ### HTML based templating
 
@@ -27,13 +29,13 @@ There is a large number of (non-)commercial products offering such PDF templatin
 - rather slow to startup a (headless) browser for rendering
 - not many possibilities for more PDF specific things like PDF/A support, or file embedding
 
-### Custom layouting
+### Custom typesetter
 
-- Often limited; layouting is a very big problem space
+- Often limited; typesetting is a very big problem space
 - Usually very limited ecosystem of shared components; if any
 - 
 
-### Integrating into existing software for layouting
+### Integration into existing software for layouting
 
 An example in this category are all the solutions to use Word-documents as templates.
 
@@ -43,18 +45,19 @@ Solutions in the second and third category are often GUI based and export to som
 
 - Limited cross platform support
 
-## Free and markup based layouting
+## Powerfull markup-based typesetting
 
-Classic markdown does not have enough layouting features for complex PDF templating. A complete solution is LaTeX. LaTeX can create very complicated documents and can share components and layouts through packages. But, LaTeX is rather complicated (macro based) and not that easy to run on different systems. Rendering larger documents can take multiple seconds.
+One complete markup-based typesetting solution is LaTeX. LaTeX can create advanced documents and can share components and layouts through packages. But, LaTeX is rather complicated (macro based) and not that easy to run on different systems. Rendering larger documents can take multiple seconds and directly integrating a programm with it's compiler is no easy feat (at least for me).
 
-A more modern option is Typst.
+Typst is a modern markup-based typesetting system. It is focused on performance, can run in many environments like all major desktop operating systems and WebAssembly in the Browser, and the compiler is open source.
 
-### Typst
+The company behind Typst maintains the open source compiler and offers a web editor. The editor has a substancial free tier and [pro features](https://typst.app/pricing/) like private packages, additional storage, and more. For privacy sensitive companies, the on premise solution might be of interest. 
+
 
 
 ## PDF templating with Typst
 
-
+The Typst compiler is available as a Rust library. We can use it to create a PDF from a Typst project out of Rust code. To allow users on different techstacks to create PDFs, the rust library can be wrapped using FFI or equivalents for many programming languages.
 
 
 
