@@ -10,33 +10,29 @@ tags:
 - oicana
 ---
 
-A large number of businesses software needs to create documents at some point. Some kind of template will define a layout and general look, while dynamic content is provided by the software's users and/or database. Often the preferred output for storage and distribution is PDF files. In this post, I want to discuss existing solutions and a rather modern approach using the typesetter Typst.
+A large number of businesses software needs to create documents at some point. A template will define the layout and general look, while dynamic content is provided by the software's users and/or database. Often the preferred output format for storage and distribution is PDF. In this post, I want to discuss existing solutions and an approach using the modern typesetter Typst.
 
-We will concentrate on PDF file output with a high quality and total control in the templates. File generation should be as fast as possible and should run in different environments. The backend, using some tech-stack, can create documents and a potetial frontend in the browser can generate and display live previews.
+We will concentrate on PDF file output with a high quality and total control in the templates. File generation should be as fast as possible and should run in different environments. The backend, using "some tech-stack", can create documents and a potetial frontend in the browser can generate and display live previews.
 
-A PDF templating solution should allow to share parts of the document to, for example, use the same header and footer for all your buisiness reports. Common elements of documents are tables, images, headers, and footers. These elements need to be flexible and customizable. Think of tables in invoices which might need to stretch over multiple pages, have subtotals on each table page, or merge some columns/rows. The typesetter needs to be able to calculate things like the subtotals for every table page.
+A PDF templating solution should allow to share parts of the document to, for example, use the same header and footer for all your buisiness reports. Apart from structured text, common elements of documents are tables, images, headers, and footers. These elements need to be flexible and customizable. Think of tables in invoices which might need to stretch over multiple pages, have subtotals on each table page, or merge some columns/rows. The typesetter needs to be able to calculate things like the subtotals for every table page, because only the typesetter will be able to tell what items end up on which page in the final layout.
 
 ## Existing solutions
 
-There is a large number of (non-)commercial products offering such PDF templating. From libraries that allow building PDF documents completely out of code to rendering an HTML template with a headless browser you can find all kinds of solutions. I am unhappy with most of them. Let's go through some of the issues I see.
+There is a large number of commercial and noncommercial products offering PDF templating. From libraries that allow building PDF documents completely out of code to rendering an HTML template with a headless browser you can find all kinds of solutions. I am unhappy with most of them. Let's go through some of the issues I see.
 
-Many commercial solutions come with a GUI editor only and export templates in some binary format. My biggest gripe with that is maintainability. I am looking at this issue from the point of view of a software developer. As such, I want to be able to put the templates into version control. Changes to templates should be reviewed in a pull request. Clicking and dragging a template together in a GUI is just not reproducible enough in my opinion.
+### GUI based solutions
 
-Additionally, sharing layouts or some template elements is often complicated in these GUI solutions or not possible at all. It also makes it more difficult to allow end users to provide some parts of the template.
+Many commercial solutions come with a GUI editor only and export templates in some binary format. My biggest gripe with that is maintainability. I am looking at this issue from the point of view of a software developer. As such, I want to be able to put the templates into version control. Changes to templates should be reviewed in a pull request. Clicking and dragging a template together in a GUI is just not reproducible enough in my opinion. Additionaly, if you want to use LLMs to help maintain the templates, that is significantly easier if their source is text based.
 
-With these arguments I would discard any GUI based solution and only consider markup-based approaches for templates from here on out.
+Sharing layouts or some template elements is often complicated in these GUI solutions or not possible at all. It also makes it more difficult to allow end users to provide some parts of the template.
 
+With these arguments I would discard any GUI based solution and only consider markup-based approaches for templates from here on out. That of course does not mean, that the final solution cannot have a graphical editor that outputs the markup!
 
+### Custom typesetter
 
+Some solutions come with their own typesetter and layouting engine. While that is admirable, I can see significant downsides for that approach. Developing a capable typesetter is a gigantic task. My expectation for most custom typesetters developed for a single solution is that they are lacking features and flexibility.
 
-
-
-
-
-They usually fall into one of three categories:
-1. HTML based templates
-2. Custom typesetter
-3. Integration for existing typesetting software
+Since they are custom for some product, they often have small or non existing ecosystems. Meaning there are less resources in the form of documentation, example projects, and shared components. It also means that the people building the PDF templating solution, have to spent a significant portion of their time on the typesetter and layouting engine.
 
 ### HTML based templating
 
@@ -44,19 +40,7 @@ They usually fall into one of three categories:
 - rather slow to startup a (headless) browser for rendering
 - not many possibilities for more PDF specific things like PDF/A support, or file embedding
 
-### Custom typesetter
 
-- Often limited; typesetting is a very big problem space
-- Usually very limited ecosystem of shared components; if any
-- 
-
-### Integration into existing software for layouting
-
-An example in this category are all the solutions to use Word-documents as templates.
-
-### Common issues
-
-Solutions in the second and third category are often GUI based and export to some binary format (most likely propriatery). This makes the templates harder to maintain and often complicates sharing common components. It also makes it more difficult to keep the templates in versioning software like `git` or reuse them with a different templating solution.
 
 - Limited cross platform support
 
