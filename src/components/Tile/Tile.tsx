@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { StyledTile } from './Tile.styles';
 import { navigate } from 'gatsby';
 
@@ -6,7 +6,7 @@ export interface OuterProps {
   link?: string;
 }
 
-export const Tile: React.FC<OuterProps> = ({ link, children }) => {
+export const Tile: React.FC<PropsWithChildren<OuterProps>> = ({ link, children }) => {
   const onClick =
     link !== undefined
       ? async () => {

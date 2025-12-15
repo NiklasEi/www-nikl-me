@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import withDefaultLayout from '../../layouts/default';
 import { ProjectList } from '../../components/ProjectList/ProjectList';
 import { ProjectData } from '../../pages/projects';
-import { PageContext } from 'gatsby/internal';
 import { CenteredTitle, ContentContainer } from '../../layouts/default.styled';
 
 interface TaggedProjectsProps {
@@ -10,7 +9,11 @@ interface TaggedProjectsProps {
   tag: string;
 }
 
-const TaggedProjects: React.FC<PropsWithChildren<PageContext>> = ({ pageContext }: { pageContext: TaggedProjectsProps }) => {
+interface TaggedProjectsPageProps extends PropsWithChildren {
+  pageContext: TaggedProjectsProps;
+}
+
+const TaggedProjects: React.FC<TaggedProjectsPageProps> = ({ pageContext }) => {
   return (
     <ContentContainer>
       <CenteredTitle>{`Projects tagged '${pageContext.tag}'`}</CenteredTitle>
