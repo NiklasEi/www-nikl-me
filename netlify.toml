@@ -1,5 +1,10 @@
 [build]
 publish = "public"
+command = "npm run build"
+
+[build.environment]
+SHARP_IGNORE_GLOBAL_LIBVIPS = "1"
+NPM_FLAGS = "--prefer-offline --no-audit"
 
 [[plugins]]
 package = "netlify-plugin-gatsby-cache"
