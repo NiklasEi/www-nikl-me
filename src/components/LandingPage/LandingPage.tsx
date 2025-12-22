@@ -22,6 +22,7 @@ const LandingPage: React.FC = () => {
                 frontmatter {
                   title
                   date(formatString: "DD MMMM, YYYY")
+                  website
                   github
                   apple
                   spigot

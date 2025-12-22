@@ -1,9 +1,10 @@
 import React from 'react';
 import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
 import ItchIcon from '../../icons/itchio.svg';
-import { FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaUserSecret } from 'react-icons/fa';
+import { FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaGlobe, FaUserSecret } from 'react-icons/fa';
 
 export interface ProjectLinksData {
+  website: string | null;
   github: string | null;
   apple: string | null;
   spigot: string | null;
@@ -20,6 +21,18 @@ interface ProjectLinksProps {
 }
 
 export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle }) => {
+  function renderWebsiteLink() {
+    if (links.website === null) {
+      return undefined;
+    }
+
+    return (
+      <ProjectLink href={links.website} target="_blank" title={`Website of ${projectTitle}`}>
+        <FaGlobe size={20} />
+      </ProjectLink>
+    );
+  }
+
   function renderGithubLink() {
     if (links.github === null) {
       return undefined;
@@ -118,6 +131,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
   return (
     <ProjectLinksContainer>
+      {renderWebsiteLink()}
       {renderGithubLink()}
       {renderAndroidLink()}
       {renderAppleLink()}

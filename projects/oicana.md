@@ -1,29 +1,23 @@
 ---
-title: "Oicana"
-github: https://github.com/NiklasEi/oicana
-itch: https://niklme.itch.io/oicana
-date: 2021-01-16
+title: "Oicana - PDF templating"
+github: https://github.com/oicana/oicana
+website: https://oicana.com
+date: 2025-12-21
 tags:
-- Game
+- Typst
+- Oicana
 - Rust
-- Bevy
-- Jam entry
 ---
 
-**Game submission for Mini Jam 71**
+*Dynamic PDF Generation based on Typst*
 
-*The game tries to combine the genres `Tower defense`, `Puzzle` and `Monster tamer` (admittedly, the last one is a stretch). Mini Jam 71 called for a combination of at least two genres*
+Oicana is a Polyglot library that does PDF templating based on the open source Typst compiler. Define a template in Typst, collect data in any of the supported programming languages, then let Oicana combine the two creating a `PDF`, `png` or `svg` file.
 
-Oicana [is published on itch.io](https://niklme.itch.io/oicana). You can get the latest builds there or find them in [the releases of this repository](https://github.com/NiklasEi/oicana/releases).
+## Currently available Libraries
 
-![oicana game play](oicana.png)
-
-## Goal of the game
-
-All enemies are geometrical forms. In the beginning they are all grey, but when getting hit by your towers they will start showing color. When they are beaten, their color fully shows, and they will try to make a run for the colorful clouds on the map. During that time you can collect them by clicking on them and use them as puzzle pieces to update your towers or build new ones.
-
-As in every TD game, you can lose by letting too many enemies through to your base.
-
-## Credits
-
-See [CREDITS.md](https://github.com/NiklasEi/oicana/blob/master/credits/CREDITS.md)
+* TypeScript/JavaScript
+    * in the browser -> [@oicana/browser](https://www.npmjs.com/package/@oicana/browser)
+    * Node.js -> [@oicana/node](https://www.npmjs.com/package/@oicana/node)
+* C# -> [Oicana](https://www.nuget.org/packages/Oicana)
+* Rust -> [oicana](https://crates.io/crates/oicana)
+* Python -> [oicana](https://pypi.org/project/oicana/)

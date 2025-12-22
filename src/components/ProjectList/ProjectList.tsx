@@ -11,8 +11,8 @@ export const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   return (
     <div>
       <StyledProjectPreviewList>
-        {projects.map((post) => (
-          <ProjectPreview key={post.id} {...post} />
+        {projects.map((project) => (
+          <ProjectPreview key={project.id} {...project} />
         ))}
       </StyledProjectPreviewList>
     </div>

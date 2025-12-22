@@ -67,6 +67,7 @@ export const query = graphql`
         node {
           id
           frontmatter {
+            website
             date
             github
             apple

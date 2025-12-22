@@ -145,6 +145,7 @@ const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArg
           node {
             id
             frontmatter {
+              website
               title
               tags
               github
