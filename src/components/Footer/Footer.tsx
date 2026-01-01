@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
                 <FaEnvelopeOpenText />
               </ContactLink>
             </Contacts>
-            <Copyright>Nikl.me © 2025</Copyright>
+            <Copyright>Nikl.me © 2026</Copyright>
           </FooterContent>
         </StyledFooter>
       )}
