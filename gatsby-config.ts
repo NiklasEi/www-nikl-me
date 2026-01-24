@@ -12,7 +12,7 @@ export const siteMetadata = {
       gitlab: 'NiklasEi',
       discord: 'WgCrwXF',
       linkedin: 'neicker',
-      mastodon: 'https://mastodon.online/@nikl_me'
+      bluesky: 'https://bsky.app/profile/nikl.me'
     }
   }
 };

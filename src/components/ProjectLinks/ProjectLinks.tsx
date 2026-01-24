@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
 import ItchIcon from '../../icons/itchio.svg';
-import { FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaGlobe, FaUserSecret } from 'react-icons/fa';
+import { FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaGlobe, FaUserSecret } from 'react-icons/fa6';
 
 export interface ProjectLinksData {
   website: string | null;

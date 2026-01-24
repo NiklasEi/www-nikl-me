@@ -127,7 +127,7 @@ So far, I like the direction Cinnog is taking. There are a lot of rough edges, b
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl.me][bluesky] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [^1]: This increases complexity and the gained flexibility might not always be needed. But the generator could use the data layer to easily support a classic structure with data files. Simple projects would almost work out of the box, but if they grow and need more flexibility, the data layer could offer it.
 [^2]: Properly explaining ECS is out of scope here, but there are already a lot of good resources for that. You could take a look at [Sander's ECS FAQ][sander_ecs_faq] for general information and the [Bevy ECS docs][bevy_ecs_readme] for some code examples.
@@ -140,7 +140,7 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [leptos_auto_dependency_tracking]: https://book.leptos.dev/reactivity/14_create_effect.html#autotracking-and-dynamic-dependencies
 [wasm]: https://webassembly.org/
 [leptos_get_started]: https://book.leptos.dev/getting_started/index.html
-[mastodon]: https://mastodon.online/@nikl_me
+[bluesky]: https://bsky.app/profile/nikl.me
 [bevy_discord]: https://discord.gg/bevy
 [cinnog]: https://github.com/NiklasEi/cinnog
 [cinnog_example]: https://github.com/NiklasEi/cinnog_example

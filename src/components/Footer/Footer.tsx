@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, StaticQuery, Link } from 'gatsby';
-import { FaDiscord, FaGithub, FaLinkedin, FaMastodon, FaEnvelopeOpenText, FaRssSquare } from 'react-icons/fa';
+import { FaDiscord, FaGithub, FaLinkedin, FaBluesky, FaEnvelopeOpenText, FaSquareRss } from 'react-icons/fa6';
 import { ContactLink, Copyright, FooterContent, RssLink, StyledFooter, Contacts } from './Footer.styles';
 
 interface StaticQueryProps {
@@ -13,7 +13,7 @@ interface StaticQueryProps {
           github: string;
           discord: string;
           linkedin: string;
-          mastodon: string;
+          bluesky: string;
         };
       };
     };
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
                   github
                   discord
                   linkedin
-                  mastodon
+                  bluesky
                 }
               }
             }
@@ -46,17 +46,17 @@ const Footer: React.FC = () => {
           <FooterContent>
             <RssLink>
               <Link to={'/rss.xml'} title={"RSS Feed for Nikl's blog"}>
-                <FaRssSquare />
+                <FaSquareRss />
               </Link>
             </RssLink>
             <Contacts>
               <ContactLink
-                href={data.site.siteMetadata.author.social.mastodon}
+                href={data.site.siteMetadata.author.social.bluesky}
                 target="_blank"
                 rel="me"
-                title={`${data.site.siteMetadata.author.firstName} on Mastodon`}
+                title={`${data.site.siteMetadata.author.firstName} on BlueSky`}
               >
-                <FaMastodon />
+                <FaBluesky />
               </ContactLink>
               <ContactLink
                 href={`https://github.com/${data.site.siteMetadata.author.social.github}`}

@@ -173,10 +173,10 @@ Workflow runs are free for public repositories on GitHub. If your project is pri
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl.me][bluesky] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [bevy]: https://bevyengine.org/
-[mastodon]: https://mastodon.online/@nikl_me
+[bluesky]: https://bsky.app/profile/nikl.me
 [bevy_discord]: https://discord.gg/bevy
 [ios-workflow]: https://www.nikl.me/blog/2023/github_workflow_to_publish_ios_app/
 [note-mobile-bevy-2]: https://www.nikl.me/blog/2023/notes_on_mobile_development_with_bevy_2/

@@ -123,10 +123,10 @@ For now, my workaround in the app is to save the current state in a database, so
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl.me][bluesky] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [bevy]: https://bevyengine.org/
-[mastodon]: https://mastodon.online/@nikl_me
+[bluesky]: https://bsky.app/profile/nikl.me
 [bevy_discord]: https://discord.gg/bevy
 [bevyengine/bevy#9057]: https://github.com/bevyengine/bevy/issues/9057
 [bevyengine/bevy#86]: https://github.com/bevyengine/bevy/issues/86

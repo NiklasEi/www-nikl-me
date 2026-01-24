@@ -12,6 +12,8 @@ tags:
 - ci/cd
 ---
 
+*Last update Jan 24 2026 (fixed an appstore connect link)*
+
 I built a GitHub workflow to bundle, sign and publish an iOS app. There are already a couple guides on how to do this, but none of them worked out of the box for me (an iOS/mac noob). With lots of googling plus trial and error, I pieced together the missing and broken parts. Since I wouldn't wish that on anyone, here is some information on how to set up the workflow.
 
 The project that the workflow was build for might be a bit unconventional. It's a mobile app using the Rust game engine [Bevy][bevy]. The workflow expects a specific project structure with the Xcode project living in a subdirectory. You can change the name of the subdirectory and the Xcode project in the `env` section. The whole workflow is part of this post, but if you want to see it in use, you can look at [bevy_game_template][bevy_game_template].
@@ -199,10 +201,10 @@ In case you are also interested in Android development with Bevy, there is a sep
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl.me][bluesky] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [bevy]: https://bevyengine.org/
-[mastodon]: https://mastodon.online/@nikl_me
+[bluesky]: https://bsky.app/profile/nikl.me
 [bevy_discord]: https://discord.gg/bevy
 [android-workflow]: https://www.nikl.me/blog/2023/github_workflow_to_publish_android_app/
 [bevy_game_template]: https://github.com/NiklasEi/bevy_game_template/blob/main/.github/workflows/release-ios-testflight.yaml
@@ -210,7 +212,7 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [xcode-docs-cert-types]: https://help.apple.com/xcode/mac/current/#/dev80c6204ec
 [xcode-docs-export-cert]: https://help.apple.com/xcode/mac/current/#/dev154b28f09?sub=dev6dab365c2
 [developer-account-resources]: https://developer.apple.com/account/resources/profiles/list
-[users-and-access]: https://appstoreconnect.apple.com/access/api
+[users-and-access]: https://appstoreconnect.apple.com/access/integrations/api
 [app-store-key-roles]: https://developer.apple.com/support/roles/
 [create-api-key]: https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api#3028599
 [github-actions-free]: https://github.com/pricing

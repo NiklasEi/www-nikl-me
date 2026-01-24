@@ -124,14 +124,14 @@ fn screenshot_on_spacebar(
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl.me][bluesky] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 [^1]: [Crossbow](https://github.com/dodorare/crossbow) might also work, but I didn't manage to set it up correctly. If you do, please tell me.
 [^2]: It also doesn't support globs yet, which is a bit unpractical for Bevy's asset directory. Every file and subdirectory would need to be listed separately. I added [simple glob support for APK builds][xbuild-fork-support-globs] on my fork and will try to upstream that once basic assets support has landed.
 [^3]: Now I understand why the Bevy mobile example has the [two `arm` targets configured](https://github.com/bevyengine/bevy/blob/v0.11.0/examples/mobile/Cargo.toml#L23) for cargo-apk builds :D
 
 [bevy]: https://bevyengine.org/
-[mastodon]: https://mastodon.online/@nikl_me
+[bluesky]: https://bsky.app/profile/nikl.me
 [bevy_discord]: https://discord.gg/bevy
 [app-bundles-only]: https://android-developers.googleblog.com/2021/06/the-future-of-android-app-bundles-is.html
 [xbuild]: https://github.com/rust-mobile/xbuild

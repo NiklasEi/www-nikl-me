@@ -181,7 +181,7 @@ I would also like to make it easier for users of bevy\_asset\_loader to build ni
 
 ---
 
-Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl_me@mastodon.online ][mastodon] or on the [Bevy Discord server][bevy_discord] (@nikl).
+Thank you for reading! If you have any feedback, questions, or comments, you can find me at [@nikl.me][bluesky] or on the [Bevy Discord server][bevy_discord] (@nikl).
 
 
 
@@ -193,5 +193,5 @@ Thank you for reading! If you have any feedback, questions, or comments, you can
 [bevy_sprite_sheet_example]: https://github.com/bevyengine/bevy/blob/main/examples/2d/sprite_sheet.rs
 [states]: https://bevy-cheatbook.github.io/programming/states.html
 [loading_statistics_issue]: https://github.com/NiklasEi/bevy_asset_loader/issues/6
-[mastodon]: https://mastodon.online/@nikl_me
+[bluesky]: https://bsky.app/profile/nikl.me
 [bevy_discord]: https://discord.gg/bevy

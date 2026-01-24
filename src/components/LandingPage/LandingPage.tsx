@@ -7,7 +7,7 @@ import { ProjectData } from '../../pages/projects';
 import withDefaultLayout from '../../layouts/default';
 import { ProjectList } from '../ProjectList/ProjectList';
 import { BlogPostList } from '../BlogPostList/BlogPostList';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa6';
 
 const LandingPage: React.FC = () => {
   return (

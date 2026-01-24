@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTag } from 'react-icons/fa';
+import { FaTag } from 'react-icons/fa6';
 import { TagContainer, TagName } from './Tag.styles';
 
 export interface OuterProps {
