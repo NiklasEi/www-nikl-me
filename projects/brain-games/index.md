@@ -5,6 +5,7 @@ date: 2025-12-15
 privacy: /projects/brain-games/privacy
 summary: Android and iOS app with logic puzzles. Written in Rust using Bevy.
 android: https://play.google.com/store/apps/details?id=me.nikl.braingames
+apple: https://apps.apple.com/us/app/brain-games-logic-puzzles/id6452756305
 tags:
 - mobile app
 - Bevy
