@@ -11,7 +11,7 @@ tags:
 
 *Dynamic PDF Generation based on Typst*
 
-Oicana is a Polyglot library that does PDF templating based on the open source Typst compiler. Define a template in Typst, collect data in any of the supported programming languages, then let Oicana combine the two creating a `PDF`, `png` or `svg` file.
+Oicana is a toolset for document templating based on the typesetter Typst. Define a template in Typst, collect data in any of the supported programming languages, then let Oicana combine the two creating a `PDF`, `PNG` or `SVG` file.
 
 ## Currently available Libraries
 
@@ -21,3 +21,5 @@ Oicana is a Polyglot library that does PDF templating based on the open source T
 * C# -> [Oicana](https://www.nuget.org/packages/Oicana)
 * Rust -> [oicana](https://crates.io/crates/oicana)
 * Python -> [oicana](https://pypi.org/project/oicana/)
+* Java -> [com.oicana/oicana](https://central.sonatype.com/artifact/com.oicana/oicana)
+* PHP -> [oicana/oicana](https://composer.oicana.com/#oicana/oicana)
