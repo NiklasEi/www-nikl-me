@@ -85,9 +85,9 @@ A git repository hosting all Oicana templates of an organisation can look like s
 -> CI/CD scripts
 -> Readme.md
 
-I think the approach of Oicana works well and despite being in early development, the project can keep up with many other commercial solutions. Typst is very powerfull and on a good trajectory (link to growing github languages). The ecosystem already supports a lot and is growing well (Typst universe).
+I think the approach of Oicana works well and despite being in early development, the project can keep up with many other commercial solutions. Typst is very powerful and on a good trajectory (link to growing github languages). The ecosystem already supports a lot and is growing well (Typst universe).
   
-Give the gettign started guid e a try if you are interested. You can reach me at `hello@oicana.com` if you have any questions or feedback!
+Give the getting started guide a try if you are interested. You can reach me at `support@oicana.com` if you have any questions or feedback!
 
 
 
