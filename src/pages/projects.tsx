@@ -6,6 +6,7 @@ import { ProjectLinksData } from '../components/ProjectLinks/ProjectLinks';
 import { CenteredTitle, ContentContainer } from '../layouts/default.styled';
 import { groupTags } from '../utilities/tags';
 import { GroupedTags } from '../components/GroupedTags/GroupedTags';
+import { Seo } from '../components/Seo/Seo';
 
 interface ProjectsProps {
   data: ProjectListData;
@@ -29,6 +30,8 @@ const Projects: React.FC<PropsWithChildren<ProjectsProps>> = ({ data }) => {
 };
 
 export default withDefaultLayout(Projects);
+
+export const Head: React.FC = () => <Seo />;
 
 interface ProjectListData {
   allMarkdownRemark: {

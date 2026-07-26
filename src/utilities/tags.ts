@@ -9,7 +9,7 @@ export function groupTags(projects: ProjectFrontmatter[]): TagGroup[] {
   let tags: TagGroup[] = [];
   for (const currentProject of projects) {
     for (const tag of currentProject.tags) {
-      let current = tags.find((tagGroup) => tagGroup.tag === tag);
+      const current = tags.find((tagGroup) => tagGroup.tag === tag);
       if (current === undefined) {
         tags.push({ tag, count: 1 });
       } else {

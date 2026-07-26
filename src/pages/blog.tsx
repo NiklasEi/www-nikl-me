@@ -4,6 +4,7 @@ import withDefaultLayout from '../layouts/default';
 import { BlogPostList } from '../components/BlogPostList/BlogPostList';
 import { BlogListData } from '../modules/blog';
 import { CenteredTitle, ContentContainer } from '../layouts/default.styled';
+import { Seo } from '../components/Seo/Seo';
 
 interface BlogProps {
   data: BlogListData;
@@ -19,6 +20,8 @@ const BlogPage: React.FC<PropsWithChildren<BlogProps>> = ({ data }) => {
 };
 
 export default withDefaultLayout(BlogPage);
+
+export const Head: React.FC = () => <Seo />;
 
 export const query = graphql`
   query {

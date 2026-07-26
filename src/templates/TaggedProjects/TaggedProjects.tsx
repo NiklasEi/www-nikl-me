@@ -3,6 +3,7 @@ import withDefaultLayout from '../../layouts/default';
 import { ProjectList } from '../../components/ProjectList/ProjectList';
 import { ProjectData } from '../../pages/projects';
 import { CenteredTitle, ContentContainer } from '../../layouts/default.styled';
+import { Seo } from '../../components/Seo/Seo';
 
 interface TaggedProjectsProps {
   projects: ProjectData[];
@@ -23,3 +24,5 @@ const TaggedProjects: React.FC<TaggedProjectsPageProps> = ({ pageContext }) => {
 };
 
 export default withDefaultLayout(TaggedProjects);
+
+export const Head: React.FC = () => <Seo />;

@@ -1,6 +1,6 @@
 import { CreateNodeArgs, CreatePagesArgs } from 'gatsby';
 import { createFilePath } from 'gatsby-source-filesystem';
-import * as path from 'path';
+import * as path from 'node:path';
 import { ProjectData } from './src/pages/projects';
 
 export const onCreateNode = ({ node, getNode, actions }: CreateNodeArgs) => {
@@ -49,7 +49,7 @@ interface AllMarkdown {
   };
 }
 
-interface MarkdownNode<T = {}> {
+interface MarkdownNode<T = object> {
   node: {
     id: string;
     parent: {
@@ -93,8 +93,8 @@ const createTagPages = async (args: CreatePagesArgs) => {
     console.error('Failed to query markdown');
     return;
   }
-  let projects = new Map<string, string[]>();
-  let blogPosts = new Map<string, string[]>();
+  const projects = new Map<string, string[]>();
+  const blogPosts = new Map<string, string[]>();
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     const fileNode = getNode(node.parent.id!)!;
     switch (fileNode.sourceInstanceName) {
@@ -172,8 +172,8 @@ const createProjects = async (posts: Map<string, string[]>, args: CreatePagesArg
     console.error(`Failed to get projects`);
     return;
   }
-  for (let tag of posts.keys()) {
-    let nodeIds = posts.get(tag) ?? [];
+  for (const tag of posts.keys()) {
+    const nodeIds = posts.get(tag) ?? [];
     const taggedProjects = projects.data.allMarkdownRemark.edges.map(({ node }) => node).filter((node) => nodeIds.includes(node.id));
 
     createPage({
