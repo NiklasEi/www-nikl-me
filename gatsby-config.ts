@@ -34,30 +34,9 @@ export const plugins = [
     }
   },
   {
-    resolve: 'gatsby-plugin-react-svg',
-    options: {
-      rule: {
-        include: /src\/icons/
-      }
-    }
-  },
-  {
     resolve: `gatsby-transformer-remark`,
     options: {
       plugins: [
-        // {
-        //   resolve: 'gatsby-remark-code-buttons',
-        //   options: {
-        //     buttonContainerClass: `copy-code-button-container`,
-        //     buttonClass: `copy-code-button`,
-        //     buttonText: ``,
-        //     svgIconClass: `copy-code-icon`,
-        //     tooltipText: `Copy`,
-        //     toasterClass: `copied-toaster`,
-        //     // toasterTextClass: ``,
-        //     // toasterText: 'Copied',
-        //   }
-        // },
         {
           resolve: 'gatsby-remark-embed-video',
           options: {
@@ -152,6 +131,5 @@ export const plugins = [
         }
       ]
     }
-  },
-  'gatsby-plugin-react-helmet'
+  }
 ];

@@ -1,7 +1,6 @@
 import React from 'react';
 import { ProjectLink, ProjectLinksContainer } from './ProjectLinks.styles';
-import ItchIcon from '../../icons/itchio.svg';
-import { FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaGlobe, FaUserSecret } from 'react-icons/fa6';
+import { FaAndroid, FaApple, FaBox, FaFaucet, FaGem, FaGithub, FaGlobe, FaItchIo, FaUserSecret } from 'react-icons/fa6';
 
 export interface ProjectLinksData {
   website: string | null;
@@ -112,7 +111,7 @@ export const ProjectLinks: React.FC<ProjectLinksProps> = ({ links, projectTitle 
 
     return (
       <ProjectLink href={links.itch} target="_blank" title={`${projectTitle} on Itch.io`}>
-        <ItchIcon />
+        <FaItchIo size={20} />
       </ProjectLink>
     );
   }

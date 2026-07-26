@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, HeadProps } from 'gatsby';
 import withDefaultLayout from '../../layouts/default';
 import { BlogBody, BlogDate, BlogPostTitle, StyledBlogPost } from './BlogPost.styles';
-import Helmet from 'react-helmet';
+import { Seo } from '../../components/Seo/Seo';
 
 interface BlogEntryProps {
   data: BlogEntryData;
@@ -11,25 +11,22 @@ interface BlogEntryProps {
 const BlogPost: React.FC<PropsWithChildren<BlogEntryProps>> = ({ data }) => {
   const post = data.markdownRemark;
   return (
-    <>
-      <Helmet
-        title={post.frontmatter.title}
-        meta={[
-          { name: 'description', content: post.frontmatter.summary },
-          { name: 'keywords', content: post.frontmatter.tags.concat(['nikl', 'nikl.me']).join(', ') },
-          { name: 'fediverse:creator', content: '@nikl_me@mastodon.online' }
-        ]}
-      />
-      <StyledBlogPost>
-        <BlogPostTitle>{post.frontmatter.title}</BlogPostTitle>
-        <BlogDate>{post.frontmatter.date}</BlogDate>
-        <BlogBody dangerouslySetInnerHTML={{ __html: post.html }} />
-      </StyledBlogPost>
-    </>
+    <StyledBlogPost>
+      <BlogPostTitle>{post.frontmatter.title}</BlogPostTitle>
+      <BlogDate>{post.frontmatter.date}</BlogDate>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: the HTML is generated at build time from own markdown */}
+      <BlogBody dangerouslySetInnerHTML={{ __html: post.html }} />
+    </StyledBlogPost>
   );
 };
 
 export default withDefaultLayout(BlogPost);
+
+export const Head: React.FC<HeadProps<BlogEntryData>> = ({ data }) => {
+  const post = data.markdownRemark;
+
+  return <Seo title={post.frontmatter.title} description={post.frontmatter.summary} tags={post.frontmatter.tags} fediverseCreator />;
+};
 
 interface BlogEntryData {
   markdownRemark: {
